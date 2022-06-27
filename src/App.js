@@ -5,14 +5,18 @@ import { uploadFile, getFileURL } from "./firebase";
 function App() {
   const [files, setFiles] = useState([]);
   const [urls, setUrls] = useState([]);
+  const [relativePath, setRelativePath] = useState();
 
   const clickSelector = () => {
     document.getElementById("file-selector").click();
   };
 
   const handleSelectFolder = (ev) => {
-    setFiles([...ev.target.files]);
-    console.log([...ev.target.files].length + ' files selected.')
+    const filesArray = [...ev.target.files];
+    const relativePathString = filesArray[0].webkitRelativePath;
+    setFiles(filesArray);
+    console.log(filesArray.length + " files selected.");
+    setRelativePath([...relativePathString].slice(0,[...relativePathString].indexOf('/')).join(''));
   };
 
   const handleUploadFiles = () => {
@@ -24,17 +28,20 @@ function App() {
   };
 
   const handleGetFileURL = async () => {
-    let urlsTmp =[];
+    let urlsTmp = [];
     await Promise.all(
-      files.map(async (file,i) => {
+      files.map(async (file, i) => {
         urlsTmp[i] = await getFileURL(file.webkitRelativePath);
       })
     );
 
-    let fileUrls = Array.from({length: urlsTmp.length},(_,i) => ({name: files[i].webkitRelativePath,url: urlsTmp[i]}));
-
+    let fileUrls = Array.from({ length: urlsTmp.length }, (_, i) => ({
+      name: files[i].webkitRelativePath,
+      url: urlsTmp[i],
+    }));
 
     setUrls(fileUrls);
+    console.log('All urls received.')
   };
 
   return (
@@ -57,6 +64,14 @@ function App() {
         {/* checks if there is an order file (an only one), if the folder already exists in target, if there is internet connection, if there are rare characters */}
         <button onClick={handleUploadFiles}>Upload files</button>
         <button onClick={handleGetFileURL}> Get URLs</button>
+        {!!files.length && !!urls.length && <a
+          href={`data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(urls)
+          )}`}
+          download={`${relativePath}_url_${new Date()}.json`}
+        >
+          <button>{`Download JSON`}</button>
+        </a>}
       </div>
     </div>
   );
