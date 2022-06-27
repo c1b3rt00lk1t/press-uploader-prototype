@@ -13,6 +13,7 @@ function App() {
   const [orderFileContent, setOrderFileContent] = useState();
   const [session, setSession] = useState();
   const [taggedFiles, setTaggedFiles] = useState();
+  const [previous, setPrevious] = useState([]);
   const [urls, setUrls] = useState([]);
   const [relativePath, setRelativePath] = useState();
 
@@ -190,6 +191,8 @@ function App() {
                 orderFileContent={orderFileContent}
                 taggedFiles={taggedFiles}
                 handleTaggedFiles={handleTaggedFiles}
+                previous={previous}
+                setPrevious={setPrevious}
               />
             }
           />

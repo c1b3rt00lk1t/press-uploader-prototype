@@ -3,9 +3,9 @@ import { useState } from "react";
 import TagsForm from "../components/TagsForm";
 import PreviewPdf from "../components/PreviewPdf";
 
-const Tagger = ({ files, taggedFiles, handleTaggedFiles }) => {
+const Tagger = ({ files, taggedFiles, handleTaggedFiles, previous, setPrevious }) => {
   const [selected, setSelected] = useState(+2);
-  const [previous, setPrevious] = useState([]);
+ 
 
   const handleSelectItem = (ev) => {
     setSelected(+ev.target.dataset.order);
