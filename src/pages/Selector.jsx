@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from "react-router-dom";
 
-const Selector = ({clickSelector, handleSelectFolder}) => {
+
+const Selector = ({clickSelector, handleSelectFolder, basicFolderChecks}) => {
   return (
     <div>
       Press Selector
@@ -18,12 +18,10 @@ const Selector = ({clickSelector, handleSelectFolder}) => {
           style={{ display: "none" }}
           webkitdirectory="true"
         />
-        <button disabled>Basic checks</button>
+        <button onClick={basicFolderChecks}>Basic checks</button>
         {/* checks if there is an order file (an only one), if the folder already exists in target, if there is internet connection, if there are rare characters */}
       </div>
-      <Link to="/uploader">
-        Uploader
-      </Link>
+
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+
 
 const Uploader = ({files, urls, relativePath, handleUploadFiles, handleGetFileURL}) => {
   return (
@@ -26,9 +26,6 @@ const Uploader = ({files, urls, relativePath, handleUploadFiles, handleGetFileUR
           </a>
         )}
       </div>
-      <Link to="/">
-        Selector
-      </Link>
     </div>
   )
 }
