@@ -20,7 +20,7 @@ function App() {
     const pdfFilesArray = filesArray.filter(file => file.type === "application/pdf");
     setFiles(filesArray);
     setPdfFiles(pdfFilesArray)
-    console.log(pdfFilesArray.length + " PDF files selected.");
+    console.log(pdfFilesArray.length + " PDF and " + (filesArray.length - pdfFilesArray.length) + " non-PDF files selected.");
     setRelativePath(
       [...relativePathString]
         .slice(0, [...relativePathString].indexOf("/"))
