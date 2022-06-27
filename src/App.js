@@ -6,6 +6,7 @@ import Uploader from "./pages/Uploader";
 
 function App() {
   const [files, setFiles] = useState([]);
+  const [pdfFiles, setPdfFiles] = useState([]);
   const [urls, setUrls] = useState([]);
   const [relativePath, setRelativePath] = useState();
 
@@ -16,8 +17,10 @@ function App() {
   const handleSelectFolder = (ev) => {
     const filesArray = [...ev.target.files];
     const relativePathString = filesArray[0].webkitRelativePath;
+    const pdfFilesArray = filesArray.filter(file => file.type === "application/pdf");
     setFiles(filesArray);
-    console.log(filesArray.length + " files selected.");
+    setPdfFiles(pdfFilesArray)
+    console.log(pdfFilesArray.length + " PDF files selected.");
     setRelativePath(
       [...relativePathString]
         .slice(0, [...relativePathString].indexOf("/"))
@@ -27,7 +30,7 @@ function App() {
 
   const handleUploadFiles = () => {
     Promise.all(
-      files.map((file) => {
+      pdfFiles.map((file) => {
         return uploadFile(file, file.webkitRelativePath);
       })
     ).then((_) => console.log("Everything loaded"));
@@ -36,13 +39,13 @@ function App() {
   const handleGetFileURL = async () => {
     let urlsTmp = [];
     await Promise.all(
-      files.map(async (file, i) => {
+      pdfFiles.map(async (file, i) => {
         urlsTmp[i] = await getFileURL(file.webkitRelativePath);
       })
     );
 
     let fileUrls = Array.from({ length: urlsTmp.length }, (_, i) => ({
-      name: files[i].webkitRelativePath,
+      name: pdfFiles[i].webkitRelativePath,
       url: urlsTmp[i],
     }));
 

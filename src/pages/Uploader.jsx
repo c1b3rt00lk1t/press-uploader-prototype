@@ -17,7 +17,7 @@ const Uploader = ({files, urls, relativePath, clickSelector, handleSelectFolder,
           style={{ display: "none" }}
           webkitdirectory="true"
         />
-        <button>Basic checks</button>
+        <button disabled>Basic checks</button>
         {/* checks if there is an order file (an only one), if the folder already exists in target, if there is internet connection, if there are rare characters */}
         <button onClick={handleUploadFiles}>Upload files</button>
         <button onClick={handleGetFileURL}> Get URLs</button>
