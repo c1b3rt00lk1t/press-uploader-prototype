@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { uploadFile, getFileURL } from "./firebase";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Uploader from "./pages/Uploader";
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -48,46 +50,22 @@ function App() {
     console.log("All urls received.");
   };
 
-
   return (
-    <div>
-      Press Uploader
-      <div id="selector">
-        <button onClick={clickSelector} id="display-selector">
-          Select folder
-        </button>
-        <span id="selection-result" className="contador"></span>
-        <input
-          onChange={handleSelectFolder}
-          type="file"
-          id="file-selector"
-          name="fileList"
-          style={{ display: "none" }}
-          webkitdirectory="true"
-        />
-        <button>Basic checks</button>
-        {/* checks if there is an order file (an only one), if the folder already exists in target, if there is internet connection, if there are rare characters */}
-        <button onClick={handleUploadFiles}>Upload files</button>
-        <button onClick={handleGetFileURL}> Get URLs</button>
-        {!!files.length && !!urls.length && (
-          <a
-            href={`data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(urls)
-            )}`}
-            download={`urls_${relativePath}_${new Date().getFullYear()}${(
-              new Date().getMonth() + 1
-            )
-              .toString()
-              .padStart(2, "0")}${new Date().getDate()}_${new Date()
-              .getHours()
-              .toString()
-              .padStart(2, "0")}${new Date().getMinutes()}.json`}
-          >
-            <button>{`Download JSON`}</button>
-          </a>
-        )}
-      </div>
-    </div>
+    <>
+      <Router>
+        <Routes>
+        <Route
+              exact
+              path="/"
+              element={
+                <>
+                <Uploader files={files} urls={urls} relativePath={relativePath} clickSelector={clickSelector} handleSelectFolder={handleSelectFolder} handleUploadFiles={handleUploadFiles} handleGetFileURL={handleGetFileURL} />
+                </>
+              }
+            />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
