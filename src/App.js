@@ -10,7 +10,9 @@ import NavBar from "./components/NavBar";
 function App() {
   const [files, setFiles] = useState([]);
   const [pdfFiles, setPdfFiles] = useState([]);
-  const [taggedFiles, setTaggedFiles] = useState([]);
+  const [orderFileContent, setOrderFileContent] = useState();
+  const [session, setSession] = useState();
+  const [taggedFiles, setTaggedFiles] = useState();
   const [urls, setUrls] = useState([]);
   const [relativePath, setRelativePath] = useState();
 
@@ -38,26 +40,25 @@ function App() {
         .slice(0, [...relativePathString].indexOf("/"))
         .join("")
     );
-    
   };
-
 
   const basicFolderChecks = () => {
     readOrderFile(files);
-  }
-
+  };
 
   const readOrderFile = async (files) => {
-
-    const orderFile = files.filter(file => file.name.toLowerCase().includes("orden") && file.name.endsWith(".txt"));
-    if (orderFile.length === 0){
-      console.log('There is no order file.');
+    const orderFile = files.filter(
+      (file) =>
+        file.name.toLowerCase().includes("orden") && file.name.endsWith(".txt")
+    );
+    if (orderFile.length === 0) {
+      console.log("There is no order file.");
       return;
-    } else if (orderFile.length > 1){
-      console.log('There are too many order files.');
+    } else if (orderFile.length > 1) {
+      console.log("There are too many order files.");
       return;
     } else {
-    console.log('Order file loaded.');
+      console.log("Order file loaded.");
     }
 
     const fr = new FileReader();
@@ -65,11 +66,61 @@ function App() {
       fr.onload = () => resolve(fr.result);
       fr.readAsText(orderFile[0], "UTF-8");
     });
-    const orderFileContent = [await fileSelection];
-    console.log(orderFileContent);
+    setOrderFileContent(
+      [await fileSelection][0].split("\r\n").filter((a) => a !== "")
+    );
+    const name = orderFile[0].name;
+    setSession([...name].slice(0,8).join(''))
   };
 
+
+  const prepareTaggedFiles = () => {
+    const getDate = (arr, i) => {
+      if (isNaN(parseInt(arr[0]))) {
+        return { date: "00000000", arr: arr, order: i };
+      } else {
+        return {
+          date: arr.slice(0, 8),
+          arr: arr.slice(11, arr.length),
+          order: i,
+        };
+      }
+    };
+    const getSourceTitle = (arr) => {
+      if (arr.date === "00000000") {
+        return {
+          date: "00000000",
+          source: "label",
+          title: arr.arr.join(""),
+          order: arr.order,
+        };
+      } else {
+        return {
+          date: arr.date.join(""),
+          source: arr.arr.slice(0, arr.arr.indexOf("-") - 1).join(""),
+          title: arr.arr
+            .slice(arr.arr.indexOf("-") + 2, arr.arr.length)
+            .join(""),
+          order: arr.order,
+        };
+      }
+    };
+
+    const enhanceTaggedFiles = (arr) => {
+
+      return {...arr,session: session, zones: [],sectors: [],tags: [], others: [], id: session + arr.order}
+
+    }
+
+    setTaggedFiles(orderFileContent.map((item, i) =>
+    enhanceTaggedFiles(getSourceTitle(getDate([...item], i))))
+    );
+  };
   /* Logic for Tagger */
+
+  const handleTaggedFiles = (a) => {
+    setTaggedFiles(a);
+  };
 
   /* Logic for Uploader */
 
@@ -101,6 +152,7 @@ function App() {
   return (
     <>
       <Router>
+        <NavBar />
         <Routes>
           <Route
             exact
@@ -111,6 +163,7 @@ function App() {
                   clickSelector={clickSelector}
                   handleSelectFolder={handleSelectFolder}
                   basicFolderChecks={basicFolderChecks}
+                  prepareTaggedFiles={prepareTaggedFiles}
                 />
               </>
             }
@@ -131,10 +184,16 @@ function App() {
           />
           <Route
             path="/tagger"
-            element={<Tagger files={files} urls={urls} />}
+            element={
+              <Tagger
+                files={files}
+                orderFileContent={orderFileContent}
+                taggedFiles={taggedFiles}
+                handleTaggedFiles={handleTaggedFiles}
+              />
+            }
           />
         </Routes>
-        <NavBar />
       </Router>
     </>
   );

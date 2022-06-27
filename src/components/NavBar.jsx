@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <div>
+    <div className="navbar">
     <Link to="/">
         Selector
       </Link>
-      <Link to="/tagger">
+      <Link  to="/tagger">
         Tagger
       </Link>
       <Link to="/uploader">

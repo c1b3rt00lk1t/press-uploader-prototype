@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const Selector = ({clickSelector, handleSelectFolder, basicFolderChecks}) => {
+const Selector = ({clickSelector, handleSelectFolder, basicFolderChecks, prepareTaggedFiles}) => {
   return (
     <div>
       Press Selector
@@ -20,6 +20,7 @@ const Selector = ({clickSelector, handleSelectFolder, basicFolderChecks}) => {
         />
         <button onClick={basicFolderChecks}>Basic checks</button>
         {/* checks if there is an order file (an only one), if the folder already exists in target, if there is internet connection, if there are rare characters */}
+        <button onClick={prepareTaggedFiles}>Prepare tagger</button>
       </div>
 
     </div>
