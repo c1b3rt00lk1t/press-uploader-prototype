@@ -3,6 +3,7 @@ import { useState } from "react";
 import { uploadFile, getFileURL } from "./firebase";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Uploader from "./pages/Uploader";
+import Selector from "./pages/Selector";
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -62,10 +63,11 @@ function App() {
               path="/"
               element={
                 <>
-                <Uploader files={files} urls={urls} relativePath={relativePath} clickSelector={clickSelector} handleSelectFolder={handleSelectFolder} handleUploadFiles={handleUploadFiles} handleGetFileURL={handleGetFileURL} />
+                <Selector clickSelector={clickSelector} handleSelectFolder={handleSelectFolder}/>
                 </>
               }
             />
+            <Route path="/uploader" element={<Uploader files={files} urls={urls} relativePath={relativePath} clickSelector={clickSelector} handleSelectFolder={handleSelectFolder} handleUploadFiles={handleUploadFiles} handleGetFileURL={handleGetFileURL} />} />
         </Routes>
       </Router>
     </>

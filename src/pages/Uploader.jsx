@@ -1,24 +1,11 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
-const Uploader = ({files, urls, relativePath, clickSelector, handleSelectFolder, handleUploadFiles, handleGetFileURL}) => {
+const Uploader = ({files, urls, relativePath, handleUploadFiles, handleGetFileURL}) => {
   return (
     <div>
       Press Uploader
-      <div id="selector">
-        <button onClick={clickSelector} id="display-selector">
-          Select folder
-        </button>
-        <span id="selection-result" className="contador"></span>
-        <input
-          onChange={handleSelectFolder}
-          type="file"
-          id="file-selector"
-          name="fileList"
-          style={{ display: "none" }}
-          webkitdirectory="true"
-        />
-        <button disabled>Basic checks</button>
-        {/* checks if there is an order file (an only one), if the folder already exists in target, if there is internet connection, if there are rare characters */}
+      <div id="uploader">
         <button onClick={handleUploadFiles}>Upload files</button>
         <button onClick={handleGetFileURL}> Get URLs</button>
         {!!files.length && !!urls.length && (
@@ -39,6 +26,9 @@ const Uploader = ({files, urls, relativePath, clickSelector, handleSelectFolder,
           </a>
         )}
       </div>
+      <Link to="/">
+        Selector
+      </Link>
     </div>
   )
 }
