@@ -74,7 +74,7 @@ function App() {
             href={`data:text/json;charset=utf-8,${encodeURIComponent(
               JSON.stringify(urls)
             )}`}
-            download={`url_${relativePath}_${new Date().getFullYear()}${(
+            download={`urls_${relativePath}_${new Date().getFullYear()}${(
               new Date().getMonth() + 1
             )
               .toString()
