@@ -16,7 +16,11 @@ function App() {
     const relativePathString = filesArray[0].webkitRelativePath;
     setFiles(filesArray);
     console.log(filesArray.length + " files selected.");
-    setRelativePath([...relativePathString].slice(0,[...relativePathString].indexOf('/')).join(''));
+    setRelativePath(
+      [...relativePathString]
+        .slice(0, [...relativePathString].indexOf("/"))
+        .join("")
+    );
   };
 
   const handleUploadFiles = () => {
@@ -41,8 +45,9 @@ function App() {
     }));
 
     setUrls(fileUrls);
-    console.log('All urls received.')
+    console.log("All urls received.");
   };
+
 
   return (
     <div>
@@ -64,14 +69,23 @@ function App() {
         {/* checks if there is an order file (an only one), if the folder already exists in target, if there is internet connection, if there are rare characters */}
         <button onClick={handleUploadFiles}>Upload files</button>
         <button onClick={handleGetFileURL}> Get URLs</button>
-        {!!files.length && !!urls.length && <a
-          href={`data:text/json;charset=utf-8,${encodeURIComponent(
-            JSON.stringify(urls)
-          )}`}
-          download={`${relativePath}_url_${new Date()}.json`}
-        >
-          <button>{`Download JSON`}</button>
-        </a>}
+        {!!files.length && !!urls.length && (
+          <a
+            href={`data:text/json;charset=utf-8,${encodeURIComponent(
+              JSON.stringify(urls)
+            )}`}
+            download={`url_${relativePath}_${new Date().getFullYear()}${(
+              new Date().getMonth() + 1
+            )
+              .toString()
+              .padStart(2, "0")}${new Date().getDate()}_${new Date()
+              .getHours()
+              .toString()
+              .padStart(2, "0")}${new Date().getMinutes()}.json`}
+          >
+            <button>{`Download JSON`}</button>
+          </a>
+        )}
       </div>
     </div>
   );
