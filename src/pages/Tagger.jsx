@@ -63,7 +63,7 @@ const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
                 item.source !== "label" && item.order === selected
                   ? "selectedContentItem"
                   : undefined
-              } ${item.source === "label" ? "label" : undefined} ${previous.indexOf(item.order) > -1 ?  "previous" : undefined}`}
+              } ${item.source === "label" ? "label" : undefined} ${(previous.indexOf(item.order) > -1 &&  item.source !== "label") ?  "previous" : undefined}`}
             >
               {" "}
               {item.title}
