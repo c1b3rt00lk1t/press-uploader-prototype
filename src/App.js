@@ -41,7 +41,20 @@ function App() {
         .slice(0, [...relativePathString].indexOf("/"))
         .join("")
     );
+    resetStates();
   };
+
+  const resetStates = () => {
+    setOrderFileContent([]);
+    setSession('');
+    setTaggedFiles([]);
+    setPrevious([]);
+    setUrls([]);
+
+
+
+  }
+
 
   const basicFolderChecks = () => {
     readOrderFile(files);
