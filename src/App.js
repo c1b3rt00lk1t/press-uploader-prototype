@@ -11,9 +11,9 @@ import Merger from "./pages/Merger";
 function App() {
   const [files, setFiles] = useState([]);
   const [pdfFiles, setPdfFiles] = useState([]);
-  const [orderFileContent, setOrderFileContent] = useState();
+  const [orderFileContent, setOrderFileContent] = useState([]);
   const [session, setSession] = useState();
-  const [taggedFiles, setTaggedFiles] = useState();
+  const [taggedFiles, setTaggedFiles] = useState([]);
   const [previous, setPrevious] = useState([]);
   const [urls, setUrls] = useState([]);
   const [relativePath, setRelativePath] = useState();
@@ -47,15 +47,11 @@ function App() {
 
   const resetStates = () => {
     setOrderFileContent([]);
-    setSession('');
+    setSession("");
     setTaggedFiles([]);
     setPrevious([]);
     setUrls([]);
-
-
-
-  }
-
+  };
 
   const basicFolderChecks = () => {
     readOrderFile(files);
@@ -85,9 +81,8 @@ function App() {
       [await fileSelection][0].split("\r\n").filter((a) => a !== "")
     );
     const name = orderFile[0].name;
-    setSession([...name].slice(0,8).join(''))
+    setSession([...name].slice(0, 8).join(""));
   };
-
 
   const prepareTaggedFiles = () => {
     const getDate = (arr, i) => {
@@ -122,13 +117,21 @@ function App() {
     };
 
     const enhanceTaggedFiles = (arr) => {
+      return {
+        ...arr,
+        session: session,
+        zones: [],
+        sectors: [],
+        tags: [],
+        others: [],
+        id: session + arr.order,
+      };
+    };
 
-      return {...arr,session: session, zones: [],sectors: [],tags: [], others: [], id: session + arr.order}
-
-    }
-
-    setTaggedFiles(orderFileContent.map((item, i) =>
-    enhanceTaggedFiles(getSourceTitle(getDate([...item], i))))
+    setTaggedFiles(
+      orderFileContent.map((item, i) =>
+        enhanceTaggedFiles(getSourceTitle(getDate([...item], i)))
+      )
     );
   };
   /* Logic for Tagger */
@@ -166,27 +169,34 @@ function App() {
 
   /* Logic for the Merger */
   const handleMerge = () => {
-   
     let merged = [];
-    const taggedPDFs = taggedFiles.filter(tagged => tagged.source !== 'label')
-    for (let tagged of taggedPDFs ){
+    const taggedPDFs = taggedFiles.filter(
+      (tagged) => tagged.source !== "label"
+    );
+    for (let tagged of taggedPDFs) {
       // console.log(tagged.title)
       // console.log(urls.filter( url => url.name.includes(tagged.title)))
 
-
       /* IMPORTANT: the "labels" have to be filtered OUT !!!! */
-      const url = urls.filter( url => url.name.includes(tagged.title))
-        if (url.length){
-          // console.log(url[0].url)
-          merged.push({...tagged,...url[0]})
-        }
+      const url = urls.filter((url) => url.name.includes(tagged.title));
+      if (url.length) {
+        // console.log(url[0].url)
+        merged.push({ ...tagged, ...url[0] });
+      }
     }
-    console.log(merged)
+    console.log(merged);
+  };
 
+  const handleDownloadMerged = () => {};
 
-  }
-
-  const handleDownloadMerged = () => {}
+  const handleBasicMergeChecks = () => {
+    if (!urls.length) {
+      console.log("No urls to merge.");
+    }
+    if (!taggedFiles.length) {
+      console.log("No tagged files to merge.");
+    }
+  };
 
   return (
     <>
@@ -237,7 +247,11 @@ function App() {
           <Route
             path="/merger"
             element={
-              <Merger handleMerge={handleMerge} handleDownloadMerged={handleDownloadMerged}/>
+              <Merger
+                handleMerge={handleMerge}
+                handleDownloadMerged={handleDownloadMerged}
+                handleBasicMergeChecks={handleBasicMergeChecks}
+              />
             }
           />
         </Routes>
