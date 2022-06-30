@@ -12,6 +12,7 @@ function App() {
   const [files, setFiles] = useState([]);
   const [pdfFiles, setPdfFiles] = useState([]);
   const [orderFileContent, setOrderFileContent] = useState([]);
+  const [preTaggerChecks, setPreTaggerChecks] = useState(false);
   const [session, setSession] = useState();
   const [taggedFiles, setTaggedFiles] = useState([]);
   const [previous, setPrevious] = useState([]);
@@ -58,6 +59,7 @@ function App() {
   };
 
   const readOrderFile = async (files) => {
+  
     const orderFile = files.filter(
       (file) =>
         file.name.toLowerCase().includes("orden") && file.name.endsWith(".txt")
@@ -70,6 +72,7 @@ function App() {
       return;
     } else {
       console.log("Order file loaded.");
+      
     }
 
     const fr = new FileReader();
@@ -82,6 +85,7 @@ function App() {
     );
     const name = orderFile[0].name;
     setSession([...name].slice(0, 8).join(""));
+    setPreTaggerChecks(true)
   };
 
   const prepareTaggedFiles = () => {
