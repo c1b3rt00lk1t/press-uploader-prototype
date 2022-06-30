@@ -30,6 +30,10 @@ a {
   color: white;
 }
 
+a[disabled] {
+  pointer-events: none;
+  color: grey;
+}
 
 /* css for the tagger page*/
 .horizontal{

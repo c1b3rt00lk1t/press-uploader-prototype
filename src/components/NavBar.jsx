@@ -1,19 +1,24 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({readyToTagger,basicSelectorChecks}) => {
+
+  const enableTagger = !readyToTagger;
+  const enableUploader = !basicSelectorChecks;
+  const enableMerger = enableTagger && enableUploader;
+
   return (
     <div className="navbar">
     <Link to="/">
         Selector
       </Link>
-      <Link  to="/tagger">
+      <Link disabled={enableTagger} to="/tagger">
         Tagger
       </Link>
-      <Link to="/uploader">
+      <Link disabled={enableUploader} to="/uploader">
         Uploader
       </Link>
-      <Link to="/merger">
+      <Link disabled={enableMerger} to="/merger">
         Merger
       </Link>
 

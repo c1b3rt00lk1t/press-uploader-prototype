@@ -12,12 +12,15 @@ function App() {
   const [files, setFiles] = useState([]);
   const [pdfFiles, setPdfFiles] = useState([]);
   const [orderFileContent, setOrderFileContent] = useState([]);
-  const [preTaggerChecks, setPreTaggerChecks] = useState(false);
   const [session, setSession] = useState();
   const [taggedFiles, setTaggedFiles] = useState([]);
   const [previous, setPrevious] = useState([]);
   const [urls, setUrls] = useState([]);
   const [relativePath, setRelativePath] = useState();
+
+  /* States for controlling the enabling of next components */
+  const [basicSelectorChecks, setBasicSelectorChecks] = useState(false);
+  const [readyToTagger, setReadyToTagger] = useState(false);
 
   /* Logic for Selector */
   const clickSelector = () => {
@@ -85,7 +88,7 @@ function App() {
     );
     const name = orderFile[0].name;
     setSession([...name].slice(0, 8).join(""));
-    setPreTaggerChecks(true)
+    setBasicSelectorChecks(true)
   };
 
   const prepareTaggedFiles = () => {
@@ -137,6 +140,7 @@ function App() {
         enhanceTaggedFiles(getSourceTitle(getDate([...item], i)))
       )
     );
+    setReadyToTagger(true);
   };
   /* Logic for Tagger */
 
@@ -205,7 +209,7 @@ function App() {
   return (
     <>
       <Router>
-        <NavBar />
+        <NavBar readyToTagger={readyToTagger}  basicSelectorChecks={basicSelectorChecks}/>
         <Routes>
           <Route
             exact
@@ -217,7 +221,7 @@ function App() {
                   handleSelectFolder={handleSelectFolder}
                   basicFolderChecks={basicFolderChecks}
                   prepareTaggedFiles={prepareTaggedFiles}
-                  preTaggerChecks={preTaggerChecks}
+                  basicSelectorChecks={basicSelectorChecks}
                 />
               </>
             }
