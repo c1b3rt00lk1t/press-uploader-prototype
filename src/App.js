@@ -19,6 +19,8 @@ function App() {
   const [relativePath, setRelativePath] = useState();
 
   /* States for controlling the enabling of next components */
+  const emptyCard = {status:undefined, msg :[]}
+  const [selectorSelectCard, setSelectorSelectCard] = useState(emptyCard);
   const [basicSelectorChecks, setBasicSelectorChecks] = useState(false);
   const [readyToTagger, setReadyToTagger] = useState(false);
 
@@ -35,18 +37,22 @@ function App() {
     );
     setFiles(filesArray);
     setPdfFiles(pdfFilesArray);
-    console.log(
+
+    const msg =
       pdfFilesArray.length +
         " PDF and " +
         (filesArray.length - pdfFilesArray.length) +
         " non-PDF files selected."
-    );
+    ;
+
     setRelativePath(
       [...relativePathString]
         .slice(0, [...relativePathString].indexOf("/"))
         .join("")
     );
     resetStates();
+
+    setSelectorSelectCard({status:true,msg:[msg]});
   };
 
   const resetStates = () => {
@@ -222,6 +228,7 @@ function App() {
                   basicFolderChecks={basicFolderChecks}
                   prepareTaggedFiles={prepareTaggedFiles}
                   basicSelectorChecks={basicSelectorChecks}
+                  selectorSelectCard={selectorSelectCard}
                 />
               </>
             }

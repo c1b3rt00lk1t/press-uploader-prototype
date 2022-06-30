@@ -3,11 +3,12 @@ import Card from '../shared/Card'
 import CardDisplay from '../shared/CardDisplay'
 
 
-const Selector = ({clickSelector, handleSelectFolder, basicFolderChecks, prepareTaggedFiles, basicSelectorChecks}) => {
+const Selector = ({clickSelector, handleSelectFolder, basicFolderChecks, prepareTaggedFiles, basicSelectorChecks,selectorSelectCard}) => {
+  
   return (
       <div id="selector">
         <CardDisplay>
-        <Card status={undefined} msg={[]}>
+        <Card status={selectorSelectCard.status} msg={selectorSelectCard.msg}>
         <button onClick={clickSelector} id="display-selector">
           Select folder
         </button>
