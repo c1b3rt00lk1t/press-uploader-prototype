@@ -217,6 +217,7 @@ function App() {
                   handleSelectFolder={handleSelectFolder}
                   basicFolderChecks={basicFolderChecks}
                   prepareTaggedFiles={prepareTaggedFiles}
+                  preTaggerChecks={preTaggerChecks}
                 />
               </>
             }
