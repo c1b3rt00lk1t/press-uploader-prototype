@@ -1,11 +1,13 @@
 import React from 'react'
+import Card from '../shared/Card'
+import CardDisplay from '../shared/CardDisplay'
 
 
 const Selector = ({clickSelector, handleSelectFolder, basicFolderChecks, prepareTaggedFiles, basicSelectorChecks}) => {
   return (
-    <div>
-      Press Selector
       <div id="selector">
+        <CardDisplay>
+        <Card status={undefined} msg={[]}>
         <button onClick={clickSelector} id="display-selector">
           Select folder
         </button>
@@ -18,12 +20,17 @@ const Selector = ({clickSelector, handleSelectFolder, basicFolderChecks, prepare
           style={{ display: "none" }}
           webkitdirectory="true"
         />
+        </Card>
+        <Card status={undefined} msg={[]}>
         <button onClick={basicFolderChecks}>Basic checks</button>
-        {/* checks if there is an order file (an only one), if the folder already exists in target, if there is internet connection, if there are rare characters */}
+        </Card>
+        <Card status={undefined} msg={[]}>
         <button onClick={prepareTaggedFiles} disabled={!basicSelectorChecks}>Prepare tagger</button>
+        </Card>
+
+        </CardDisplay>
       </div>
 
-    </div>
   )
 }
 
