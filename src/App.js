@@ -6,6 +6,7 @@ import Uploader from "./pages/Uploader";
 import Selector from "./pages/Selector";
 import Tagger from "./pages/Tagger";
 import NavBar from "./components/NavBar";
+import Merger from "./pages/Merger";
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -163,6 +164,30 @@ function App() {
     console.log("All urls received.");
   };
 
+  /* Logic for the Merger */
+  const handleMerge = () => {
+   
+    let merged = [];
+    const taggedPDFs = taggedFiles.filter(tagged => tagged.source !== 'label')
+    for (let tagged of taggedPDFs ){
+      // console.log(tagged.title)
+      // console.log(urls.filter( url => url.name.includes(tagged.title)))
+
+
+      /* IMPORTANT: the "labels" have to be filtered OUT !!!! */
+      const url = urls.filter( url => url.name.includes(tagged.title))
+        if (url.length){
+          // console.log(url[0].url)
+          merged.push({...tagged,...url[0]})
+        }
+    }
+    console.log(merged)
+
+
+  }
+
+  const handleDownloadMerged = () => {}
+
   return (
     <>
       <Router>
@@ -207,6 +232,12 @@ function App() {
                 previous={previous}
                 setPrevious={setPrevious}
               />
+            }
+          />
+          <Route
+            path="/merger"
+            element={
+              <Merger handleMerge={handleMerge} handleDownloadMerged={handleDownloadMerged}/>
             }
           />
         </Routes>

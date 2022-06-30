@@ -13,6 +13,9 @@ const NavBar = () => {
       <Link to="/uploader">
         Uploader
       </Link>
+      <Link to="/merger">
+        Merger
+      </Link>
 
     </div>
   )
