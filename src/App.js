@@ -7,6 +7,7 @@ import Selector from "./pages/Selector";
 import Tagger from "./pages/Tagger";
 import NavBar from "./components/NavBar";
 import Merger from "./pages/Merger";
+import Order from "./pages/Order";
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -19,7 +20,7 @@ function App() {
   const [relativePath, setRelativePath] = useState();
 
   /* States for controlling the enabling of next components */
-  const emptyCard = {status:undefined, msg :[]}
+  const emptyCard = { status: undefined, msg: [] };
   const [selectorSelectCard, setSelectorSelectCard] = useState(emptyCard);
   const [basicSelectorChecks, setBasicSelectorChecks] = useState(false);
   const [readyToTagger, setReadyToTagger] = useState(false);
@@ -40,11 +41,9 @@ function App() {
 
     const msg =
       pdfFilesArray.length +
-        " PDF and " +
-        (filesArray.length - pdfFilesArray.length) +
-        " non-PDF files selected."
-    ;
-
+      " PDF and " +
+      (filesArray.length - pdfFilesArray.length) +
+      " non-PDF files selected.";
     setRelativePath(
       [...relativePathString]
         .slice(0, [...relativePathString].indexOf("/"))
@@ -52,7 +51,7 @@ function App() {
     );
     resetStates();
 
-    setSelectorSelectCard({status:true,msg:[msg]});
+    setSelectorSelectCard({ status: true, msg: [msg] });
   };
 
   const resetStates = () => {
@@ -68,7 +67,6 @@ function App() {
   };
 
   const readOrderFile = async (files) => {
-  
     const orderFile = files.filter(
       (file) =>
         file.name.toLowerCase().includes("orden") && file.name.endsWith(".txt")
@@ -81,7 +79,6 @@ function App() {
       return;
     } else {
       console.log("Order file loaded.");
-      
     }
 
     const fr = new FileReader();
@@ -94,7 +91,7 @@ function App() {
     );
     const name = orderFile[0].name;
     setSession([...name].slice(0, 8).join(""));
-    setBasicSelectorChecks(true)
+    setBasicSelectorChecks(true);
   };
 
   const prepareTaggedFiles = () => {
@@ -198,7 +195,7 @@ function App() {
         merged.push({ ...tagged, ...url[0] });
       }
     }
-    console.log(merged);
+
   };
 
   const handleDownloadMerged = () => {};
@@ -215,7 +212,10 @@ function App() {
   return (
     <>
       <Router>
-        <NavBar readyToTagger={readyToTagger}  basicSelectorChecks={basicSelectorChecks}/>
+        <NavBar
+          readyToTagger={readyToTagger}
+          basicSelectorChecks={basicSelectorChecks}
+        />
         <Routes>
           <Route
             exact
@@ -234,18 +234,8 @@ function App() {
             }
           />
           <Route
-            path="/uploader"
-            element={
-              <Uploader
-                files={files}
-                urls={urls}
-                relativePath={relativePath}
-                clickSelector={clickSelector}
-                handleSelectFolder={handleSelectFolder}
-                handleUploadFiles={handleUploadFiles}
-                handleGetFileURL={handleGetFileURL}
-              />
-            }
+            path="/order"
+            element={<Order pdfFiles={pdfFiles} relativePath={relativePath} />}
           />
           <Route
             path="/tagger"
@@ -257,6 +247,20 @@ function App() {
                 handleTaggedFiles={handleTaggedFiles}
                 previous={previous}
                 setPrevious={setPrevious}
+              />
+            }
+          />
+          <Route
+            path="/uploader"
+            element={
+              <Uploader
+                files={files}
+                urls={urls}
+                relativePath={relativePath}
+                clickSelector={clickSelector}
+                handleSelectFolder={handleSelectFolder}
+                handleUploadFiles={handleUploadFiles}
+                handleGetFileURL={handleGetFileURL}
               />
             }
           />

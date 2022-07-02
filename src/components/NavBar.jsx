@@ -12,6 +12,9 @@ const NavBar = ({readyToTagger,basicSelectorChecks}) => {
     <Link to="/">
         Selector
       </Link>
+      <Link to="/order">
+        Order
+      </Link>
       <Link disabled={enableTagger} to="/tagger">
         Tagger
       </Link>
