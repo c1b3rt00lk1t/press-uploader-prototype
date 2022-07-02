@@ -23,12 +23,15 @@ function App() {
   const emptyCard = { status: undefined, msg: [] };
   const [selectorSelectCard, setSelectorSelectCard] = useState(emptyCard);
   const [selectorBasicChecksCard, setSelectorBasicChecksCard] = useState(emptyCard);
+
+  const [readyToOrder, setReadyToOrder] = useState(false);
   const [basicSelectorChecks, setBasicSelectorChecks] = useState(false);
   const [readyToTagger, setReadyToTagger] = useState(false);
 
   /* Logic for Selector */
   const clickSelector = () => {
     setSelectorBasicChecksCard({status: undefined,msg:['']});
+    setReadyToOrder(false);
     document.getElementById("file-selector").click();
   };
 
@@ -54,6 +57,7 @@ function App() {
     resetStates();
 
     setSelectorSelectCard({ status: true, msg: [msg] });
+    setReadyToOrder(true);
   };
 
   const resetStates = () => {
@@ -229,6 +233,7 @@ function App() {
         <NavBar
           readyToTagger={readyToTagger}
           basicSelectorChecks={basicSelectorChecks}
+          readyToOrder={readyToOrder}
         />
         <Routes>
           <Route

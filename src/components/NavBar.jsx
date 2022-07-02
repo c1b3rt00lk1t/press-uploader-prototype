@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-const NavBar = ({readyToTagger,basicSelectorChecks}) => {
+const NavBar = ({readyToTagger,basicSelectorChecks, readyToOrder}) => {
 
+  const enableOrder = !readyToOrder;
   const enableTagger = !readyToTagger;
   const enableUploader = !basicSelectorChecks;
   const enableMerger = enableTagger && enableUploader;
@@ -12,7 +13,7 @@ const NavBar = ({readyToTagger,basicSelectorChecks}) => {
     <Link to="/">
         Selector
       </Link>
-      <Link to="/order">
+      <Link disabled={enableOrder} to="/order">
         Order
       </Link>
       <Link disabled={enableTagger} to="/tagger">
