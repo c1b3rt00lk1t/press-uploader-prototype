@@ -269,6 +269,7 @@ function App() {
               <Tagger
                 files={files}
                 orderFileContent={orderFileContent}
+                relativePath={relativePath}
                 taggedFiles={taggedFiles}
                 handleTaggedFiles={handleTaggedFiles}
                 previous={previous}

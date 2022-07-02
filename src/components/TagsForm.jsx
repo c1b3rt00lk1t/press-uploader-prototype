@@ -6,6 +6,8 @@ const TagsForm = ({
   handleZonesChange,
   handleSectorsChange,
   handleTagsChange,
+  relativePath,
+  taggedFiles
 }) => {
   let { zones, sectors, tags } = selectedFile;
 
@@ -44,11 +46,30 @@ const TagsForm = ({
           ></input>
         </div>
       </div>
-      <div className={'tagFormBtns'}>
+      <div className={"tagFormBtns"}>
         <button onClick={handleTagsNext}>Next</button>
-        <button onClick={handleTagsNext} disabled>Save</button>
-        <button onClick={handleTagsNext} disabled>Load</button>
-        <button onClick={handleTagsNext} disabled>Done</button>
+        <a
+          href={`data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(taggedFiles)
+          )}`}
+          download={`tagged_${relativePath}_${new Date().getFullYear()}${(
+            new Date().getMonth() + 1
+          )
+            .toString()
+            .padStart(2, "0")}${new Date().getDate()}_${new Date()
+            .getHours()
+            .toString()
+            .padStart(2, "0")}${new Date().getMinutes()}.json`}
+        >
+          <button disabled={!relativePath}>{`Save`}</button>
+        </a>
+
+        <button onClick={handleTagsNext} disabled>
+          Load
+        </button>
+        <button onClick={handleTagsNext} disabled>
+          Done
+        </button>
       </div>
     </div>
   );

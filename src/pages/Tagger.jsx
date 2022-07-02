@@ -3,7 +3,7 @@ import { useState } from "react";
 import TagsForm from "../components/TagsForm";
 import PreviewPdf from "../components/PreviewPdf";
 
-const Tagger = ({ files, taggedFiles, handleTaggedFiles, previous, setPrevious }) => {
+const Tagger = ({ files, taggedFiles, handleTaggedFiles, previous, setPrevious,relativePath }) => {
   const [selected, setSelected] = useState(+2);
  
 
@@ -89,6 +89,8 @@ const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
             handleSectorsChange={handleSectorsChange}
             handleTagsChange={handleTagsChange}
             handleTagsNext={handleTagsNext}
+            taggedFiles={taggedFiles}
+            relativePath={relativePath}
           />
         </div>
       </div>
