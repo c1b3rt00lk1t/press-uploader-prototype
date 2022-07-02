@@ -219,6 +219,7 @@ function App() {
         merged.push({ ...tagged, ...url[0] });
       }
     }
+    console.log(merged)
   };
 
   const handleDownloadMerged = () => {};
