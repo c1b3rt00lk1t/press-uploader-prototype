@@ -22,7 +22,10 @@ function App() {
   /* States for controlling the enabling of next components */
   const emptyCard = { status: undefined, msg: [] };
   const [selectorSelectCard, setSelectorSelectCard] = useState(emptyCard);
-  const [selectorBasicChecksCard, setSelectorBasicChecksCard] = useState(emptyCard);
+  const [selectorBasicChecksCard, setSelectorBasicChecksCard] =
+    useState(emptyCard);
+  const [selectorPrepareTaggerCard, setSelectorPrepareTaggerCard] =
+    useState(emptyCard);
 
   const [readyToOrder, setReadyToOrder] = useState(false);
   const [basicSelectorChecks, setBasicSelectorChecks] = useState(false);
@@ -30,8 +33,15 @@ function App() {
 
   /* Logic for Selector */
   const clickSelector = () => {
-    setSelectorBasicChecksCard({status: undefined,msg:['']});
+    // Resets the next states
+    setSelectorBasicChecksCard({ status: undefined, msg: [""] });
     setReadyToOrder(false);
+    setBasicSelectorChecks(false);
+    setSelectorPrepareTaggerCard({status: undefined,msg:[""]})
+
+
+    
+    // Triggers the event
     document.getElementById("file-selector").click();
   };
 
@@ -66,8 +76,6 @@ function App() {
     setTaggedFiles([]);
     setPrevious([]);
     setUrls([]);
-
-    
   };
 
   const basicFolderChecks = () => {
@@ -81,16 +89,15 @@ function App() {
     );
     if (orderFile.length === 0) {
       const msg = "There is no order file.";
-      setSelectorBasicChecksCard({status: false,msg:[msg]});
+      setSelectorBasicChecksCard({ status: false, msg: [msg] });
       console.log("There is no order file.");
       return;
     } else if (orderFile.length > 1) {
       const msg = "There are too many order files.";
-      setSelectorBasicChecksCard({status: false,msg:[msg]});
+      setSelectorBasicChecksCard({ status: false, msg: [msg] });
       console.log("There are too many order files.");
       return;
     } else {
-
       const fr = new FileReader();
       const fileSelection = new Promise((resolve) => {
         fr.onload = () => resolve(fr.result);
@@ -103,13 +110,10 @@ function App() {
       setSession([...name].slice(0, 8).join(""));
       setBasicSelectorChecks(true);
 
-
       const msg = "Order file loaded.";
-      setSelectorBasicChecksCard({status: true,msg:[msg]});
+      setSelectorBasicChecksCard({ status: true, msg: [msg] });
       console.log("Order file loaded.");
     }
-
-    
   };
 
   const prepareTaggedFiles = () => {
@@ -162,6 +166,8 @@ function App() {
       )
     );
     setReadyToTagger(true);
+    const msg = "Order enhanced to be tagged.";
+    setSelectorPrepareTaggerCard({ status: true, msg: [msg] });
   };
   /* Logic for Tagger */
 
@@ -213,7 +219,6 @@ function App() {
         merged.push({ ...tagged, ...url[0] });
       }
     }
-
   };
 
   const handleDownloadMerged = () => {};
@@ -249,6 +254,7 @@ function App() {
                   basicSelectorChecks={basicSelectorChecks}
                   selectorSelectCard={selectorSelectCard}
                   selectorBasicChecksCard={selectorBasicChecksCard}
+                  selectorPrepareTaggerCard={selectorPrepareTaggerCard}
                 />
               </>
             }

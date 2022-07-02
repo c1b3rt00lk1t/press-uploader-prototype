@@ -10,6 +10,7 @@ const Selector = ({
   basicSelectorChecks,
   selectorSelectCard,
   selectorBasicChecksCard,
+  selectorPrepareTaggerCard
 }) => {
   return (
     <div id="selector">
@@ -31,7 +32,7 @@ const Selector = ({
         <Card status={selectorBasicChecksCard.status} msg={[selectorBasicChecksCard.msg]}>
           <button onClick={basicFolderChecks} disabled={!selectorSelectCard.status}>Basic checks</button>
         </Card>
-        <Card status={undefined} msg={[]}>
+        <Card status={selectorPrepareTaggerCard.status} msg={[selectorPrepareTaggerCard.msg]}>
           <button onClick={prepareTaggedFiles} disabled={!basicSelectorChecks}>
             Prepare tagger
           </button>
