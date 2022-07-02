@@ -22,11 +22,13 @@ function App() {
   /* States for controlling the enabling of next components */
   const emptyCard = { status: undefined, msg: [] };
   const [selectorSelectCard, setSelectorSelectCard] = useState(emptyCard);
+  const [selectorBasicChecksCard, setSelectorBasicChecksCard] = useState(emptyCard);
   const [basicSelectorChecks, setBasicSelectorChecks] = useState(false);
   const [readyToTagger, setReadyToTagger] = useState(false);
 
   /* Logic for Selector */
   const clickSelector = () => {
+    setSelectorBasicChecksCard({status: undefined,msg:['']});
     document.getElementById("file-selector").click();
   };
 
@@ -60,6 +62,8 @@ function App() {
     setTaggedFiles([]);
     setPrevious([]);
     setUrls([]);
+
+    
   };
 
   const basicFolderChecks = () => {
@@ -72,26 +76,36 @@ function App() {
         file.name.toLowerCase().includes("orden") && file.name.endsWith(".txt")
     );
     if (orderFile.length === 0) {
+      const msg = "There is no order file.";
+      setSelectorBasicChecksCard({status: false,msg:[msg]});
       console.log("There is no order file.");
       return;
     } else if (orderFile.length > 1) {
+      const msg = "There are too many order files.";
+      setSelectorBasicChecksCard({status: false,msg:[msg]});
       console.log("There are too many order files.");
       return;
     } else {
+
+      const fr = new FileReader();
+      const fileSelection = new Promise((resolve) => {
+        fr.onload = () => resolve(fr.result);
+        fr.readAsText(orderFile[0], "UTF-8");
+      });
+      setOrderFileContent(
+        [await fileSelection][0].split("\r\n").filter((a) => a !== "")
+      );
+      const name = orderFile[0].name;
+      setSession([...name].slice(0, 8).join(""));
+      setBasicSelectorChecks(true);
+
+
+      const msg = "Order file loaded.";
+      setSelectorBasicChecksCard({status: true,msg:[msg]});
       console.log("Order file loaded.");
     }
 
-    const fr = new FileReader();
-    const fileSelection = new Promise((resolve) => {
-      fr.onload = () => resolve(fr.result);
-      fr.readAsText(orderFile[0], "UTF-8");
-    });
-    setOrderFileContent(
-      [await fileSelection][0].split("\r\n").filter((a) => a !== "")
-    );
-    const name = orderFile[0].name;
-    setSession([...name].slice(0, 8).join(""));
-    setBasicSelectorChecks(true);
+    
   };
 
   const prepareTaggedFiles = () => {
@@ -229,6 +243,7 @@ function App() {
                   prepareTaggedFiles={prepareTaggedFiles}
                   basicSelectorChecks={basicSelectorChecks}
                   selectorSelectCard={selectorSelectCard}
+                  selectorBasicChecksCard={selectorBasicChecksCard}
                 />
               </>
             }
