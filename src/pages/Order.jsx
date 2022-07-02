@@ -1,15 +1,10 @@
 import React from "react";
-import { useState } from "react";
+
 import { v4 as uuidv4 } from "uuid";
 import Folder from "../components/Folder";
-// import PreviewPdf from "../components/PreviewPdf";
 
 const Order = ({ pdfFiles, relativePath }) => {
-  // const [selected, setSelected] = useState(+2);
 
-  // const handleSelectItem = (ev) => {
-  //   setSelected(+ev.target.dataset.order);
-  // };
 
   const files = pdfFiles.map((file) => ({
     file: file,
