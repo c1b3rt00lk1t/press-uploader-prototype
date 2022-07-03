@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { uploadFile, getFileURL } from "./firebase";
+import { uploadFile, getFileURL, writeData } from "./firebase";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Uploader from "./pages/Uploader";
 import Selector from "./pages/Selector";
@@ -303,6 +303,7 @@ function App() {
             }
           />
         </Routes>
+        <button onClick={() => writeData()}>Write</button>
       </Router>
     </>
   );
