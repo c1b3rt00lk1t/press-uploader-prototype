@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const TagsForm = ({
   selectedFile,
@@ -7,9 +8,11 @@ const TagsForm = ({
   handleSectorsChange,
   handleTagsChange,
   relativePath,
-  taggedFiles
+  taggedFiles,
 }) => {
   let { zones, sectors, tags } = selectedFile;
+
+  const navigate = useNavigate();
 
   return (
     <div className="tagsForm">
@@ -67,7 +70,11 @@ const TagsForm = ({
         <button onClick={handleTagsNext} disabled>
           Load
         </button>
-        <button onClick={handleTagsNext} disabled>
+        <button
+          onClick={() => {
+            navigate("/uploader");
+          }}
+        >
           Done
         </button>
       </div>
