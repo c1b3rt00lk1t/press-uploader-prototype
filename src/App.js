@@ -30,7 +30,6 @@ function App() {
 
   const [uploaderUpload, setUploaderUpload] = useState(emptyCard);
 
-
   const [mergerBasicChecksCard, setMergerBasicChecksCard] = useState(emptyCard);
   const [mergerMergeCard, setMergerMergeCard] = useState(emptyCard);
   const [mergerSendToServer, setMergerSendToServer] = useState(emptyCard);
@@ -185,12 +184,14 @@ function App() {
   /* Logic for Uploader */
 
   const handleUploadFiles = () => {
-    setUploaderUpload({status: undefined, msg: ["Loading..."]})
+    setUploaderUpload({ status: undefined, msg: ["Loading..."] });
     Promise.all(
       pdfFiles.map((file) => {
         return uploadFile(file, file.webkitRelativePath);
       })
-    ).then((_) => setUploaderUpload({status: true, msg: ["Everything loaded"]}));
+    ).then((_) =>
+      setUploaderUpload({ status: true, msg: ["Everything loaded"] })
+    );
   };
 
   const handleGetFileURL = async () => {
@@ -259,19 +260,14 @@ function App() {
   };
 
   const handleUploadMerged = () => {
-    try { 
-      writeDataSession(merged).then(
-        setMergerSendToServer({
-          status: true,
-          msg: "Merged tags and url sent to the server.",
-        })
-      );
-    } catch (e) {
-      setMergerSendToServer({
-        status: false,
-        msg: "Error sending data to the server.",
-      });
-    }
+    setMergerSendToServer({ status: undefined, msg: "Sending..." });
+    writeDataSession(merged).then((result) => {
+      if (result) {
+        setMergerSendToServer({ status: true, msg: "Tags and urls sent." });
+      } else {
+        setMergerSendToServer({ status: false, msg: "Erro sending tags and urls." });
+      }
+    });
   };
 
   return (
