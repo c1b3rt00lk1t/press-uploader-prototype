@@ -7,7 +7,8 @@ const Merger = ({
   handleDownloadMerged,
   handleBasicMergeChecks,
   handleUploadMerged,
-  mergerBasicChecksCard
+  mergerBasicChecksCard,
+  mergerMergeCard
 }) => {
   return (
     <div>
@@ -15,7 +16,7 @@ const Merger = ({
         <Card status={mergerBasicChecksCard.status} msg={mergerBasicChecksCard.msg}>
           <button onClick={handleBasicMergeChecks}>Basic checks</button>
         </Card>
-        <Card status={undefined} msg={[]}>
+        <Card status={mergerMergeCard.status} msg={[mergerMergeCard.msg]}>
           <button onClick={handleMerge}>Merge</button>
         </Card>
         <Card status={undefined} msg={[]}>

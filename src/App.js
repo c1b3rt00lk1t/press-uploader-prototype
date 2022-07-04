@@ -31,6 +31,10 @@ function App() {
 
   const [mergerBasicChecksCard, setMergerBasicChecksCard] =
     useState(emptyCard);
+  const [mergerMergeCard, setMergerMergeCard] =
+    useState(emptyCard);
+
+
 
   /* States for controlling the enabling of next components */
   const [readyToOrder, setReadyToOrder] = useState(false);
@@ -225,6 +229,10 @@ function App() {
     }
     setMerged(mergedTmp)
     console.log(mergedTmp)
+    
+    
+    !!mergedTmp.length ? setMergerMergeCard({ status: true, msg: "Tags and urls successfully merged." }) : setMergerMergeCard({ status: false, msg: "Tags and urls not merged." })
+
   };
 
   const handleDownloadMerged = () => {};
@@ -327,6 +335,7 @@ function App() {
                 handleBasicMergeChecks={handleBasicMergeChecks}
                 handleUploadMerged={handleUploadMerged}
                 mergerBasicChecksCard={mergerBasicChecksCard}
+                mergerMergeCard={mergerMergeCard}
               />
             }
           />
