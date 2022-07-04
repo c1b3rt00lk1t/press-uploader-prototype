@@ -19,9 +19,9 @@ const Merger = ({
         <Card status={mergerMergeCard.status} msg={[mergerMergeCard.msg]}>
           <button onClick={handleMerge}>Merge</button>
         </Card>
-        <Card status={undefined} msg={[]}>
+        {/* <Card status={undefined} msg={[]}>
           <button onClick={handleDownloadMerged}>Download</button>
-        </Card>
+        </Card> */}
         <Card status={undefined} msg={[]}>
         <button onClick={handleUploadMerged}>Send to server</button>
         </Card>
