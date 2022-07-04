@@ -8,16 +8,20 @@ const Uploader = ({
   relativePath,
   handleUploadFiles,
   handleGetFileURL,
+  uploaderUpload
 }) => {
   return (
     <div id="uploader">
       <CardDisplay>
-        <Card status={undefined} msg={[]}>
+        <Card status={uploaderUpload.status} msg={[uploaderUpload.msg]}>
           <button onClick={handleUploadFiles}>Upload files</button>
         </Card>
         <Card status={undefined} msg={[]}>
           <button onClick={handleGetFileURL}> Get URLs</button>
-          {!!files.length && !!urls.length && (
+        </Card>
+
+        {!!files.length && !!urls.length && (
+          <Card status={undefined} msg={[]}>
             <a
               href={`data:text/json;charset=utf-8,${encodeURIComponent(
                 JSON.stringify(urls)
@@ -32,9 +36,8 @@ const Uploader = ({
                 .padStart(2, "0")}${new Date().getMinutes()}.json`}
             >
               <button>{`Download JSON`}</button>
-            </a>
+            </a></Card>
           )}
-        </Card>
       </CardDisplay>
     </div>
   );

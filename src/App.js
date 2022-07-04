@@ -28,13 +28,12 @@ function App() {
   const [selectorPrepareTaggerCard, setSelectorPrepareTaggerCard] =
     useState(emptyCard);
 
+  const [uploaderUpload, setUploaderUpload] = useState(emptyCard);
 
-  const [mergerBasicChecksCard, setMergerBasicChecksCard] =
-    useState(emptyCard);
-  const [mergerMergeCard, setMergerMergeCard] =
-    useState(emptyCard);
+
+  const [mergerBasicChecksCard, setMergerBasicChecksCard] = useState(emptyCard);
+  const [mergerMergeCard, setMergerMergeCard] = useState(emptyCard);
   const [mergerSendToServer, setMergerSendToServer] = useState(emptyCard);
-
 
   /* States for controlling the enabling of next components */
   const [readyToOrder, setReadyToOrder] = useState(false);
@@ -47,7 +46,7 @@ function App() {
     setSelectorBasicChecksCard({ status: undefined, msg: [""] });
     setReadyToOrder(false);
     setBasicSelectorChecks(false);
-    setSelectorPrepareTaggerCard({status: undefined,msg:[""]})
+    setSelectorPrepareTaggerCard({ status: undefined, msg: [""] });
 
     // Triggers the event
     document.getElementById("file-selector").click();
@@ -186,11 +185,12 @@ function App() {
   /* Logic for Uploader */
 
   const handleUploadFiles = () => {
+    setUploaderUpload({status: undefined, msg: ["Loading..."]})
     Promise.all(
       pdfFiles.map((file) => {
         return uploadFile(file, file.webkitRelativePath);
       })
-    ).then((_) => console.log("Everything loaded"));
+    ).then((_) => setUploaderUpload({status: true, msg: ["Everything loaded"]}));
   };
 
   const handleGetFileURL = async () => {
@@ -227,16 +227,20 @@ function App() {
         mergedTmp.push({ ...tagged, ...url[0] });
       }
     }
-    setMerged(mergedTmp)
-    
-    !!mergedTmp.length ? setMergerMergeCard({ status: true, msg: "Tags and urls successfully merged." }) : setMergerMergeCard({ status: false, msg: "Tags and urls not merged." })
+    setMerged(mergedTmp);
 
+    !!mergedTmp.length
+      ? setMergerMergeCard({
+          status: true,
+          msg: "Tags and urls successfully merged.",
+        })
+      : setMergerMergeCard({ status: false, msg: "Tags and urls not merged." });
   };
 
   const handleDownloadMerged = () => {};
 
   const handleBasicMergeChecks = () => {
-    let msg = []
+    let msg = [];
     let status = true;
 
     if (!urls.length) {
@@ -252,19 +256,23 @@ function App() {
       msg.push("Found tagged files to merge.");
     }
     setMergerBasicChecksCard({ status: status, msg: msg });
-
   };
 
   const handleUploadMerged = () => {
-    try{
-   writeDataSession(merged).then(setMergerSendToServer({status: true, msg: "Merged tags and url sent to the server."}))
+    try { 
+      writeDataSession(merged).then(
+        setMergerSendToServer({
+          status: true,
+          msg: "Merged tags and url sent to the server.",
+        })
+      );
     } catch (e) {
-      setMergerSendToServer({status: false, msg: "Error sending data to the server."})
+      setMergerSendToServer({
+        status: false,
+        msg: "Error sending data to the server.",
+      });
     }
-
   };
-
-
 
   return (
     <>
@@ -322,6 +330,7 @@ function App() {
                 handleSelectFolder={handleSelectFolder}
                 handleUploadFiles={handleUploadFiles}
                 handleGetFileURL={handleGetFileURL}
+                uploaderUpload={uploaderUpload}
               />
             }
           />
