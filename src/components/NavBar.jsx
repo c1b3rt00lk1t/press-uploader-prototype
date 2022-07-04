@@ -6,7 +6,9 @@ const NavBar = ({readyToTagger,basicSelectorChecks, readyToOrder}) => {
   const enableOrder = !readyToOrder;
   const enableTagger = !readyToTagger;
   const enableUploader = !basicSelectorChecks;
-  const enableMerger = enableTagger && enableUploader;
+  // const enableMerger = enableTagger && enableUploader;
+  const enableMerger = false;
+
 
   return (
     <div className="navbar">

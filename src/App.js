@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { uploadFile, getFileURL, writeData } from "./firebase";
+import { uploadFile, getFileURL, writeDataSession } from "./firebase";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Uploader from "./pages/Uploader";
 import Selector from "./pages/Selector";
@@ -17,6 +17,7 @@ function App() {
   const [taggedFiles, setTaggedFiles] = useState([]);
   const [previous, setPrevious] = useState([]);
   const [urls, setUrls] = useState([]);
+  const [merged, setMerged] = useState([]);
   const [relativePath, setRelativePath] = useState();
 
   /* States for controlling the enabling of next components */
@@ -39,8 +40,6 @@ function App() {
     setBasicSelectorChecks(false);
     setSelectorPrepareTaggerCard({status: undefined,msg:[""]})
 
-
-    
     // Triggers the event
     document.getElementById("file-selector").click();
   };
@@ -204,7 +203,7 @@ function App() {
 
   /* Logic for the Merger */
   const handleMerge = () => {
-    let merged = [];
+    let mergedTmp = [];
     const taggedPDFs = taggedFiles.filter(
       (tagged) => tagged.source !== "label"
     );
@@ -216,10 +215,11 @@ function App() {
       const url = urls.filter((url) => url.name.includes(tagged.title));
       if (url.length) {
         // console.log(url[0].url)
-        merged.push({ ...tagged, ...url[0] });
+        mergedTmp.push({ ...tagged, ...url[0] });
       }
     }
-    console.log(merged)
+    setMerged(mergedTmp)
+    console.log(mergedTmp)
   };
 
   const handleDownloadMerged = () => {};
@@ -232,6 +232,12 @@ function App() {
       console.log("No tagged files to merge.");
     }
   };
+
+  const handleUploadMerged = () => {
+    writeDataSession(merged)
+  };
+
+
 
   return (
     <>
@@ -299,11 +305,11 @@ function App() {
                 handleMerge={handleMerge}
                 handleDownloadMerged={handleDownloadMerged}
                 handleBasicMergeChecks={handleBasicMergeChecks}
+                handleUploadMerged={handleUploadMerged}
               />
             }
           />
         </Routes>
-        <button onClick={() => writeData()}>Write</button>
       </Router>
     </>
   );
