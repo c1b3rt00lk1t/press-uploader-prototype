@@ -29,6 +29,7 @@ function App() {
     useState(emptyCard);
 
   const [uploaderUpload, setUploaderUpload] = useState(emptyCard);
+  const [uploaderGetURLs, setUploaderGetURLs] = useState(emptyCard);
 
   const [mergerBasicChecksCard, setMergerBasicChecksCard] = useState(emptyCard);
   const [mergerMergeCard, setMergerMergeCard] = useState(emptyCard);
@@ -190,11 +191,12 @@ function App() {
         return uploadFile(file, file.webkitRelativePath);
       })
     ).then((_) =>
-      setUploaderUpload({ status: true, msg: ["Everything loaded"] })
-    );
+      setUploaderUpload({ status: true, msg: ["Everything loaded."] })
+    )
   };
 
   const handleGetFileURL = async () => {
+    setUploaderGetURLs({ status: undefined, msg: ["Getting the URLs..."] })
     let urlsTmp = [];
     await Promise.all(
       pdfFiles.map(async (file, i) => {
@@ -209,6 +211,7 @@ function App() {
 
     setUrls(fileUrls);
     console.log("All urls received.");
+    !!fileUrls.length ? setUploaderGetURLs({ status: true, msg: ["All urls received."] }) : setUploaderGetURLs({ status: false, msg: ["No urls received."] })
   };
 
   /* Logic for the Merger */
@@ -327,6 +330,7 @@ function App() {
                 handleUploadFiles={handleUploadFiles}
                 handleGetFileURL={handleGetFileURL}
                 uploaderUpload={uploaderUpload}
+                uploaderGetURLs={uploaderGetURLs}
               />
             }
           />

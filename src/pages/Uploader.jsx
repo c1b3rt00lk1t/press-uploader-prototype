@@ -8,7 +8,8 @@ const Uploader = ({
   relativePath,
   handleUploadFiles,
   handleGetFileURL,
-  uploaderUpload
+  uploaderUpload,
+  uploaderGetURLs
 }) => {
   return (
     <div id="uploader">
@@ -16,7 +17,7 @@ const Uploader = ({
         <Card status={uploaderUpload.status} msg={[uploaderUpload.msg]}>
           <button onClick={handleUploadFiles}>Upload files</button>
         </Card>
-        <Card status={undefined} msg={[]}>
+        <Card status={uploaderGetURLs.status} msg={[uploaderGetURLs.msg]}>
           <button onClick={handleGetFileURL}> Get URLs</button>
         </Card>
 
