@@ -20,7 +20,7 @@ function App() {
   const [merged, setMerged] = useState([]);
   const [relativePath, setRelativePath] = useState();
 
-  /* States for controlling the enabling of next components */
+  /* States for controlling the the status and messages of the cards */
   const emptyCard = { status: undefined, msg: [] };
   const [selectorSelectCard, setSelectorSelectCard] = useState(emptyCard);
   const [selectorBasicChecksCard, setSelectorBasicChecksCard] =
@@ -28,6 +28,11 @@ function App() {
   const [selectorPrepareTaggerCard, setSelectorPrepareTaggerCard] =
     useState(emptyCard);
 
+
+  const [mergerBasicChecksCard, setMergerBasicChecksCard] =
+    useState(emptyCard);
+
+  /* States for controlling the enabling of next components */
   const [readyToOrder, setReadyToOrder] = useState(false);
   const [basicSelectorChecks, setBasicSelectorChecks] = useState(false);
   const [readyToTagger, setReadyToTagger] = useState(false);
@@ -225,12 +230,27 @@ function App() {
   const handleDownloadMerged = () => {};
 
   const handleBasicMergeChecks = () => {
+    let msg = []
+    let status = true;
+
     if (!urls.length) {
+      msg.push("No urls to merge.");
+      status = false;
       console.log("No urls to merge.");
+    } else {
+      msg.push("Found urls to merge.");
+      console.log("Found urls to merge.");
     }
     if (!taggedFiles.length) {
+      status = false;
+      msg.push("No tagged files to merge.");
       console.log("No tagged files to merge.");
+    } else {
+      msg.push("Found tagged files to merge.");
+      console.log("Found tagged files to merge.");
     }
+    setMergerBasicChecksCard({ status: status, msg: msg });
+
   };
 
   const handleUploadMerged = () => {
@@ -306,6 +326,7 @@ function App() {
                 handleDownloadMerged={handleDownloadMerged}
                 handleBasicMergeChecks={handleBasicMergeChecks}
                 handleUploadMerged={handleUploadMerged}
+                mergerBasicChecksCard={mergerBasicChecksCard}
               />
             }
           />
