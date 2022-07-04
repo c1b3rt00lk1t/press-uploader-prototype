@@ -33,7 +33,7 @@ function App() {
     useState(emptyCard);
   const [mergerMergeCard, setMergerMergeCard] =
     useState(emptyCard);
-
+  const [mergerSendToServer, setMergerSendToServer] = useState(emptyCard);
 
 
   /* States for controlling the enabling of next components */
@@ -228,8 +228,6 @@ function App() {
       }
     }
     setMerged(mergedTmp)
-    console.log(mergedTmp)
-    
     
     !!mergedTmp.length ? setMergerMergeCard({ status: true, msg: "Tags and urls successfully merged." }) : setMergerMergeCard({ status: false, msg: "Tags and urls not merged." })
 
@@ -244,25 +242,26 @@ function App() {
     if (!urls.length) {
       msg.push("No urls to merge.");
       status = false;
-      console.log("No urls to merge.");
     } else {
       msg.push("Found urls to merge.");
-      console.log("Found urls to merge.");
     }
     if (!taggedFiles.length) {
       status = false;
       msg.push("No tagged files to merge.");
-      console.log("No tagged files to merge.");
     } else {
       msg.push("Found tagged files to merge.");
-      console.log("Found tagged files to merge.");
     }
     setMergerBasicChecksCard({ status: status, msg: msg });
 
   };
 
   const handleUploadMerged = () => {
-    writeDataSession(merged)
+    try{
+   writeDataSession(merged).then(setMergerSendToServer({status: true, msg: "Merged tags and url sent to the server."}))
+    } catch (e) {
+      setMergerSendToServer({status: false, msg: "Error sending data to the server."})
+    }
+
   };
 
 
@@ -336,6 +335,7 @@ function App() {
                 handleUploadMerged={handleUploadMerged}
                 mergerBasicChecksCard={mergerBasicChecksCard}
                 mergerMergeCard={mergerMergeCard}
+                mergerSendToServer={mergerSendToServer}
               />
             }
           />

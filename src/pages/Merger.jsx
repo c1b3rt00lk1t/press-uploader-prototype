@@ -8,7 +8,8 @@ const Merger = ({
   handleBasicMergeChecks,
   handleUploadMerged,
   mergerBasicChecksCard,
-  mergerMergeCard
+  mergerMergeCard,
+  mergerSendToServer
 }) => {
   return (
     <div>
@@ -22,7 +23,7 @@ const Merger = ({
         {/* <Card status={undefined} msg={[]}>
           <button onClick={handleDownloadMerged}>Download</button>
         </Card> */}
-        <Card status={undefined} msg={[]}>
+        <Card status={mergerSendToServer.status} msg={[mergerSendToServer.msg]}>
         <button onClick={handleUploadMerged}>Send to server</button>
         </Card>
       </CardDisplay>
