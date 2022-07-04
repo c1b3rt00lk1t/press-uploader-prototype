@@ -21,7 +21,7 @@ const Uploader = ({
           <button onClick={handleGetFileURL}> Get URLs</button>
         </Card>
 
-        {!!files.length && !!urls.length && (
+        {/* {!!files.length && !!urls.length && (
           <Card status={undefined} msg={[]}>
             <a
               href={`data:text/json;charset=utf-8,${encodeURIComponent(
@@ -38,7 +38,7 @@ const Uploader = ({
             >
               <button>{`Download JSON`}</button>
             </a></Card>
-          )}
+          )} */}
       </CardDisplay>
     </div>
   );
