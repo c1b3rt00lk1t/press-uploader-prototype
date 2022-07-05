@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const TagsForm = ({
   selectedFile,
@@ -71,7 +71,8 @@ const TagsForm = ({
           Load
         </button>
         <button
-          onClick={() => {
+          onClick={(ev) => {
+            handleTagsNext(ev);
             navigate("/uploader");
           }}
         >
