@@ -12,6 +12,9 @@ const NavBar = ({readyToTagger,basicSelectorChecks, readyToOrder}) => {
 
   return (
     <div className="navbar">
+      <Link disabled={true} to="/">
+        Start
+      </Link>
     <Link to="/">
         Selector
       </Link>
@@ -26,6 +29,12 @@ const NavBar = ({readyToTagger,basicSelectorChecks, readyToOrder}) => {
       </Link>
       <Link disabled={enableMerger} to="/merger">
         Merger
+      </Link>
+      <Link disabled={true} to="/">
+        Settings
+      </Link>
+      <Link disabled={true} to="/">
+        Log in
       </Link>
 
     </div>
