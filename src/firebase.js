@@ -52,7 +52,7 @@ export const getFileURL = async (path) => {
 
 export const writeDataSession = async (data) => {
   try {
-    await set(refDb(database, "/" + data[0].session), data);
+    await set(refDb(database, "/sessions/" + data[0].session), data);
   } catch (error) {
     return false;
   }
