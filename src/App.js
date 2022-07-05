@@ -315,6 +315,7 @@ function App() {
                 handleTaggedFiles={handleTaggedFiles}
                 previous={previous}
                 setPrevious={setPrevious}
+                session={session}
               />
             }
           />

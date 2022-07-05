@@ -10,6 +10,7 @@ const Tagger = ({
   previous,
   setPrevious,
   relativePath,
+  session,
 }) => {
   const [selected, setSelected] = useState(+2);
 
@@ -78,7 +79,7 @@ const Tagger = ({
 
   const handleTagsLoad = async (ev) => {
     const filesArray = [...ev.target.files];
-    
+
     const fr = new FileReader();
     const fileTagged = await new Promise((resolve) => {
       fr.onload = () => resolve(fr.result);
@@ -86,13 +87,19 @@ const Tagger = ({
     });
     const fileTaggedParsed = JSON.parse(fileTagged);
 
-
-    handleTaggedFiles(fileTaggedParsed)
-
-    setPrevious(fileTaggedParsed.filter( file => file.zones.length || file.sectors.length || file.tags.length).map(file => file.order))
-
-
-
+    if (fileTaggedParsed[0].session === session) {
+      handleTaggedFiles(fileTaggedParsed);
+      setPrevious(
+        fileTaggedParsed
+          .filter(
+            (file) =>
+              file.zones.length || file.sectors.length || file.tags.length
+          )
+          .map((file) => file.order)
+      );
+    } else {
+      alert("The tagged file does not correspond to the current working session.")
+    }
   };
 
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
