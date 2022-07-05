@@ -7,12 +7,18 @@ const TagsForm = ({
   handleZonesChange,
   handleSectorsChange,
   handleTagsChange,
+  handleTagsLoad,
   relativePath,
   taggedFiles,
 }) => {
   let { zones, sectors, tags } = selectedFile;
 
   const navigate = useNavigate();
+
+  const clickLoader = () => {
+    // Triggers the event
+    document.getElementById("loader-selector").click();
+  };
 
   return (
     <div className="tagsForm">
@@ -67,9 +73,19 @@ const TagsForm = ({
           <button disabled={!relativePath}>{`Save`}</button>
         </a>
 
-        <button onClick={handleTagsNext} disabled>
-          Load
-        </button>
+        <button onClick={clickLoader} id="display-loader">
+            Load
+          </button>
+          <input
+            onChange={handleTagsLoad}
+            type="file"
+            accept=".json"
+            id="loader-selector"
+            name="fileLoad"
+            style={{ display: "none" }}
+
+          />
+
         <button
           onClick={(ev) => {
             handleTagsNext(ev);

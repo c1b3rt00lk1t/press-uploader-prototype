@@ -19,25 +19,24 @@ const Tagger = ({
 
   /* Logic for the Tag Form */
 
-  
   const formatTags = (tags) => {
-    if (tags){
-    return tags
-      .map((tag) => tag.trim())
-      .map((tag) => tag.toLowerCase())
-      .filter((tag) => tag !== "");
+    if (tags) {
+      return tags
+        .map((tag) => tag.trim())
+        .map((tag) => tag.toLowerCase())
+        .filter((tag) => tag !== "");
     } else {
       return [];
     }
   };
 
   const formatFileTags = (file) => {
-    const formated = {...file};
-    formated.zones = formatTags(formated.zones); 
-    formated.sectors = formatTags(formated.sectors); 
-    formated.tags = formatTags(formated.tags); 
+    const formated = { ...file };
+    formated.zones = formatTags(formated.zones);
+    formated.sectors = formatTags(formated.sectors);
+    formated.tags = formatTags(formated.tags);
     return formated;
-  }
+  };
 
   const handleZonesChange = (ev) => {
     handleTaggedFiles(
@@ -75,6 +74,25 @@ const Tagger = ({
     } else if (selected >= taggedFiles.length - 1) {
       setSelected(+2);
     }
+  };
+
+  const handleTagsLoad = async (ev) => {
+    const filesArray = [...ev.target.files];
+    
+    const fr = new FileReader();
+    const fileTagged = await new Promise((resolve) => {
+      fr.onload = () => resolve(fr.result);
+      fr.readAsText(filesArray[0], "UTF-8");
+    });
+    const fileTaggedParsed = JSON.parse(fileTagged);
+
+
+    handleTaggedFiles(fileTaggedParsed)
+
+    setPrevious(fileTaggedParsed.filter( file => file.zones.length || file.sectors.length || file.tags.length).map(file => file.order))
+
+
+
   };
 
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
@@ -120,6 +138,7 @@ const Tagger = ({
             handleTagsNext={handleTagsNext}
             taggedFiles={taggedFiles}
             relativePath={relativePath}
+            handleTagsLoad={handleTagsLoad}
           />
         </div>
       </div>
