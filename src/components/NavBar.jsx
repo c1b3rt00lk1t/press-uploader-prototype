@@ -16,7 +16,7 @@ const NavBar = ({readyToTagger,basicSelectorChecks, readyToOrder}) => {
         Start
       </Link>
     <Link to="/">
-        Selector
+        Folder
       </Link>
       <Link disabled={enableOrder} to="/order">
         Order

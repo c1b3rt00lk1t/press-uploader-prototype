@@ -32,12 +32,15 @@ const Selector = ({
         <Card status={selectorBasicChecksCard.status} msg={[selectorBasicChecksCard.msg]}>
           <button onClick={basicFolderChecks} disabled={!selectorSelectCard.status}>Basic checks</button>
         </Card>
+        <Card status={undefined} msg={[]}>
+          <button onClick={() =>{}} disabled={true}>Edit order</button>
+        </Card>
         <Card status={selectorPrepareTaggerCard.status} msg={[selectorPrepareTaggerCard.msg]}>
           <button onClick={prepareTaggedFiles} disabled={!basicSelectorChecks}>
             Prepare tagger
           </button>
         </Card>
-      </CardDisplay>
+        </CardDisplay>
     </div>
   );
 };
