@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
+import { useNavigate } from "react-router-dom";
 
 const Selector = ({
   clickSelector,
@@ -12,6 +13,14 @@ const Selector = ({
   selectorBasicChecksCard,
   selectorPrepareTaggerCard
 }) => {
+
+  const navigate = useNavigate();
+  const handleClickPrepareTagger = () => {
+    prepareTaggedFiles();
+    navigate("/tagger");
+
+  }
+
   return (
     <div id="selector">
       <CardDisplay>
@@ -36,7 +45,7 @@ const Selector = ({
           <button onClick={() =>{}} disabled={true}>Edit order</button>
         </Card>
         <Card status={selectorPrepareTaggerCard.status} msg={[selectorPrepareTaggerCard.msg]}>
-          <button onClick={prepareTaggedFiles} disabled={!basicSelectorChecks}>
+          <button onClick={handleClickPrepareTagger} disabled={!basicSelectorChecks}>
             Prepare tagger
           </button>
         </Card>
