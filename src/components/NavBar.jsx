@@ -1,23 +1,18 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = ({readyToTagger,basicSelectorChecks, readyToOrder}) => {
-
+const NavBar = ({ readyToTagger, basicSelectorChecks, readyToOrder }) => {
   const enableOrder = !readyToOrder;
   const enableTagger = !readyToTagger;
   const enableUploader = !basicSelectorChecks;
   // const enableMerger = enableTagger && enableUploader;
   const enableMerger = false;
 
-
   return (
     <div className="navbar">
-      <Link  to="/">
-        Start
-      </Link>
-    <Link to="/selector">
-        Folder
-      </Link>
+      <Link to="/">Start</Link>
+      <Link to="/server">Server</Link>
+      <Link to="/selector">Folder</Link>
       <Link disabled={enableOrder} to="/order">
         Order
       </Link>
@@ -36,9 +31,8 @@ const NavBar = ({readyToTagger,basicSelectorChecks, readyToOrder}) => {
       <Link disabled={true} to="/">
         Log in
       </Link>
-
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

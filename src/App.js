@@ -9,6 +9,7 @@ import NavBar from "./components/NavBar";
 import Merger from "./pages/Merger";
 import Order from "./pages/Order";
 import Start from "./pages/Start";
+import Server from "./pages/Server";
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -294,6 +295,14 @@ function App() {
             element={
               <>
                 <Start />
+              </>
+            }
+          />
+          <Route
+            path="/server"
+            element={
+              <>
+                <Server />
               </>
             }
           />
