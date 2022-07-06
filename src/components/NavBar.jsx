@@ -12,10 +12,10 @@ const NavBar = ({readyToTagger,basicSelectorChecks, readyToOrder}) => {
 
   return (
     <div className="navbar">
-      <Link disabled={true} to="/">
+      <Link  to="/">
         Start
       </Link>
-    <Link to="/">
+    <Link to="/selector">
         Folder
       </Link>
       <Link disabled={enableOrder} to="/order">

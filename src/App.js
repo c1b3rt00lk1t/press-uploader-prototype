@@ -8,6 +8,7 @@ import Tagger from "./pages/Tagger";
 import NavBar from "./components/NavBar";
 import Merger from "./pages/Merger";
 import Order from "./pages/Order";
+import Start from "./pages/Start";
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -192,11 +193,11 @@ function App() {
       })
     ).then((_) =>
       setUploaderUpload({ status: true, msg: ["Everything loaded."] })
-    )
+    );
   };
 
   const handleGetFileURL = async () => {
-    setUploaderGetURLs({ status: undefined, msg: ["Getting the URLs..."] })
+    setUploaderGetURLs({ status: undefined, msg: ["Getting the URLs..."] });
     let urlsTmp = [];
     await Promise.all(
       pdfFiles.map(async (file, i) => {
@@ -211,7 +212,9 @@ function App() {
 
     setUrls(fileUrls);
     console.log("All urls received.");
-    !!fileUrls.length ? setUploaderGetURLs({ status: true, msg: ["All urls received."] }) : setUploaderGetURLs({ status: false, msg: ["No urls received."] })
+    !!fileUrls.length
+      ? setUploaderGetURLs({ status: true, msg: ["All urls received."] })
+      : setUploaderGetURLs({ status: false, msg: ["No urls received."] });
   };
 
   /* Logic for the Merger */
@@ -268,7 +271,10 @@ function App() {
       if (result) {
         setMergerSendToServer({ status: true, msg: "Tags and urls sent." });
       } else {
-        setMergerSendToServer({ status: false, msg: "Erro sending tags and urls." });
+        setMergerSendToServer({
+          status: false,
+          msg: "Erro sending tags and urls.",
+        });
       }
     });
   };
@@ -285,6 +291,14 @@ function App() {
           <Route
             exact
             path="/"
+            element={
+              <>
+                <Start />
+              </>
+            }
+          />
+          <Route
+            path="/selector"
             element={
               <>
                 <Selector
