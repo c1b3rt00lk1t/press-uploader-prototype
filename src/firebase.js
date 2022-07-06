@@ -6,7 +6,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
-import { getDatabase, ref as refDb, set } from "firebase/database";
+import { getDatabase, ref as refDb, set, onValue } from "firebase/database";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -57,4 +57,16 @@ export const writeDataSession = async (data) => {
     return false;
   }
   return true;
+};
+
+export const getDataFromDB = (handleDataFromDB) => {
+ 
+  const refDB = refDb(database, "/sessions/");
+   onValue(refDB,  (snapshot) => {
+    const data =  snapshot.val();   
+    handleDataFromDB(data);
+  });
+  
+  
+  
 };
