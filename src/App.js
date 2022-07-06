@@ -10,6 +10,7 @@ import Merger from "./pages/Merger";
 import Order from "./pages/Order";
 import Start from "./pages/Start";
 import Server from "./pages/Server";
+import { PressUploaderContextProvider } from "./contexts/PressUploaderContext";
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -282,6 +283,7 @@ function App() {
 
   return (
     <>
+    <PressUploaderContextProvider>
       <Router>
         <NavBar
           readyToTagger={readyToTagger}
@@ -374,6 +376,7 @@ function App() {
           />
         </Routes>
       </Router>
+      </PressUploaderContextProvider>
     </>
   );
 }
