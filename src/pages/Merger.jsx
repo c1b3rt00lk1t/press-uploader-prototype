@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import PressUploaderContext from "../contexts/PressUploaderContext";
 import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
 
-const Merger = ({
-  handleMerge,
-  handleDownloadMerged,
-  handleBasicMergeChecks,
-  handleUploadMerged,
-  mergerBasicChecksCard,
-  mergerMergeCard,
-  mergerSendToServer
-}) => {
+const Merger = () => {
+
+  const {
+    handleMerge,
+    handleBasicMergeChecks,
+    handleUploadMerged,
+    mergerBasicChecksCard,
+    mergerMergeCard,
+    mergerSendToServer
+  } = useContext(PressUploaderContext);
+
   return (
     <div>
       <CardDisplay>

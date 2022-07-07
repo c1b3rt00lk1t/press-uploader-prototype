@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import PressUploaderContext from "../contexts/PressUploaderContext";
 import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
 
-const Uploader = ({
-  files,
-  urls,
-  relativePath,
-  handleUploadFiles,
-  handleGetFileURL,
-  uploaderUpload,
-  uploaderGetURLs
-}) => {
+const Uploader = () => {
+  const {
+    handleUploadFiles,
+    handleGetFileURL,
+    uploaderUpload,
+    uploaderGetURLs
+  } = useContext(PressUploaderContext);
+
   return (
     <div id="uploader">
       <CardDisplay>

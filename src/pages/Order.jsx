@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import PressUploaderContext from "../contexts/PressUploaderContext";
 
 import { v4 as uuidv4 } from "uuid";
 import Folder from "../components/Folder";
 
-const Order = ({ pdfFiles, relativePath }) => {
-
+const Order = () => {
+  const {
+    pdfFiles, relativePath
+  } = useContext(PressUploaderContext);
 
   const files = pdfFiles.map((file) => ({
     file: file,

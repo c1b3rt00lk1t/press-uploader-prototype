@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import PressUploaderContext from "../contexts/PressUploaderContext";
 import { useState } from "react";
 import TagsForm from "../components/TagsForm";
 import PreviewPdf from "../components/PreviewPdf";
 
-const Tagger = ({
-  files,
+const Tagger = () => {
+
+  const {
+    files,
   taggedFiles,
   handleTaggedFiles,
   previous,
   setPrevious,
   relativePath,
   session,
-}) => {
+  } = useContext(PressUploaderContext);
+
+
   const [selected, setSelected] = useState(+2);
 
   const handleSelectItem = (ev) => {

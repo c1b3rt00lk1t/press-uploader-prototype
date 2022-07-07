@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import SelectableMessageBox from "../shared/SelectableMessageBox";
 
 const Server = () => {
@@ -14,7 +14,9 @@ const Server = () => {
     handleClickSelectSession,
     serverSelectSession
   } = useContext(PressUploaderContext);
-  const navigate = useNavigate();
+
+  // const navigate = useNavigate();
+  
   return (
     <div id="server">
       <CardDisplay>

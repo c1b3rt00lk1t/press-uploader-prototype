@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import PressUploaderContext from "../contexts/PressUploaderContext";
 import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
 import { useNavigate } from "react-router-dom";
 
-const Selector = ({
-  clickSelector,
-  handleSelectFolder,
-  basicFolderChecks,
-  prepareTaggedFiles,
-  basicSelectorChecks,
-  selectorSelectCard,
-  selectorBasicChecksCard,
-  selectorPrepareTaggerCard
-}) => {
+const Selector = () => {
 
+  const {
+    clickSelector,
+    handleSelectFolder,
+    basicFolderChecks,
+    prepareTaggedFiles,
+    basicSelectorChecks,
+    selectorSelectCard,
+    selectorBasicChecksCard,
+    selectorPrepareTaggerCard
+  } = useContext(PressUploaderContext);
+  
   const navigate = useNavigate();
   const handleClickPrepareTagger = () => {
     prepareTaggedFiles();

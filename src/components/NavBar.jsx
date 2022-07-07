@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import PressUploaderContext from "../contexts/PressUploaderContext";
 
-const NavBar = ({ readyToTagger, basicSelectorChecks, readyToOrder }) => {
+const NavBar = () => {
+  const {
+    readyToTagger, basicSelectorChecks, readyToOrder
+  } = useContext(PressUploaderContext);
   const enableOrder = !readyToOrder;
   const enableTagger = !readyToTagger;
   const enableUploader = !basicSelectorChecks;
