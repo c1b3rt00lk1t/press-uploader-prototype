@@ -85,14 +85,20 @@ a[disabled] {
   margin: 0;
   padding: 0;
   width: 15vw;
+  height: 10vh;
   display:flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
 }
 
-.message-box{
-  font-size: 0.8em;
+.message-item{
+  font-size: 0.85em;
   color: inherit;
+}
+.selectable{
+  cursor: pointer;
+
 }
 
 /* css for the tagger page*/
