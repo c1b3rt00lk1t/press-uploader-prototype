@@ -5,6 +5,10 @@ import { uploadFile, getFileURL, writeDataSession } from "../firebase";
 const PressUploaderContext = createContext();
 
 export const PressUploaderContextProvider = ({ children }) => {
+
+  /** START CONTEXT */
+  const [origin, setOrigin] = useState();
+
   /**
    * SERVER CONTEXT
    * */
@@ -12,6 +16,8 @@ export const PressUploaderContextProvider = ({ children }) => {
   const [data, setData] = useState();
   const [uniqueSessions, setUniqueSessions] = useState([]);
   const [session, setSession] = useState();
+  const [taggedFiles, setTaggedFiles] = useState([]);
+
 
   /* States for controlling the status and messages of the cards */
   const emptyCard = { status: undefined, msg: [] };
@@ -42,30 +48,61 @@ export const PressUploaderContextProvider = ({ children }) => {
 
   const handleSessionSelection = (e) => {
     setSession(e.target.innerText);
-    
   };
 
-  const handleClickSelectSession = () => {
+  const prepareTaggedFilesFromServer = () => {
 
-    console.log(data[session]);
+    const enhanceTaggedFilesFromServer = (arr) => {
+      if (!arr.zones){
+        arr.zones = []
+      }
+      if (!arr.sectors){
+        arr.sectors = []
+      }
+      if (!arr.tags){
+        arr.tags = []
+      }
+      if (!arr.others){
+        arr.others = []
+      }
+      return arr;
+    };
+    const taggedFilesTmp = data[session].map(a => enhanceTaggedFilesFromServer(a));
+    setTaggedFiles(taggedFilesTmp);
+    handlePreviousAfterLoad(taggedFilesTmp);
+    setReadyToTagger(true);
 
+  }
+  const handlePreviousAfterLoad = (fileList) => {
+    setPrevious(
+      fileList
+        .filter(
+          (file) =>
+            file.zones.length || file.sectors.length || file.tags.length
+        )
+        .map((file) => file.order)
+    );
+  }
+
+   const handleClickSelectSession = () => {
+    prepareTaggedFilesFromServer();
+    
     setServerSelectSession({
       status: true,
       msg: [""],
-    })
-  }
+    });
+  };
+
 
 
   /**
    * PREVIOUS APP CONTEXT MIGRATED
    */
 
-   const [taggedFiles, setTaggedFiles] = useState([]);
-   const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([]);
   const [pdfFiles, setPdfFiles] = useState([]);
   const [orderFileContent, setOrderFileContent] = useState([]);
 
-  
   const [previous, setPrevious] = useState([]);
   const [urls, setUrls] = useState([]);
   const [merged, setMerged] = useState([]);
@@ -173,7 +210,7 @@ export const PressUploaderContextProvider = ({ children }) => {
     }
   };
 
-  const prepareTaggedFiles = () => {
+  const prepareTaggedFilesFromFolder = () => {
     const getDate = (arr, i) => {
       if (isNaN(parseInt(arr[0]))) {
         return { date: "00000000", arr: arr, order: i };
@@ -227,6 +264,8 @@ export const PressUploaderContextProvider = ({ children }) => {
     setSelectorPrepareTaggerCard({ status: true, msg: [msg] });
   };
   /* Logic for Tagger */
+
+
 
   const handleTaggedFiles = (a) => {
     setTaggedFiles(a);
@@ -326,11 +365,12 @@ export const PressUploaderContextProvider = ({ children }) => {
     });
   };
 
-   
-
   return (
     <PressUploaderContext.Provider
       value={{
+        //// START
+        origin,
+        setOrigin,
         //// SERVER
         handleGetSessionsFromDB,
         data,
@@ -344,7 +384,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         clickSelector,
         handleSelectFolder,
         basicFolderChecks,
-        prepareTaggedFiles,
+        prepareTaggedFiles: prepareTaggedFilesFromFolder,
         basicSelectorChecks,
         selectorSelectCard,
         selectorBasicChecksCard,
@@ -353,16 +393,19 @@ export const PressUploaderContextProvider = ({ children }) => {
         //// ORDER
         pdfFiles,
         relativePath,
-        
+
         //// TAGGER
+        // origin,
         files,
-        orderFileContent,        
+        orderFileContent,
         // relativePath,
         taggedFiles,
         handleTaggedFiles,
         previous,
         setPrevious,
         session,
+        setMerged,
+        handlePreviousAfterLoad,
 
         //// UPLOADER
         // clickSelector,
@@ -384,8 +427,6 @@ export const PressUploaderContextProvider = ({ children }) => {
         readyToTagger,
         // basicSelectorChecks,
         readyToOrder,
-
-
       }}
     >
       {children}

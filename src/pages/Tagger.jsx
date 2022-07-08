@@ -5,19 +5,33 @@ import TagsForm from "../components/TagsForm";
 import PreviewPdf from "../components/PreviewPdf";
 
 const Tagger = () => {
-
   const {
+    origin,
     files,
-  taggedFiles,
-  handleTaggedFiles,
-  previous,
-  setPrevious,
-  relativePath,
-  session,
+    taggedFiles,
+    handleTaggedFiles,
+    previous,
+    setPrevious,
+    relativePath,
+    session,
+    setMerged,
+    handlePreviousAfterLoad
   } = useContext(PressUploaderContext);
 
 
-  const [selected, setSelected] = useState(+2);
+  const orderArray = taggedFiles
+  .filter((a) => a.source !== "label")
+  .map((a) => a.order);
+
+  const minOrder = orderArray
+    .reduce((a, b) => Math.min(+a, +b));
+
+  const maxOrder = orderArray
+    .reduce((a, b) => Math.max(+a, +b));
+  
+
+
+  const [selected, setSelected] = useState(+minOrder);
 
   const handleSelectItem = (ev) => {
     setSelected(+ev.target.dataset.order);
@@ -75,12 +89,16 @@ const Tagger = () => {
 
     setPrevious(previous.concat(selected));
 
-    if (selected < taggedFiles.length - 1) {
-      setSelected(selected + 1);
-    } else if (selected >= taggedFiles.length - 1) {
-      setSelected(+2);
+    
+
+    if (selected < maxOrder) {
+      setSelected(orderArray[orderArray.indexOf(selected) + 1]);
+    } else if (selected >= maxOrder) {
+      setSelected(minOrder);
     }
   };
+
+
 
   const handleTagsLoad = async (ev) => {
     const filesArray = [...ev.target.files];
@@ -94,20 +112,21 @@ const Tagger = () => {
 
     if (fileTaggedParsed[0].session === session) {
       handleTaggedFiles(fileTaggedParsed);
-      setPrevious(
-        fileTaggedParsed
-          .filter(
-            (file) =>
-              file.zones.length || file.sectors.length || file.tags.length
-          )
-          .map((file) => file.order)
-      );
+      handlePreviousAfterLoad(fileTaggedParsed);
     } else {
-      alert("The tagged file does not correspond to the current working session.")
+      alert(
+        "The tagged file does not correspond to the current working session."
+      );
     }
   };
 
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
+  const url =
+    origin === "folder"
+      ? files.filter((file) => file.name.includes(selectedFile.title))[0]
+      : selectedFile.url;
+
+  
 
   return (
     <div>
@@ -136,6 +155,7 @@ const Tagger = () => {
 
         <div>
           <PreviewPdf
+            url={url}
             files={files}
             selectedFileTitle={selectedFile.title}
             selectedFileSource={selectedFile.source}
@@ -151,6 +171,8 @@ const Tagger = () => {
             taggedFiles={taggedFiles}
             relativePath={relativePath}
             handleTagsLoad={handleTagsLoad}
+            origin={origin}
+            setMerged={setMerged}
           />
         </div>
       </div>

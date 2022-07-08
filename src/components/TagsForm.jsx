@@ -10,6 +10,8 @@ const TagsForm = ({
   handleTagsLoad,
   relativePath,
   taggedFiles,
+  origin,
+  setMerged
 }) => {
   let { zones, sectors, tags } = selectedFile;
 
@@ -74,22 +76,26 @@ const TagsForm = ({
         </a>
 
         <button onClick={clickLoader} id="display-loader">
-            Load
-          </button>
-          <input
-            onChange={handleTagsLoad}
-            type="file"
-            accept=".json"
-            id="loader-selector"
-            name="fileLoad"
-            style={{ display: "none" }}
-
-          />
+          Load
+        </button>
+        <input
+          onChange={handleTagsLoad}
+          type="file"
+          accept=".json"
+          id="loader-selector"
+          name="fileLoad"
+          style={{ display: "none" }}
+        />
 
         <button
           onClick={(ev) => {
-            handleTagsNext(ev);
-            navigate("/uploader");
+            if (origin === "folder") {
+              handleTagsNext(ev);
+              navigate("/uploader");
+            } else if (origin === "server") {
+              setMerged(taggedFiles);
+              navigate("/merger");
+            }
           }}
         >
           Done

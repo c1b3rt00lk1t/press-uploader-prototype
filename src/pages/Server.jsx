@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SelectableMessageBox from "../shared/SelectableMessageBox";
 
 const Server = () => {
@@ -12,10 +12,11 @@ const Server = () => {
     uniqueSessions,
     handleSessionSelection,
     handleClickSelectSession,
-    serverSelectSession
+    serverSelectSession,
+    
   } = useContext(PressUploaderContext);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   
   return (
     <div id="server">
@@ -33,8 +34,7 @@ const Server = () => {
           <button
             onClick={() => {
               handleClickSelectSession();
-              console.log("Select session");
-              // navigate("/tagger");
+              navigate("/tagger");
             }}
             disabled={false}
           >
