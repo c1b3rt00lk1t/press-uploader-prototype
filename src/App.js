@@ -18,31 +18,9 @@ function App() {
         <Router>
           <NavBar />
           <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <>
-                  <Start />
-                </>
-              }
-            />
-            <Route
-              path="/server"
-              element={
-                <>
-                  <Server />
-                </>
-              }
-            />
-            <Route
-              path="/selector"
-              element={
-                <>
-                  <Selector />
-                </>
-              }
-            />
+            <Route exact path="/" element={<Start />} />
+            <Route path="/server" element={<Server />} />
+            <Route path="/selector" element={<Selector />} />
             <Route path="/order" element={<Order />} />
             <Route path="/tagger" element={<Tagger />} />
             <Route path="/uploader" element={<Uploader />} />
