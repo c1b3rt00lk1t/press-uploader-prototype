@@ -172,6 +172,7 @@ const Tagger = () => {
             relativePath={relativePath}
             handleTagsLoad={handleTagsLoad}
             origin={origin}
+            formatFileTags={formatFileTags}
             setMerged={setMerged}
           />
         </div>

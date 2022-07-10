@@ -11,6 +11,7 @@ const TagsForm = ({
   relativePath,
   taggedFiles,
   origin,
+  formatFileTags,
   setMerged
 }) => {
   let { zones, sectors, tags } = selectedFile;
@@ -89,11 +90,13 @@ const TagsForm = ({
 
         <button
           onClick={(ev) => {
+            handleTagsNext(ev);
             if (origin === "folder") {
-              handleTagsNext(ev);
+              
               navigate("/uploader");
             } else if (origin === "server") {
-              setMerged(taggedFiles);
+              
+              setMerged(taggedFiles.map((a) => formatFileTags(a)));
               navigate("/merger");
             }
           }}
