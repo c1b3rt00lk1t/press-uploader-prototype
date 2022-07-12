@@ -5,7 +5,6 @@ import { uploadFile, getFileURL, writeDataSession } from "../firebase";
 const PressUploaderContext = createContext();
 
 export const PressUploaderContextProvider = ({ children }) => {
-
   /** START CONTEXT */
   const [origin, setOrigin] = useState();
 
@@ -17,7 +16,6 @@ export const PressUploaderContextProvider = ({ children }) => {
   const [uniqueSessions, setUniqueSessions] = useState([]);
   const [session, setSession] = useState();
   const [taggedFiles, setTaggedFiles] = useState([]);
-
 
   /* States for controlling the status and messages of the cards */
   const emptyCard = { status: undefined, msg: [] };
@@ -51,49 +49,46 @@ export const PressUploaderContextProvider = ({ children }) => {
   };
 
   const prepareTaggedFilesFromServer = () => {
-
     const enhanceTaggedFilesFromServer = (arr) => {
-      if (!arr.zones){
-        arr.zones = []
+      if (!arr.zones) {
+        arr.zones = [];
       }
-      if (!arr.sectors){
-        arr.sectors = []
+      if (!arr.sectors) {
+        arr.sectors = [];
       }
-      if (!arr.tags){
-        arr.tags = []
+      if (!arr.tags) {
+        arr.tags = [];
       }
-      if (!arr.others){
-        arr.others = []
+      if (!arr.others) {
+        arr.others = [];
       }
       return arr;
     };
-    const taggedFilesTmp = data[session].map(a => enhanceTaggedFilesFromServer(a));
+    const taggedFilesTmp = data[session].map((a) =>
+      enhanceTaggedFilesFromServer(a)
+    );
     setTaggedFiles(taggedFilesTmp);
     handlePreviousAfterLoad(taggedFilesTmp);
     setReadyToTagger(true);
-
-  }
+  };
   const handlePreviousAfterLoad = (fileList) => {
     setPrevious(
       fileList
         .filter(
-          (file) =>
-            file.zones.length || file.sectors.length || file.tags.length
+          (file) => file.zones.length || file.sectors.length || file.tags.length
         )
         .map((file) => file.order)
     );
-  }
+  };
 
-   const handleClickSelectSession = () => {
+  const handleClickSelectSession = () => {
     prepareTaggedFilesFromServer();
-    
+
     setServerSelectSession({
       status: true,
       msg: [""],
     });
   };
-
-
 
   /**
    * PREVIOUS APP CONTEXT MIGRATED
@@ -174,6 +169,7 @@ export const PressUploaderContextProvider = ({ children }) => {
 
   const basicFolderChecks = () => {
     readOrderFile(files);
+    checkFilesSizes(pdfFiles);
   };
 
   const readOrderFile = async (files) => {
@@ -208,6 +204,22 @@ export const PressUploaderContextProvider = ({ children }) => {
       setSelectorBasicChecksCard({ status: true, msg: [msg] });
       console.log("Order file loaded.");
     }
+  };
+
+  const checkFilesSizes = (inputFiles) => {
+    const bigFiles = inputFiles
+      .filter((pdf) => pdf.size >= 512000)
+      .sort((a, b) => b.size - a.size)
+      .map(
+        (pdf) =>
+          pdf.webkitRelativePath +
+          " size: " +
+          (+pdf.size / 1024 / 1024).toFixed(2) +
+          " MB"
+      );
+
+   
+    bigFiles.forEach((a) => console.log(a));
   };
 
   const prepareTaggedFilesFromFolder = () => {
@@ -264,8 +276,6 @@ export const PressUploaderContextProvider = ({ children }) => {
     setSelectorPrepareTaggerCard({ status: true, msg: [msg] });
   };
   /* Logic for Tagger */
-
-
 
   const handleTaggedFiles = (a) => {
     setTaggedFiles(a);
