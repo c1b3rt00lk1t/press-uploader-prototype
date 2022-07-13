@@ -338,13 +338,16 @@ export const PressUploaderContextProvider = ({ children }) => {
     let urlsTmp = [];
     await Promise.all(
       pdfFiles.map(async (file, i) => {
+        // From the backup, also the size is gotten
         urlsTmp[i] = await getFileURLFromBackUp(file.webkitRelativePath);
       })
     );
 
     let fileUrls = Array.from({ length: urlsTmp.length }, (_, i) => ({
       name: pdfFiles[i].webkitRelativePath,
-      url: urlsTmp[i],
+      url: urlsTmp[i].url,
+      // From the backup, also the size is gotten
+      size: urlsTmp[i].size,
     }));
 
     setUrlsFromBackUp(fileUrls);
@@ -370,7 +373,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       const url2 = urlsFromBackUp.filter((url) => url.name.includes(tagged.title));
       if (url.length && url2.length) {
         // console.log(url[0].url)
-        mergedTmp.push({ ...tagged, ...url[0], url2: url2[0].url });
+        mergedTmp.push({ ...tagged, ...url[0], url2: url2[0].url, size: url2[0].size });
       }
     }
     setMerged(mergedTmp);
@@ -418,7 +421,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       } else {
         setMergerSendToServer({
           status: false,
-          msg: "Erro sending tags and urls.",
+          msg: "Error sending tags and urls.",
         });
       }
     });

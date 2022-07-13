@@ -8,6 +8,7 @@ import {
   ref as refStorage,
   uploadBytes,
   getDownloadURL,
+  getMetadata
 } from "firebase/storage";
 
 
@@ -36,5 +37,7 @@ export const uploadFileToBackUp = (file, path) => {
 export const getFileURLFromBackUp = async (path) => {
   const storageRef = refStorage(storage, path);
   const downloadURL = await getDownloadURL(storageRef);
-  return downloadURL;
+  // From the backup, also the size is gotten
+  const fileSizeBytes = await getMetadata(storageRef).then((metadata) => metadata.size);
+  return {url: downloadURL, size: fileSizeBytes};
 };
