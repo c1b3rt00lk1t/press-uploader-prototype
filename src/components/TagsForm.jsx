@@ -73,7 +73,7 @@ const TagsForm = ({
             .toString()
             .padStart(2, "0")}${new Date().getMinutes()}.json`}
         >
-          <button disabled={!relativePath}>{`Save`}</button>
+          <button >{`Save`}</button>
         </a>
 
         <button onClick={clickLoader} id="display-loader">
