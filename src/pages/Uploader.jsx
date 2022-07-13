@@ -8,7 +8,11 @@ const Uploader = () => {
     handleUploadFiles,
     handleGetFileURL,
     uploaderUpload,
-    uploaderGetURLs
+    uploaderGetURLs,
+    handleUploadFilesToBackUp,
+    handleGetFileURLFromBackUp,
+    uploaderUploadToBackUp,
+    uploaderGetURLsFromBackUp
   } = useContext(PressUploaderContext);
 
   return (
@@ -21,24 +25,14 @@ const Uploader = () => {
           <button onClick={handleGetFileURL}> Get URLs</button>
         </Card>
 
-        {/* {!!files.length && !!urls.length && (
-          <Card status={undefined} msg={[]}>
-            <a
-              href={`data:text/json;charset=utf-8,${encodeURIComponent(
-                JSON.stringify(urls)
-              )}`}
-              download={`urls_${relativePath}_${new Date().getFullYear()}${(
-                new Date().getMonth() + 1
-              )
-                .toString()
-                .padStart(2, "0")}${new Date().getDate()}_${new Date()
-                .getHours()
-                .toString()
-                .padStart(2, "0")}${new Date().getMinutes()}.json`}
-            >
-              <button>{`Download JSON`}</button>
-            </a></Card>
-          )} */}
+        <Card status={uploaderUploadToBackUp.status} msg={[uploaderUploadToBackUp.msg]}>
+          <button onClick={handleUploadFilesToBackUp}>Upload files (backup)</button>
+        </Card>
+        <Card status={uploaderGetURLsFromBackUp.status} msg={[uploaderGetURLsFromBackUp.msg]}>
+          <button onClick={handleGetFileURLFromBackUp}> Get URLs (backup)</button>
+        </Card>
+
+
       </CardDisplay>
     </div>
   );

@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { getDataFromDB } from "../firebase";
 import { uploadFile, getFileURL, writeDataSession } from "../firebase";
+import { uploadFileToBackUp, getFileURLFromBackUp } from "../firebase2";
 
 const PressUploaderContext = createContext();
 
@@ -100,6 +101,7 @@ export const PressUploaderContextProvider = ({ children }) => {
 
   const [previous, setPrevious] = useState([]);
   const [urls, setUrls] = useState([]);
+  const [urlsFromBackUp, setUrlsFromBackUp] = useState([]);
   const [merged, setMerged] = useState([]);
   const [relativePath, setRelativePath] = useState();
 
@@ -112,6 +114,8 @@ export const PressUploaderContextProvider = ({ children }) => {
 
   const [uploaderUpload, setUploaderUpload] = useState(emptyCard);
   const [uploaderGetURLs, setUploaderGetURLs] = useState(emptyCard);
+  const [uploaderUploadToBackUp, setUploaderUploadToBackUp] = useState(emptyCard);
+  const [uploaderGetURLsFromBackUp, setUploaderGetURLsFromBackUp] = useState(emptyCard);
 
   const [mergerBasicChecksCard, setMergerBasicChecksCard] = useState(emptyCard);
   const [mergerMergeCard, setMergerMergeCard] = useState(emptyCard);
@@ -165,6 +169,7 @@ export const PressUploaderContextProvider = ({ children }) => {
     setTaggedFiles([]);
     setPrevious([]);
     setUrls([]);
+    setUrlsFromBackUp([]);
   };
 
   const basicFolderChecks = () => {
@@ -294,6 +299,18 @@ export const PressUploaderContextProvider = ({ children }) => {
     );
   };
 
+
+  const handleUploadFilesToBackUp = () => {
+    setUploaderUploadToBackUp({ status: undefined, msg: ["Loading..."] });
+    Promise.all(
+      pdfFiles.map((file) => {
+        return uploadFileToBackUp(file, file.webkitRelativePath);
+      })
+    ).then((_) =>
+      setUploaderUploadToBackUp({ status: true, msg: ["Everything loaded."] })
+    );
+  };
+
   const handleGetFileURL = async () => {
     setUploaderGetURLs({ status: undefined, msg: ["Getting the URLs..."] });
     let urlsTmp = [];
@@ -315,6 +332,29 @@ export const PressUploaderContextProvider = ({ children }) => {
       : setUploaderGetURLs({ status: false, msg: ["No urls received."] });
   };
 
+
+  const handleGetFileURLFromBackUp = async () => {
+    setUploaderGetURLsFromBackUp({ status: undefined, msg: ["Getting the URLs..."] });
+    let urlsTmp = [];
+    await Promise.all(
+      pdfFiles.map(async (file, i) => {
+        urlsTmp[i] = await getFileURLFromBackUp(file.webkitRelativePath);
+      })
+    );
+
+    let fileUrls = Array.from({ length: urlsTmp.length }, (_, i) => ({
+      name: pdfFiles[i].webkitRelativePath,
+      url: urlsTmp[i],
+    }));
+
+    setUrlsFromBackUp(fileUrls);
+    console.log("All urls received from backup.");
+    !!fileUrls.length
+      ? setUploaderGetURLsFromBackUp({ status: true, msg: ["All urls received."] })
+      : setUploaderGetURLsFromBackUp({ status: false, msg: ["No urls received."] });
+  };
+
+
   /* Logic for the Merger */
   const handleMerge = () => {
     let mergedTmp = [];
@@ -327,9 +367,10 @@ export const PressUploaderContextProvider = ({ children }) => {
 
       /* IMPORTANT: the "labels" have to be filtered OUT !!!! */
       const url = urls.filter((url) => url.name.includes(tagged.title));
-      if (url.length) {
+      const url2 = urlsFromBackUp.filter((url) => url.name.includes(tagged.title));
+      if (url.length && url2.length) {
         // console.log(url[0].url)
-        mergedTmp.push({ ...tagged, ...url[0] });
+        mergedTmp.push({ ...tagged, ...url[0], url2: url2[0].url });
       }
     }
     setMerged(mergedTmp);
@@ -345,13 +386,21 @@ export const PressUploaderContextProvider = ({ children }) => {
   const handleBasicMergeChecks = () => {
     let msg = [];
     let status = true;
-
+    
     if (!urls.length) {
       msg.push("No urls to merge.");
       status = false;
     } else {
       msg.push("Found urls to merge.");
     }
+
+    if (!urlsFromBackUp.length) {
+      msg.push("No urls from backup to merge.");
+      status = false;
+    } else {
+      msg.push("Found urls from backup to merge.");
+    }
+
     if (!taggedFiles.length) {
       status = false;
       msg.push("No tagged files to merge.");
@@ -424,6 +473,10 @@ export const PressUploaderContextProvider = ({ children }) => {
         handleGetFileURL,
         uploaderUpload,
         uploaderGetURLs,
+        handleUploadFilesToBackUp,
+        handleGetFileURLFromBackUp,
+        uploaderUploadToBackUp,
+        uploaderGetURLsFromBackUp,
 
         //// MERGER
         handleMerge,

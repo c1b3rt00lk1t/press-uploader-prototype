@@ -22,11 +22,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app2 = initializeApp(firebaseConfig, 'app2');
 
 /** Cloud Storage */
 // Initialize Cloud Storage and get a reference to the service
-const storage = getStorage(app);
+const storage = getStorage(app2);
 
 export const uploadFileToBackUp = (file, path) => {
   const storageRef = refStorage(storage, path);
