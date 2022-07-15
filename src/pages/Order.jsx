@@ -39,7 +39,7 @@ const Order = () => {
     }, []);
 
 
-  folders.length && console.log(folders);
+  // folders.length && console.log(folders);
 
   return (
     <div>

@@ -124,11 +124,10 @@ const Tagger = () => {
 
     if (fileTaggedParsed[0].session === session) {
       const mergedTagFiles = taggedFiles.map((file) => {
-        console.log(file);
         const toMerge = fileTaggedParsed.filter(
           (input) => input.title === file.title
         )[0];
-        console.log(toMerge);
+
         if (toMerge) {
           if (toMerge.zones.length) {
             file.zones.push(toMerge.zones);
