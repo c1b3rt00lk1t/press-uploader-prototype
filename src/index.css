@@ -111,7 +111,7 @@ a[disabled] {
 
 .orderContentList{
   list-style: none;
-  width: 17.5vw;
+  width: 10vw;
   height: 90vh;
   overflow-x:scroll;
   margin: 0 0 5vh 1.75vw;
@@ -168,7 +168,7 @@ a[disabled] {
 }
 
 .previewPdf{
-  width: 60vw;
+  width: 67.5vw;
   height: 90vh;
   overflow-x: hidden;
 
@@ -179,7 +179,7 @@ a[disabled] {
 
 .react-pdf__Page__canvas {
   /* margin: 0 0 0 -2.5vw; */
-  width: 60vw !important;
+  width: 67.5vw !important;
   height: auto !important;
 }
 /* .react-pdf__Document{
