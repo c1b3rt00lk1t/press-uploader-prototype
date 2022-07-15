@@ -8,6 +8,7 @@ const TagsForm = ({
   handleSectorsChange,
   handleTagsChange,
   handleTagsLoad,
+  handleMergeLoad,
   relativePath,
   taggedFiles,
   origin,
@@ -21,6 +22,11 @@ const TagsForm = ({
   const clickLoader = () => {
     // Triggers the event
     document.getElementById("loader-selector").click();
+  };
+
+  const clickMerger = () => {
+    // Triggers the event
+    document.getElementById("merger-selector").click();
   };
 
   return (
@@ -85,6 +91,17 @@ const TagsForm = ({
           accept=".json"
           id="loader-selector"
           name="fileLoad"
+          style={{ display: "none" }}
+        />
+        <button onClick={clickMerger} id="display-merger">
+          Merge
+        </button>
+        <input
+          onChange={handleMergeLoad}
+          type="file"
+          accept=".json"
+          id="merger-selector"
+          name="fileMerge"
           style={{ display: "none" }}
         />
 

@@ -15,21 +15,16 @@ const Tagger = () => {
     relativePath,
     session,
     setMerged,
-    handlePreviousAfterLoad
+    handlePreviousAfterLoad,
   } = useContext(PressUploaderContext);
 
-
   const orderArray = taggedFiles
-  .filter((a) => a.source !== "label")
-  .map((a) => a.order);
+    .filter((a) => a.source !== "label")
+    .map((a) => a.order);
 
-  const minOrder = orderArray
-    .reduce((a, b) => Math.min(+a, +b));
+  const minOrder = orderArray.reduce((a, b) => Math.min(+a, +b));
 
-  const maxOrder = orderArray
-    .reduce((a, b) => Math.max(+a, +b));
-  
-
+  const maxOrder = orderArray.reduce((a, b) => Math.max(+a, +b));
 
   const [selected, setSelected] = useState(+minOrder);
 
@@ -89,16 +84,12 @@ const Tagger = () => {
 
     setPrevious(previous.concat(selected));
 
-    
-
     if (selected < maxOrder) {
       setSelected(orderArray[orderArray.indexOf(selected) + 1]);
     } else if (selected >= maxOrder) {
       setSelected(minOrder);
     }
   };
-
-
 
   const handleTagsLoad = async (ev) => {
     const filesArray = [...ev.target.files];
@@ -120,13 +111,56 @@ const Tagger = () => {
     }
   };
 
+  const handleMergeLoad = async (ev) => {
+    const filesArray = [...ev.target.files];
+    alert("HI");
+
+    const fr = new FileReader();
+    const fileTagged = await new Promise((resolve) => {
+      fr.onload = () => resolve(fr.result);
+      fr.readAsText(filesArray[0], "UTF-8");
+    });
+    const fileTaggedParsed = JSON.parse(fileTagged);
+
+    if (fileTaggedParsed[0].session === session) {
+      const mergedTagFiles = taggedFiles.map((file) => {
+        console.log(file);
+        const toMerge = fileTaggedParsed.filter(
+          (input) => input.title === file.title
+        )[0];
+        console.log(toMerge);
+        if (toMerge) {
+          if (toMerge.zones.length) {
+            file.zones.push(toMerge.zones);
+          }
+          if (toMerge.sectors.length) {
+            file.sectors.push(toMerge.sectors);
+          }
+          if (toMerge.tags.length) {
+            file.tags.push(toMerge.tags);
+          }
+          if (toMerge.others.length) {
+            file.others.push(toMerge.others);
+          }
+        }
+
+        return file;
+      });
+
+      handleTaggedFiles(mergedTagFiles);
+      handlePreviousAfterLoad(mergedTagFiles);
+    } else {
+      alert(
+        "The tagged file does not correspond to the current working session."
+      );
+    }
+  };
+
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
   const url =
     origin === "folder"
       ? files.filter((file) => file.name.includes(selectedFile.title))[0]
       : selectedFile.url;
-
-  
 
   return (
     <div>
@@ -171,6 +205,7 @@ const Tagger = () => {
             taggedFiles={taggedFiles}
             relativePath={relativePath}
             handleTagsLoad={handleTagsLoad}
+            handleMergeLoad={handleMergeLoad}
             origin={origin}
             formatFileTags={formatFileTags}
             setMerged={setMerged}
