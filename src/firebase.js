@@ -50,23 +50,25 @@ export const getFileURL = async (path) => {
 
 // The update is restricted to a session in order to avoid bigger damages
 
-export const writeDataSession = async (data) => {
+
+const writeData =  (path) => async (data) => {
   try {
-    await set(refDb(database, "/sessions/" + data[0].session), data);
+    await set(refDb(database, path + data[0][path.slice(1,path.length - 1)]), data);
   } catch (error) {
     return false;
   }
   return true;
 };
+export const writeDataSession = writeData("/sessions/");
 
-export const getDataFromDB = (handleDataFromDB) => {
+const getDataFromDB = (path) => (handleDataFromDB) => {
  
-  const refDB = refDb(database, "/sessions/");
+  const refDB = refDb(database, path);
    onValue(refDB,  (snapshot) => {
     const data =  snapshot.val();   
     handleDataFromDB(data);
   });
-  
-  
-  
 };
+
+export const getDataFromDBSession =  getDataFromDB("/sessions/");
+

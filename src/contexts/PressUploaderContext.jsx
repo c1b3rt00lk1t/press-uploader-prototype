@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { getDataFromDB } from "../firebase";
+import { getDataFromDBSession } from "../firebase";
 import { uploadFile, getFileURL, writeDataSession } from "../firebase";
 import { uploadFileToBackUp, getFileURLFromBackUp } from "../firebase2";
 
@@ -42,7 +42,7 @@ export const PressUploaderContextProvider = ({ children }) => {
             msg: ["No sessions received."],
           });
     };
-    getDataFromDB(handleDataFromDB);
+    getDataFromDBSession(handleDataFromDB);
   };
 
   const handleSessionSelection = (e) => {
