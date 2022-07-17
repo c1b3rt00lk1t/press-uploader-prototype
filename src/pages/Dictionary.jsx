@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useContext } from "react";
+import PressUploaderContext from "../contexts/PressUploaderContext";
 
 const Dictionary = () => {
-  return (
-    <div>Dictionary</div>
-  )
-}
+  const { handleUploadDictionary, handleGetDictionaryFromDB,handleDictionary } =
+    useContext(PressUploaderContext);
 
-export default Dictionary
+  return (<>
+  <h1>Dictionary</h1>
+  <button onClick={handleGetDictionaryFromDB}>Get dictionary</button>
+  <button onClick={handleDictionary("america",true,true)}>Set dictionary</button>
+  <button onClick={handleUploadDictionary}>Send dictionary</button>
+  
+  </>)
+};
+
+export default Dictionary;

@@ -293,7 +293,7 @@ export const PressUploaderContextProvider = ({ children }) => {
    *
    * */
 
-  const [dictionary, setDictionary] = useState([])
+  const [dictionary, setDictionary] = useState({})
   const handleUploadDictionary = () => {
     writeDataDictionary(dictionary);
   };
@@ -306,6 +306,273 @@ export const PressUploaderContextProvider = ({ children }) => {
     };
     getDataFromDBDictionary(handleDataFromDB);
   };
+
+  const handleDictionary = (zones, sectors, tags) => () => {
+    
+    setDictionary(
+      {
+        "zones": {
+          "type": "B",
+          "global": true,
+          "africa": {},
+          "europa": {
+            "ue": true,
+            "schengen": true,
+            "alemania": true,
+            "serbia": true,
+            "rusia": true,
+            "rumanía": true,
+            "polonia": true,
+            "montenegro": true,
+            "albania": true,
+            "macedonia del norte": true,
+            "grecia": true,
+            "kosovo": true,
+            "bosnia-herzegovina": true,
+            "irlanda": true
+          },
+          "norteamérica": {
+            "eeuu": true,
+            "méxico": true
+          },
+          "latinoamérica": {
+            "venezuela": true
+          },
+          "asia": {
+            "asia central": true,
+            "oriente medio": {
+              "turquía": true
+            },
+            "cáucaso": true,
+            "asia pacífico": {
+              "japón": true
+            },
+            "sudeste asiático": {
+              "camboya": true,
+              "tailandia": true
+            },
+            "china": true,
+            "india": true
+          },
+          "áfrica": {
+            "egipto": true,
+            "marruecos": true,
+            "argelia": true,
+            "somalia": true,
+            "sudáfrica": true
+          }
+        },
+        "sectors": {
+          "alimentario": true,
+          "aeronáutico": {
+            "aeropuertos": true,
+            "aerolíneas": true,
+            "industria aeronáutica": true
+          },
+          "naval": {
+            "puertos": true
+          },
+          "comercio": {
+            "comercio online": true,
+            "delivery": true,
+            "logística": true,
+            "supermercados": true,
+            "pequeño comercio": true,
+            "gran comercio": true
+          },
+          "transporte": {
+            "carretera": true,
+            "marítimo": true,
+            "contenedores": true
+          },
+          "tecnología": {
+            "electrónica": true,
+            "informática": true,
+            "redes sociales": true,
+            "telefonía móvil": true,
+            "semiconductores": true,
+            "telecomunicaciones": {
+            "cinco G": true
+            }
+          },
+          "sanidad": true,
+          "construcción": {
+            "vivienda": true
+          },
+          "textil": true,
+          "avícola": true,
+          "agrario": true,
+          "bancario": true,
+          "automovilístico": {
+            "coche eléctrico": true,
+            "segunda mano": true
+          },
+          "energía": {
+            "petróleo": {
+              "opep": true,
+              "precio": true,
+              "gasolina": true
+            },
+            "gas": {
+              "gnl": true
+            },
+            "carbón": true,
+            "renovables": true,
+            "eléctricas": true,
+            "reservas": true,
+            "suministro": true
+          },
+          "materias primas": {
+            "fertilizantes": {
+              "potasa": true
+            },
+            "cereales": {
+              "trigo": true,
+              "maíz": true,
+              "cebada": true,
+              "soja": true,
+              "girasol": true
+            },
+            "azúcar": true,
+            "café": true,
+            "metales": {
+              "cobre": true,
+              "hierro": true,
+              "litio": true
+            }
+          },
+          "alimentación": true,
+          "siderúrgico": {
+            "acero": true,
+            "cobre": true
+          },
+          "seguros": true
+        },
+        "tags": {
+          "cadena de suministro": {
+            "laboral": true
+          },
+          "economía": {
+            "type": "A",
+            "pib": true,
+            "inflación": true,
+            "deflación": true,
+            "pequeño y gran capital": true,
+            "impuestos": true,
+            "plataformas": true,
+            "multinacionales": true,
+            "multimillonarios": true,
+            "inversión": true,
+            "financiero": {
+              "política monetaria": {
+                "tipos": true,
+                "reservas": true,
+                "compra activos": true
+              },
+              "liquidez": true,
+              "fondos": true,
+              "bolsa": {
+                "dividendos": false
+              },
+              "deuda": {
+                "deuda estatal": true,
+                "deuda corporativa": true
+              },
+              "bonos": {
+                "dividendos": true
+              },
+              "bancos centrales": {
+                "bce": true,
+                "fed": true
+              },
+              "divisas": {
+                "euro": true,
+                "yen": true,
+                "rublo": true
+              },
+              "oro": true,
+              "remesas": true,
+              "criptomoneda": true
+            },
+            "sobreproducción": {
+              "sobreproducción de capitales": true
+            }
+          },
+          "laboral": {
+            "smi": true,
+            "despidos": true,
+            "directivos": true,
+            "sindicalismo subvencionado": true,
+            "asesinato laboral": true,
+            "patronal": true
+          },
+          "imperialismo": {
+            "ayudas": true
+          },
+          "situación interna": {
+            "proletarización": true,
+            "pequeña burguesía": true,
+            "patronal": true
+          },
+          "des-integración": {
+            "brexit": true
+          },
+          "militar": {
+            "type": "B",
+            "otan": true,
+            "armamento": true,
+            "misiles": true,
+            "fuerzas navales": true,
+            "fuerzas terrestres": false,
+            "fuerzas aéreas": false,
+            "atentado": true
+          },
+          "relaciones comerciales": {
+            "import-export": true
+          },
+          "inmigración": true,
+          "fronteras": true,
+          "guerra comercial": {
+            "sanciones": true
+          },
+          "infraestructuras": true,
+          "crisis": {
+            "type": "B",
+            "colapso": true,
+            "caída": true,
+            "escasez": true,
+            "sobreproducción": false,
+            "quiebra": true,
+            "impago": true,
+            "corte": true
+          },
+          "patentes": true,
+          "control social": {
+            "drogas": {
+              "marihuana": true
+            },
+            "religión": true,
+            "circo parlamentario": true
+          },
+          "organismos internacionales": {
+            "type": "B",
+            "ocde": true,
+            "fmi": true,
+            "g7": true,
+            "aie": true
+          },
+          "contaminación": true,
+          "intervención estatal": {
+            "nacionalización-privatización": true,
+            "ayudas": true
+          },
+          "ciencia burguesa": true,
+          "desarrollo productivo": true,
+          "informe": true
+        }
+      }
+    )
+  }
 
   /* Logic for Tagger */
 
@@ -406,7 +673,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       const url2 = urlsFromBackUp.filter((url) =>
         url.name.includes(tagged.title)
       );
-      if (url.length && url2.length) {
+      if ( url.length && url2.length) {
         // console.log(url[0].url)
         mergedTmp.push({
           ...tagged,
@@ -499,6 +766,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         //// DICTIONARY
         handleUploadDictionary,
         handleGetDictionaryFromDB,
+        handleDictionary,
 
         //// TAGGER
         // origin,

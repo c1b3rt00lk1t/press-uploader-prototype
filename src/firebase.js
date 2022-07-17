@@ -51,15 +51,22 @@ export const getFileURL = async (path) => {
 // The update is restricted to a session in order to avoid bigger damages
 
 
-const writeData =  (path) => async (data) => {
+const writeData =  (path, subpath) => async (data) => {
+  if(subpath){
+    subpath = data[0][path.slice(1,path.length - 2)]
+  } else {
+    subpath = ''
+  }
+  console.log(path + subpath)
+  console.log(data)
   try {
-    await set(refDb(database, path + data[0][path.slice(1,path.length - 1)]), data);
+    await set(refDb(database, path + subpath), data);
   } catch (error) {
     return false;
   }
   return true;
 };
-export const writeDataSession = writeData("/sessions/");
+export const writeDataSession = writeData("/sessions/",true);
 export const writeDataDictionary = writeData("/dictionary/");
 
 const getDataFromDB = (path) => (handleDataFromDB) => {
