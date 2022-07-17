@@ -14,17 +14,7 @@ const Start = () => {
   return (
     <div id="start">
       <CardDisplay>
-        <Card status={undefined} msg={[]}>
-          <button
-            onClick={() => {
-              setOrigin("server");
-              navigate("/server");
-            }}
-            disabled={false}
-          >
-            Edit from server
-          </button>
-        </Card>
+        
         <Card status={undefined} msg={[]}>
           <button
             onClick={() => {
@@ -34,6 +24,17 @@ const Start = () => {
             disabled={false}
           >
             Edit from folder
+          </button>
+        </Card>
+        <Card status={undefined} msg={[]}>
+          <button
+            onClick={() => {
+              setOrigin("server");
+              navigate("/server");
+            }}
+            disabled={false}
+          >
+            Edit from server
           </button>
         </Card>
       </CardDisplay>
