@@ -60,6 +60,7 @@ const writeData =  (path) => async (data) => {
   return true;
 };
 export const writeDataSession = writeData("/sessions/");
+export const writeDataDictionary = writeData("/dictionary/");
 
 const getDataFromDB = (path) => (handleDataFromDB) => {
  
@@ -71,4 +72,5 @@ const getDataFromDB = (path) => (handleDataFromDB) => {
 };
 
 export const getDataFromDBSession =  getDataFromDB("/sessions/");
+export const getDataFromDBDictionary =  getDataFromDB("/dictionary/");
 
