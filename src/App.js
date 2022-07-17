@@ -10,6 +10,7 @@ import Order from "./pages/Order";
 import Start from "./pages/Start";
 import Server from "./pages/Server";
 import { PressUploaderContextProvider } from "./contexts/PressUploaderContext";
+import Dictionary from "./pages/Dictionary";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/server" element={<Server />} />
             <Route path="/selector" element={<Selector />} />
             <Route path="/order" element={<Order />} />
+            <Route path="/dictionary" element={<Dictionary />} />
             <Route path="/tagger" element={<Tagger />} />
             <Route path="/uploader" element={<Uploader />} />
             <Route path="/merger" element={<Merger />} />
