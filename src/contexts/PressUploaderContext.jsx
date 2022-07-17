@@ -304,7 +304,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       console.log(data)
       setDictionary(data)
     };
-    getDataFromDBSession(handleDataFromDB);
+    getDataFromDBDictionary(handleDataFromDB);
   };
 
   /* Logic for Tagger */
