@@ -298,7 +298,7 @@ export const PressUploaderContextProvider = ({ children }) => {
     writeDataDictionary(dictionary);
   };
 
-  const handleGetSessionsFromDictionary = () => {
+  const handleGetDictionaryFromDB = () => {
     
     const handleDataFromDB = (data) => {
       console.log(data)
@@ -498,7 +498,7 @@ export const PressUploaderContextProvider = ({ children }) => {
 
         //// DICTIONARY
         handleUploadDictionary,
-        handleGetSessionsFromDictionary,
+        handleGetDictionaryFromDB,
 
         //// TAGGER
         // origin,
