@@ -101,6 +101,42 @@ a[disabled] {
 
 }
 
+/* css for the dictionary page */
+
+.dictionary-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dictionary-selection{
+  max-width: 30vw;
+  margin-right: 5vw;
+}
+
+.check-box{
+  min-width: 10vw;
+  max-width: 20vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  height: 1em;
+  line-height: 1em;
+  font-size: 1em;
+  margin-bottom: 0.5vh;
+}
+
+.add-tag{
+  color: grey;
+  border-style: solid;
+  border-radius: 50%;
+  background-color: whitesmoke;
+  border-color: whitesmoke;
+  margin-left: 0.25vw;
+
+}
+
 /* css for the tagger page*/
 .horizontal{
   margin-top: 3vh;

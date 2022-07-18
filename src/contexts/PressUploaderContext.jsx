@@ -300,29 +300,50 @@ export const PressUploaderContextProvider = ({ children }) => {
       "africa": true,
       "europa": {
         "ue": true,
+        "schengen": true,
+        "alemania": true,
+        "serbia": true,
+        "rusia": true,
+        "rumanía": true,
+        "polonia": true,
+        "montenegro": true,
+        "albania": true,
+        "macedonia del norte": true,
+        "grecia": true,
+        "kosovo": true,
         "bosnia-herzegovina": true,
-        "irlanda": true,
-        "norteamérica": {
-          "eeuu": true,
-          "méxico": true,
-          "norteamérica": {
-            "eeuu": true,
-            "méxico": true,
-            "norteamérica": {
-              "eeuu": true,
-              "méxico": true,
-              "norteamérica": {
-                "eeuu": true,
-                "méxico": true,
-                "norteamérica": {
-                  "eeuu": true,
-                  "méxico": true
-                },
-              },
-            },
-          },
-        },
+        "irlanda": true
       },
+      "norteamérica": {
+        "eeuu": true,
+        "méxico": true
+      },
+      "latinoamérica": {
+        "venezuela": true
+      },
+      "asia": {
+        "asia central": true,
+        "oriente medio": {
+          "turquía": true
+        },
+        "cáucaso": true,
+        "asia pacífico": {
+          "japón": true
+        },
+        "sudeste asiático": {
+          "camboya": true,
+          "tailandia": true
+        },
+        "china": true,
+        "india": true
+      },
+      "áfrica": {
+        "egipto": true,
+        "marruecos": true,
+        "argelia": true,
+        "somalia": true,
+        "sudáfrica": true
+      }
     },
 
   })
