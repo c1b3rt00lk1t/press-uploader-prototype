@@ -97,6 +97,15 @@ const Dictionary = () => {
         Set dictionary
       </button>
       <button onClick={handleUploadDictionary}>Send dictionary</button>
+      <button onClick={() => {
+          setSelectedZones([]);
+          setUnfoldedZones([]);
+          setSelectedSectors([]);
+          setUnfoldedSectors([]);
+          setSelectedTags([]);
+          setUnfoldedTags([]);
+
+      }}> Reset</button>
     </>
   );
 };
