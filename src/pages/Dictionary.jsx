@@ -13,23 +13,19 @@ const Dictionary = () => {
   const [selectedZones, setSelectedZones] = useState([]);
   const [unfoldedZones, setUnfoldedZones] = useState([]);
 
-  const handleSelectZones = (zone) => {
-    const index = selectedZones.indexOf(zone);
-    if (index > -1) {
-      setSelectedZones(selectedZones.filter((a) => a !== zone && a !== ""));
-    } else {
-      setSelectedZones(selectedZones.concat(zone));
-    }
-  };
 
-  const handleUnfoldedZones = (zone) => {
-    const index = unfoldedZones.indexOf(zone);
+
+  const handleSelect =  (setter, selected) => (type) => {
+    const index = selected.indexOf(type);
     if (index > -1) {
-      setUnfoldedZones(unfoldedZones.filter((a) => a !== zone && a !== ""));
+      setter(selected.filter((a) => a !== type && a !== ""));
     } else {
-      setUnfoldedZones(unfoldedZones.concat(zone));
+      setter(selected.concat(type));
     }
-  };
+  }
+  const handleSelectZones = handleSelect(setSelectedZones, selectedZones);
+  const handleUnfoldedZones = handleSelect(setUnfoldedZones, unfoldedZones);
+
 
   return (
     <>
