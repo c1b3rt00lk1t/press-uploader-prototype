@@ -27,7 +27,7 @@ const TreeBlock = ({
   const unfolded = unfoldedZones.indexOf(input) > -1;
 
   return (
-    <div key={uuidv4()} style={{ marginLeft: "2vw" }}>
+    <div key={uuidv4()} style={{ marginLeft: "2em" }}>
       <CheckBox
         handleSelectItems={handleSelectItems}
         path={path.concat(input)}

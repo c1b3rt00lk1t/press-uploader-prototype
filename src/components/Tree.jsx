@@ -13,7 +13,7 @@ const Tree = ({
   maxDepth = 5,
 }) => {
   return currentIteration === maxDepth ? null : (
-    <>
+    <div className="tree">
       {Object.keys(inputs)
         .sort()
         .map((input) => (
@@ -29,7 +29,7 @@ const Tree = ({
             currentIteration={currentIteration}
           />
         ))}
-    </>
+    </div>
   );
 };
 

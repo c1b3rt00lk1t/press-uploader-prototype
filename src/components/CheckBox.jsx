@@ -2,7 +2,7 @@ import React from "react";
 import {
   AiOutlineMinusSquare,
   AiOutlinePlusSquare,
-  AiOutlinePlus,
+//   AiOutlinePlus,
   AiOutlineCheckSquare,
   AiOutlineBorder,
 } from "react-icons/ai";
@@ -34,7 +34,7 @@ const CheckBox = ({
       {checked && <AiOutlineCheckSquare onClick={checkItem} style={{color:'blue'}}/>}
     
       <div style={{ color: checked ? 'blue': 'inherited'}}>{input}</div>
-      <AiOutlinePlus className="add-tag"/>
+      {/* <AiOutlinePlus className="add-tag"/> */}
     </div>
   );
 };

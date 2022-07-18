@@ -109,9 +109,21 @@ a[disabled] {
   justify-content: space-between;
 }
 
+.dictionary-subcontainer{
+  height: 75vh;
+  overflow: scroll;
+  margin-bottom: 5vh;;
+
+}
+
+.dictionary-subcontainer::-webkit-scrollbar {
+  display: none;
+}
+
 .dictionary-selection{
   max-width: 30vw;
   margin-right: 5vw;
+
 }
 
 .check-box{
