@@ -293,7 +293,39 @@ export const PressUploaderContextProvider = ({ children }) => {
    *
    * */
 
-  const [dictionary, setDictionary] = useState({})
+  const [dictionary, setDictionary] = useState({
+    "zones": {
+      "type": "B",
+      "global": true,
+      "africa": true,
+      "europa": {
+        "ue": true,
+        "bosnia-herzegovina": true,
+        "irlanda": true,
+        "norteamérica": {
+          "eeuu": true,
+          "méxico": true,
+          "norteamérica": {
+            "eeuu": true,
+            "méxico": true,
+            "norteamérica": {
+              "eeuu": true,
+              "méxico": true,
+              "norteamérica": {
+                "eeuu": true,
+                "méxico": true,
+                "norteamérica": {
+                  "eeuu": true,
+                  "méxico": true
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+
+  })
   const handleUploadDictionary = () => {
     writeDataDictionary(dictionary);
   };
@@ -314,7 +346,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         "zones": {
           "type": "B",
           "global": true,
-          "africa": {},
+          "africa": true,
           "europa": {
             "ue": true,
             "schengen": true,
@@ -767,6 +799,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         handleUploadDictionary,
         handleGetDictionaryFromDB,
         handleDictionary,
+        dictionary,
 
         //// TAGGER
         // origin,
