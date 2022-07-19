@@ -20,7 +20,7 @@ const NavBar = () => {
       <Link disabled={enableOrder} to="/order">
         Order
       </Link>
-      <Link to="/dictionary">
+      <Link disabled={true} to="/dictionary">
         Dictionary
       </Link>
       <Link disabled={enableTagger} to="/tagger">
