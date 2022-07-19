@@ -10,6 +10,7 @@ const TagsForm = ({
   handleTagsLoad,
   handleMergeLoad,
   relativePath,
+  session,
   taggedFiles,
   origin,
   formatFileTags,
@@ -70,7 +71,7 @@ const TagsForm = ({
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(taggedFiles)
           )}`}
-          download={`tagged_${relativePath}_${new Date().getFullYear()}${(
+          download={`${relativePath ? 'tagged': 'merged'}_${session}_${new Date().getFullYear()}${(
             new Date().getMonth() + 1
           )
             .toString()

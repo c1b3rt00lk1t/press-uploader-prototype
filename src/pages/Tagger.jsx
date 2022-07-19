@@ -252,6 +252,7 @@ const Tagger = () => {
             origin={origin}
             formatFileTags={formatFileTags}
             setMerged={setMerged}
+            session={session}
           />
         </div>
       </div>
