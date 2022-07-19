@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 const TagsForm = ({
   selectedFile,
   handleTagsNext,
-  handleZonesChange,
-  handleSectorsChange,
-  handleTagsChange,
+  // handleZonesChange,
+  // handleSectorsChange,
+  // handleTagsChange,
   handleTagsLoad,
   handleMergeLoad,
   relativePath,
@@ -15,7 +15,7 @@ const TagsForm = ({
   formatFileTags,
   setMerged
 }) => {
-  let { zones, sectors, tags } = selectedFile;
+  // let { zones, sectors, tags } = selectedFile;
 
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const TagsForm = ({
 
   return (
     <div className="tagsForm">
-      <div>
+      {/* <div>
         Zones:
         <div>
           <input
@@ -63,7 +63,7 @@ const TagsForm = ({
             value={tags}
           ></input>
         </div>
-      </div>
+      </div> */}
       <div className={"tagFormBtns"}>
         <button onClick={handleTagsNext}>Next</button>
         <a

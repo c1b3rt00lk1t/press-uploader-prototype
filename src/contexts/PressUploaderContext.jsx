@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createContext, useState } from "react";
 import {
   getDataFromDBSession,
@@ -305,14 +306,21 @@ export const PressUploaderContextProvider = ({ children }) => {
     writeDataDictionary(dictionary);
   };
 
-  const handleGetDictionaryFromDB = () => {
+  
+
+  useEffect(() => {
+    const handleGetDictionaryFromDB = () => {
     
-    const handleDataFromDB = (data) => {
-      window.localStorage.setItem("PrUp_dictionary", JSON.stringify(data)); 
-      setDictionary(data)
+      const handleDataFromDB = (data) => {
+        window.localStorage.setItem("PrUp_dictionary", JSON.stringify(data)); 
+        setDictionary(data)
+      };
+      getDataFromDBDictionary(handleDataFromDB);
     };
-    getDataFromDBDictionary(handleDataFromDB);
-  };
+
+    handleGetDictionaryFromDB();
+  }, [])
+
 
   const handleDictionary = (zones, sectors, tags) => () => {
     
@@ -772,7 +780,6 @@ export const PressUploaderContextProvider = ({ children }) => {
 
         //// DICTIONARY
         handleUploadDictionary,
-        handleGetDictionaryFromDB,
         handleDictionary,
         dictionary,
 

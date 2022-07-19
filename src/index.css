@@ -102,17 +102,40 @@ a[disabled] {
 }
 
 /* css for the dictionary page */
+.dictionary-container-vertical{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 1vw;
+}
 
 .dictionary-container{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0;
+  width: 17.5vw;
+}
+
+.dictionary-reset{
+  position: absolute;
+  top: 11.5vh;
+  right: 2.5vw;
+  height: 2vh;
+  line-height: 1vh;
 }
 
 .dictionary-subcontainer{
-  height: 75vh;
+  height: 70vh;
+  width: 17.5vw;
   overflow: scroll;
-  margin-bottom: 5vh;;
+  margin-bottom: 1.25vh;
+  margin-left: -1.5em;
+  background-color: whitesmoke;
+  padding: 1vh 0;
+  border-style: solid;
+  border-width: 0;
+  border-radius: 5px;
 
 }
 
@@ -121,8 +144,17 @@ a[disabled] {
 }
 
 .dictionary-selection{
-  max-width: 30vw;
-  margin-right: 5vw;
+  width: 17.5vw;
+  font-size: 0.9em;
+  margin-bottom: 1vh;
+  margin-left: -1.5em;
+  height: 12.5vh;
+  overflow: scroll;
+  background-color: whitesmoke;
+  padding: 1vh 1.5em;
+  border-style: solid;
+  border-width: 0;
+  border-radius: 5px;
 
 }
 
@@ -132,10 +164,10 @@ a[disabled] {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-
+  margin-left: -1em;
   height: 1em;
   line-height: 1em;
-  font-size: 1em;
+  font-size: 0.9em;
   margin-bottom: 0.5vh;
 }
 
@@ -199,7 +231,7 @@ a[disabled] {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 30vh;
+  /* height: 30vh; */
   width: 15vw;
   padding: 0.25vh 0.5vw; 
   margin: 0 3.25vw 0 0 ; 

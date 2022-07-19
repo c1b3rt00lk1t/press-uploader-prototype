@@ -3,6 +3,7 @@ import PressUploaderContext from "../contexts/PressUploaderContext";
 import { useState } from "react";
 import TagsForm from "../components/TagsForm";
 import PreviewPdf from "../components/PreviewPdf";
+import Dictionary from "../components/Dictionary";
 
 const Tagger = () => {
   const {
@@ -60,6 +61,42 @@ const Tagger = () => {
       )
     );
   };
+
+  const handleChangeDictionary = (type) => (input) => {
+    console.log(input);
+
+    handleTaggedFiles(
+      taggedFiles.map((a) => {
+        if (a.order === selected) {
+          const b = { ...a };
+          b[type] = input;
+          return b;
+        } else {
+          return a;
+        }
+      })
+    );
+  };
+
+  const handleZonesChangeDictionary = handleChangeDictionary("zones");
+  const handleSectorsChangeDictionary = handleChangeDictionary("sectors");
+  const handleTagsChangeDictionary = handleChangeDictionary("tags");
+  const handleResetDictionary = () => {
+    handleTaggedFiles(
+      taggedFiles.map((a) => {
+        if (a.order === selected) {
+          const b = { ...a };
+          b.zones = [];
+          b.sectors = [];
+          b.tags = [];
+          return b;
+        } else {
+          return a;
+        }
+      })
+    );
+
+  }
 
   const handleSectorsChange = (ev) => {
     handleTaggedFiles(
@@ -195,6 +232,14 @@ const Tagger = () => {
           />
         </div>
         <div>
+          <Dictionary
+            embed={true}
+            selectedFile={selectedFile}
+            handleZonesChangeDictionary={handleZonesChangeDictionary}
+            handleSectorsChangeDictionary={handleSectorsChangeDictionary}
+            handleTagsChangeDictionary={handleTagsChangeDictionary}
+            handleResetDictionary={handleResetDictionary}
+          />
           <TagsForm
             selectedFile={selectedFile}
             handleZonesChange={handleZonesChange}
