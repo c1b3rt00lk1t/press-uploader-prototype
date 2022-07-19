@@ -27,7 +27,7 @@ const Merger = () => {
           <button onClick={handleDownloadMerged}>Download</button>
         </Card> */}
         <Card status={mergerSendToServer.status} msg={[mergerSendToServer.msg]}>
-        <button onClick={handleUploadMerged}>Send to server</button>
+        <button onClick={handleUploadMerged}>Send tags</button>
         </Card>
       </CardDisplay>
     </div>
