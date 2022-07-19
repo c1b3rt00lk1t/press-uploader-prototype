@@ -293,13 +293,13 @@ export const PressUploaderContextProvider = ({ children }) => {
    *
    * */
 
-  const [dictionary, setDictionary] = useState({
-    "zones": true,
-    "sectors": true,
-    "tags": true
-  }
-
-
+  const [dictionary, setDictionary] = useState(
+    JSON.parse(window.localStorage.getItem("PrUp_dictionary"))
+  //   {
+  //   "zones": true,
+  //   "sectors": true,
+  //   "tags": true
+  // }
   )
   const handleUploadDictionary = () => {
     writeDataDictionary(dictionary);
@@ -308,7 +308,7 @@ export const PressUploaderContextProvider = ({ children }) => {
   const handleGetDictionaryFromDB = () => {
     
     const handleDataFromDB = (data) => {
-      console.log(data)
+      window.localStorage.setItem("PrUp_dictionary", JSON.stringify(data)); 
       setDictionary(data)
     };
     getDataFromDBDictionary(handleDataFromDB);
