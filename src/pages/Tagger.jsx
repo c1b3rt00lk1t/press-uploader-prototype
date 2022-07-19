@@ -150,7 +150,6 @@ const Tagger = () => {
 
   const handleMergeLoad = async (ev) => {
     const filesArray = [...ev.target.files];
-    alert("HI");
 
     const fr = new FileReader();
     const fileTagged = await new Promise((resolve) => {
@@ -167,16 +166,16 @@ const Tagger = () => {
 
         if (toMerge) {
           if (toMerge.zones.length) {
-            file.zones.push(toMerge.zones);
+            file.zones.push(...toMerge.zones);
           }
           if (toMerge.sectors.length) {
-            file.sectors.push(toMerge.sectors);
+            file.sectors.push(...toMerge.sectors);
           }
           if (toMerge.tags.length) {
-            file.tags.push(toMerge.tags);
+            file.tags.push(...toMerge.tags);
           }
           if (toMerge.others.length) {
-            file.others.push(toMerge.others);
+            file.others.push(...toMerge.others);
           }
         }
 
