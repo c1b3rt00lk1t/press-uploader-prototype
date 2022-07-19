@@ -12,9 +12,9 @@ const Dictionary = ({
   handleResetDictionary
 }) => {
   const {
-    handleUploadDictionary,
-    handleGetDictionaryFromDB,
-    handleDictionary,
+    // handleUploadDictionary,
+    // handleGetDictionaryFromDB,
+    // handleDictionary,
     dictionary,
   } = useContext(PressUploaderContext);
 
