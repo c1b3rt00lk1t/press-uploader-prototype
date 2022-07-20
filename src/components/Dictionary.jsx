@@ -66,6 +66,7 @@ const Dictionary = ({
       embed && handler && handler(selected.filter((a) => a !== type && a !== ""));
 
       !embed && !path && setAllSelectEmpty();
+      !embed && !path && setPathOfSelected([]);
       !embed && path && setter(selected.filter((a) => a !== type && a !== ""));
     } else {
       embed && setter(selected.concat(type));
