@@ -2,6 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 import Tree from "./Tree";
 import { ErrorBoundary } from "./ErrorBoundary";
+import DictionarySelection from "./DictionarySelection";
+import DictionaryEdition from "./DictionaryEdition";
+
 
 const Dictionary = ({
   embed,
@@ -9,7 +12,7 @@ const Dictionary = ({
   handleZonesChangeDictionary,
   handleSectorsChangeDictionary,
   handleTagsChangeDictionary,
-  handleResetDictionary
+  handleResetDictionary,
 }) => {
   const {
     // handleUploadDictionary,
@@ -17,7 +20,6 @@ const Dictionary = ({
     // handleDictionary,
     dictionary,
   } = useContext(PressUploaderContext);
-
 
   const [selectedZones, setSelectedZones] = useState([]);
   const [unfoldedZones, setUnfoldedZones] = useState([]);
@@ -30,35 +32,63 @@ const Dictionary = ({
   );
   const [unfoldedTags, setUnfoldedTags] = useState([]);
 
-  useEffect(() => {
-    setSelectedZones(selectedFile.zones);
-  }, [selectedFile.zones]);
+
 
   useEffect(() => {
-    setSelectedSectors(selectedFile.sectors);
-  }, [selectedFile.sectors]);
+    embed && setSelectedZones(selectedFile.zones);
+  }, [selectedFile.zones, embed]);
 
   useEffect(() => {
-    setSelectedTags(selectedFile.tags);
-  }, [selectedFile.tags]);
+    embed && setSelectedSectors(selectedFile.sectors);
+  }, [selectedFile.sectors, embed]);
 
-  const handleSelect = (selected, setter, embed, handler) => (type) => {
+  useEffect(() => {
+    embed && setSelectedTags(selectedFile.tags);
+  }, [embed, selectedFile.tags]);
+
+  const setAllSelectEmpty = () => {
+    setSelectedZones([]);
+    setSelectedSectors([]);
+    setSelectedTags([]);
+  };
+
+  const setAllUnfoldedEmpty = () => {
+    setUnfoldedZones([]);
+    setUnfoldedSectors([]);
+    setUnfoldedTags([]);
+  }
+
+  const handleSelect = (selected, setter, embed, handler) => (type, path) => {
     const index = selected.indexOf(type);
     if (index > -1) {
-      setter(selected.filter((a) => a !== type && a !== ""));
-      embed && handler(selected.filter((a) => a !== type && a !== ""));
+      embed && setter(selected.filter((a) => a !== type && a !== ""));
+      embed && handler && handler(selected.filter((a) => a !== type && a !== ""));
+
+      !embed && !path && setAllSelectEmpty();
+      !embed && path && setter(selected.filter((a) => a !== type && a !== ""));
     } else {
-      setter(selected.concat(type));
-      embed && handler(selected.concat(type));
+      embed && setter(selected.concat(type));
+      embed && handler && handler(selected.concat(type));
+
+      !embed && !path && setAllSelectEmpty();
+      !embed && path && setAllUnfoldedEmpty();
+      !embed && setter(path || [type]);
     }
   };
+
+
+
   const handleSelectZones = handleSelect(
     selectedZones,
     setSelectedZones,
     embed,
     handleZonesChangeDictionary
   );
-  const handleUnfoldedZones = handleSelect(unfoldedZones, setUnfoldedZones);
+  const handleUnfoldedZones = handleSelect(
+    unfoldedZones,
+    setUnfoldedZones,
+    embed
+  );
   const handleSelectSectors = handleSelect(
     selectedSectors,
     setSelectedSectors,
@@ -67,7 +97,8 @@ const Dictionary = ({
   );
   const handleUnfoldedSectors = handleSelect(
     unfoldedSectors,
-    setUnfoldedSectors
+    setUnfoldedSectors,
+    embed
   );
   const handleSelectTags = handleSelect(
     selectedTags,
@@ -75,7 +106,7 @@ const Dictionary = ({
     embed,
     handleTagsChangeDictionary
   );
-  const handleUnfoldedTags = handleSelect(unfoldedTags, setUnfoldedTags);
+  const handleUnfoldedTags = handleSelect(unfoldedTags, setUnfoldedTags, embed);
 
   return (
     <>
@@ -84,30 +115,30 @@ const Dictionary = ({
         Set dictionary
       </button>
       <button onClick={handleUploadDictionary}>Send dictionary</button> */}
-      
-      <div className="dictionary-container-vertical">
-      <button className="dictionary-reset"
-        onClick={() => {
-           setSelectedZones([]);
-          // setUnfoldedZones([]);
-          setSelectedSectors([]);
-          // setUnfoldedSectors([]);
-          setSelectedTags([]);
-          // setUnfoldedTags([]);
-          handleResetDictionary();
-        }}
-      >
-        {" "}
-        Reset
-      </button>
+
+      <div className={`dictionary-container-vertical`}>
+        {embed && <button
+          className="dictionary-reset"
+          onClick={() => {
+            setSelectedZones([]);
+            // setUnfoldedZones([]);
+            setSelectedSectors([]);
+            // setUnfoldedSectors([]);
+            setSelectedTags([]);
+            // setUnfoldedTags([]);
+            handleResetDictionary();
+          }}
+        >
+          {" "}
+          Reset
+        </button>}
         <div className="dictionary-container">
-        
-          <div className="dictionary-subcontainer">
+          <div className={`dictionary-subcontainer ${embed ? '' : 'dictionary-subcontainer-smaller'}`}>
             <ErrorBoundary>
               {!!dictionary && (
                 <Tree
                   inputs={{ zones: dictionary.zones }}
-                  path={["zones"]}
+                  path={[]}
                   handleSelectItems={handleSelectZones}
                   selectedItems={selectedZones}
                   handleUnfoldedZones={handleUnfoldedZones}
@@ -119,7 +150,7 @@ const Dictionary = ({
               {!!dictionary && (
                 <Tree
                   inputs={{ sectors: dictionary.sectors }}
-                  path={["sectors"]}
+                  path={[]}
                   handleSelectItems={handleSelectSectors}
                   selectedItems={selectedSectors}
                   handleUnfoldedZones={handleUnfoldedSectors}
@@ -131,7 +162,7 @@ const Dictionary = ({
               {!!dictionary && (
                 <Tree
                   inputs={{ tags: dictionary.tags }}
-                  path={["tags"]}
+                  path={[]}
                   handleSelectItems={handleSelectTags}
                   selectedItems={selectedTags}
                   handleUnfoldedZones={handleUnfoldedTags}
@@ -139,23 +170,10 @@ const Dictionary = ({
                 />
               )}
             </ErrorBoundary>
-            
           </div>
         </div>
-        <div className="dictionary-selection">
-              <div >
-                <b>zones: </b>
-                {selectedZones.join(", ")}
-              </div>
-              <div >
-                <b>sectors: </b>
-                {selectedSectors.join(", ")}
-              </div>
-              <div >
-                <b>tags: </b>
-                {selectedTags.join(", ")}
-              </div>
-            </div>
+        {embed && <DictionarySelection selectedZones={selectedZones} selectedSectors={selectedSectors} selectedTags={selectedTags} />}
+        {!embed && <DictionaryEdition selectedZones={selectedZones} selectedSectors={selectedSectors} selectedTags={selectedTags} unfoldedZones={unfoldedZones} unfoldedSectors={unfoldedSectors} unfoldedTags={unfoldedTags}/>}
       </div>
     </>
   );

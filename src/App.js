@@ -9,6 +9,7 @@ import Merger from "./pages/Merger";
 import Order from "./pages/Order";
 import Start from "./pages/Start";
 import Server from "./pages/Server";
+import DictionaryPage from "./pages/DictionaryPage";
 import { PressUploaderContextProvider } from "./contexts/PressUploaderContext";
 // import Dictionary from "./components/Dictionary";
 
@@ -23,8 +24,7 @@ function App() {
             <Route path="/server" element={<Server />} />
             <Route path="/selector" element={<Selector />} />
             <Route path="/order" element={<Order />} />
-            {/* <Route path="/dictionary" element={<Dictionary embed={false}/>} /> */}
-            <Route path="/dictionary" element={<div>Provisional</div>} />
+            <Route path="/dictionary" element={<DictionaryPage />} />
             <Route path="/tagger" element={<Tagger />} />
             <Route path="/uploader" element={<Uploader />} />
             <Route path="/merger" element={<Merger />} />

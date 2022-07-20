@@ -26,7 +26,7 @@ const CheckBox = ({
   };
 
   const unfoldItem = () => {
-    handleUnfoldedZones(input);
+    handleUnfoldedZones(input, path);
   };
 
   return (
@@ -43,7 +43,7 @@ const CheckBox = ({
       )}
 
       <div style={{ color: checked ? "blue" : "inherited" }}>{input}</div>
-      {/* <AiOutlinePlus className="add-tag"/> */}
+
     </div>
   );
 };

@@ -101,7 +101,10 @@ a[disabled] {
 
 }
 
-/* css for the dictionary page */
+/* css for the dictionary page/component */
+
+
+
 .dictionary-container-vertical{
   display: flex;
   flex-direction: column;
@@ -136,11 +139,14 @@ a[disabled] {
   border-style: solid;
   border-width: 0;
   border-radius: 5px;
-
 }
 
 .dictionary-subcontainer::-webkit-scrollbar {
   display: none;
+}
+
+.dictionary-subcontainer-smaller{
+  height: 70vh;
 }
 
 .dictionary-selection{
@@ -155,7 +161,6 @@ a[disabled] {
   border-style: solid;
   border-width: 0;
   border-radius: 5px;
-
 }
 
 .check-box{
@@ -171,14 +176,27 @@ a[disabled] {
   margin-bottom: 0.5vh;
 }
 
-.add-tag{
-  color: grey;
-  border-style: solid;
-  border-radius: 50%;
-  background-color: whitesmoke;
-  border-color: whitesmoke;
-  margin-left: 0.25vw;
+.dictionary-edit{
+  padding-top: 2.5vh;
+}
 
+.dictionary-edit-icons{
+  font-size: 1.45em;
+}
+.dictionary-edit-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 1.5em;
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
+.dictionary-edit-input{
+  margin-left: 0.5vw;;
+  width: 15vw;
+  height: 1.45em;
 }
 
 /* css for the tagger page*/
