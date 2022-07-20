@@ -21,12 +21,12 @@ const CheckBox = ({
   const avoid = input === "zones" || input === "sectors" || input === "tags";
   const checkItem = () => {
     if (!avoid) {
-      handleSelectItems(input);
+      handleSelectItems(path);
     }
   };
 
   const unfoldItem = () => {
-    handleUnfoldedZones(input, path);
+    handleUnfoldedZones(path, path);
   };
 
   return (

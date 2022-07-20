@@ -32,7 +32,7 @@ const Dictionary = ({
   );
   const [unfoldedTags, setUnfoldedTags] = useState([]);
 
-
+  const [pathOfSelected, setPathOfSelected] = useState([]);
 
   useEffect(() => {
     embed && setSelectedZones(selectedFile.zones);
@@ -58,7 +58,8 @@ const Dictionary = ({
     setUnfoldedTags([]);
   }
 
-  const handleSelect = (selected, setter, embed, handler) => (type, path) => {
+  const handleSelect = (selected, setter, embed, handler) => (input, path) => {
+    const type = input[input.length-1]
     const index = selected.indexOf(type);
     if (index > -1) {
       embed && setter(selected.filter((a) => a !== type && a !== ""));
@@ -71,6 +72,7 @@ const Dictionary = ({
       embed && handler && handler(selected.concat(type));
 
       !embed && !path && setAllSelectEmpty();
+      !embed && !path && setPathOfSelected(input);
       !embed && path && setAllUnfoldedEmpty();
       !embed && setter(path || [type]);
     }
@@ -173,7 +175,7 @@ const Dictionary = ({
           </div>
         </div>
         {embed && <DictionarySelection selectedZones={selectedZones} selectedSectors={selectedSectors} selectedTags={selectedTags} />}
-        {!embed && <DictionaryEdition selectedZones={selectedZones} selectedSectors={selectedSectors} selectedTags={selectedTags} unfoldedZones={unfoldedZones} unfoldedSectors={unfoldedSectors} unfoldedTags={unfoldedTags}/>}
+        {!embed && <DictionaryEdition selectedZones={selectedZones} selectedSectors={selectedSectors} selectedTags={selectedTags} unfoldedZones={unfoldedZones} unfoldedSectors={unfoldedSectors} unfoldedTags={unfoldedTags} pathOfSelected={pathOfSelected}/>}
       </div>
     </>
   );

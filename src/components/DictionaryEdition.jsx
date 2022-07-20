@@ -9,11 +9,11 @@ const DictionaryEdition = ({
   unfoldedZones,
   unfoldedSectors,
   unfoldedTags,
-  
+  pathOfSelected
 }) => {
 
   const selected = selectedZones[0] || selectedSectors[0] || selectedTags[0];
-  const unfolded = '/'+ unfoldedZones.concat(unfoldedSectors).concat(unfoldedTags).join('/');
+  const node = '/'+ pathOfSelected.join('/');
 
   return (
     <div className="dictionary-selection dictionary-edit">
@@ -22,7 +22,7 @@ const DictionaryEdition = ({
           onClick={() => {}}
           className="dictionary-edit-icons"
         />
-        <input type="text" placeholder={unfolded} className="dictionary-edit-input"/>
+        <input type="text" placeholder={node} className="dictionary-edit-input"/>
       </div>
       <div className="dictionary-edit-row">
         <AiOutlineDelete onClick={() => {}} className="dictionary-edit-icons" />
