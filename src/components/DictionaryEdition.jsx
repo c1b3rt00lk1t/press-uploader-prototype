@@ -3,16 +3,10 @@ import React from "react";
 import { AiOutlineFileAdd, AiOutlineDelete } from "react-icons/ai";
 
 const DictionaryEdition = ({
-  selectedZones,
-  selectedSectors,
-  selectedTags,
-  unfoldedZones,
-  unfoldedSectors,
-  unfoldedTags,
+  selected,
   pathOfSelected
 }) => {
 
-  const selected = selectedZones[0] || selectedSectors[0] || selectedTags[0];
   const node = '/'+ pathOfSelected.join('/');
 
   return (

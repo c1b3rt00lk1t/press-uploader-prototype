@@ -175,7 +175,7 @@ const Dictionary = ({
           </div>
         </div>
         {embed && <DictionarySelection selectedZones={selectedZones} selectedSectors={selectedSectors} selectedTags={selectedTags} />}
-        {!embed && <DictionaryEdition selectedZones={selectedZones} selectedSectors={selectedSectors} selectedTags={selectedTags} unfoldedZones={unfoldedZones} unfoldedSectors={unfoldedSectors} unfoldedTags={unfoldedTags} pathOfSelected={pathOfSelected}/>}
+        {!embed && <DictionaryEdition selected={selectedZones[0] || selectedSectors[0] || selectedTags[0]} pathOfSelected={pathOfSelected}/>}
       </div>
     </>
   );
