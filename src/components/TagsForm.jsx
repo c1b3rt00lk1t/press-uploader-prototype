@@ -14,7 +14,7 @@ const TagsForm = ({
   taggedFiles,
   origin,
   formatFileTags,
-  setMerged
+  setMerged,
 }) => {
   // let { zones, sectors, tags } = selectedFile;
 
@@ -71,16 +71,16 @@ const TagsForm = ({
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(taggedFiles)
           )}`}
-          download={`${relativePath ? 'tagged': 'merged'}_${session}_${new Date().getFullYear()}${(
-            new Date().getMonth() + 1
-          )
+          download={`${
+            relativePath ? "tagged" : "merged"
+          }_${session}_${new Date().getFullYear()}${(new Date().getMonth() + 1)
             .toString()
             .padStart(2, "0")}${new Date().getDate()}_${new Date()
             .getHours()
             .toString()
             .padStart(2, "0")}${new Date().getMinutes()}.json`}
         >
-          <button >{`Save`}</button>
+          <button>{`Save`}</button>
         </a>
 
         <button onClick={clickLoader} id="display-loader">
@@ -110,10 +110,15 @@ const TagsForm = ({
           onClick={(ev) => {
             handleTagsNext(ev);
             if (origin === "folder") {
-              
-              navigate("/uploader");
+              console.log(taggedFiles)
+              if (taggedFiles[0].url && taggedFiles[0].url2) {
+                console.log('Urls already merged.')
+                setMerged(taggedFiles.map((a) => formatFileTags(a)));
+                navigate("/merger");
+              } else {
+                navigate("/uploader");
+              }
             } else if (origin === "server") {
-              
               setMerged(taggedFiles.map((a) => formatFileTags(a)));
               navigate("/merger");
             }

@@ -51,11 +51,9 @@ export const getFileURL = async (path) => {
 // The update is restricted to a session in order to avoid bigger damages
 
 
-const writeData =  (path, subpath) => async (data) => {
-  if(subpath){
-    subpath = data[0][path.slice(1,path.length - 2)]
-  } else {
-    subpath = ''
+const writeData =  (path) => async (data,subpath) => {
+  if(!subpath){
+      subpath = ''
   }
   console.log(path + subpath)
   console.log(data)
@@ -66,7 +64,7 @@ const writeData =  (path, subpath) => async (data) => {
   }
   return true;
 };
-export const writeDataSession = writeData("/sessions/",true);
+export const writeDataSession = writeData("/sessions/");
 export const writeDataDictionary = writeData("/dictionary/");
 
 const getDataFromDB = (path) => (handleDataFromDB) => {

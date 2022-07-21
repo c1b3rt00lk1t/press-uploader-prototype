@@ -737,7 +737,7 @@ export const PressUploaderContextProvider = ({ children }) => {
 
   const handleUploadMerged = () => {
     setMergerSendToServer({ status: undefined, msg: "Sending..." });
-    writeDataSession(merged).then((result) => {
+    writeDataSession(merged,session).then((result) => {
       if (result) {
         setMergerSendToServer({ status: true, msg: "Tags and urls sent." });
       } else {
