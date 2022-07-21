@@ -3,7 +3,7 @@ import PressUploaderContext from "../contexts/PressUploaderContext";
 import { useState } from "react";
 import TagsForm from "../components/TagsForm";
 import PreviewPdf from "../components/PreviewPdf";
-import Dictionary from "../components/Dictionary";
+import Dictionary from "../components/dictionary/Dictionary";
 
 const Tagger = () => {
   const {

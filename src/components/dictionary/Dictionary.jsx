@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import PressUploaderContext from "../contexts/PressUploaderContext";
-import Tree from "./Tree";
-import { ErrorBoundary } from "./ErrorBoundary";
+import PressUploaderContext from "../../contexts/PressUploaderContext";
+import Tree from "../Tree";
+import { ErrorBoundary } from "../ErrorBoundary";
 import DictionarySelection from "./DictionarySelection";
 import DictionaryEdition from "./DictionaryEdition";
 
