@@ -72,7 +72,7 @@ const TagsForm = ({
             JSON.stringify(taggedFiles)
           )}`}
           download={`${
-            relativePath ? "tagged" : "merged"
+            (taggedFiles[0].url && taggedFiles[0].url2) ? "merged" : "tagged"
           }_${session}_${new Date().getFullYear()}${(new Date().getMonth() + 1)
             .toString()
             .padStart(2, "0")}${new Date().getDate()}_${new Date()
