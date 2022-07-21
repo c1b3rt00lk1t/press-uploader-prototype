@@ -6,7 +6,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
-import { getDatabase, ref as refDb, set, onValue } from "firebase/database";
+import { getDatabase, ref as refDb, set, update, onValue } from "firebase/database";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -66,6 +66,17 @@ const writeData =  (path) => async (data,subpath) => {
 };
 export const writeDataSession = writeData("/sessions/");
 export const writeDataDictionary = writeData("/dictionary/");
+
+const updateData = (path) => async (data, subpath) =>{
+  try {
+    await update(refDb(database, path + subpath), data);
+  } catch (error) {
+    return false;
+  }
+  return true;
+}
+
+export const updateDataDictionary = updateData("/dictionary");
 
 const getDataFromDB = (path) => (handleDataFromDB) => {
  

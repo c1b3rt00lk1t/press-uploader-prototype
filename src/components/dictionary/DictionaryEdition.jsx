@@ -1,26 +1,45 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import PressUploaderContext from "../../contexts/PressUploaderContext";
 
 import { AiOutlineFileAdd, AiOutlineDelete } from "react-icons/ai";
 
-const DictionaryEdition = ({
-  selected,
-  pathOfSelected
-}) => {
+const DictionaryEdition = ({ selected, pathOfSelected }) => {
+  const {
+    // handleUploadDictionary,
+    // handleGetDictionaryFromDB,
+    // handleDictionary,
+    handleAddToDictionary,
+  } = useContext(PressUploaderContext);
 
-  const node = '/'+ pathOfSelected.join('/');
+  const [newItem, setNewItem] = useState("");
+
+  const node = "/" + pathOfSelected.join("/");
 
   return (
     <div className="dictionary-selection dictionary-edit">
       <div className="dictionary-edit-row">
         <AiOutlineFileAdd
-          onClick={() => {}}
+          onClick={() => {
+            const obj = {};
+            obj[newItem] = true;
+            handleAddToDictionary(obj, node);
+          }}
           className="dictionary-edit-icons"
         />
-        <input type="text" placeholder={node} className="dictionary-edit-input"/>
+        <input
+          onChange={(ev) => setNewItem(ev.target.value)}
+          type="text"
+          placeholder={node}
+          className="dictionary-edit-input"
+        />
       </div>
       <div className="dictionary-edit-row">
         <AiOutlineDelete onClick={() => {}} className="dictionary-edit-icons" />
-        <input type='text' placeholder={selected} className="dictionary-edit-input"/>
+        <input
+          type="text"
+          placeholder={selected}
+          className="dictionary-edit-input"
+        />
       </div>
     </div>
   );

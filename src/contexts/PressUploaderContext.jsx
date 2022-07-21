@@ -5,6 +5,7 @@ import {
   writeDataSession,
   getDataFromDBDictionary,
   writeDataDictionary,
+  updateDataDictionary
 } from "../firebase";
 import { uploadFile, getFileURL } from "../firebase";
 import { uploadFileToBackUp, getFileURLFromBackUp } from "../firebase2";
@@ -305,6 +306,10 @@ export const PressUploaderContextProvider = ({ children }) => {
   const handleUploadDictionary = () => {
     writeDataDictionary(dictionary);
   };
+
+  const handleAddToDictionary = (item, subpath) => {
+    updateDataDictionary(item, subpath)
+  }
 
   
 
@@ -782,6 +787,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         handleUploadDictionary,
         handleDictionary,
         dictionary,
+        handleAddToDictionary,
 
         //// TAGGER
         // origin,
