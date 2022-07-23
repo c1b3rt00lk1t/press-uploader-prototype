@@ -5,6 +5,7 @@ import CardDisplay from "../shared/CardDisplay";
 
 const Uploader = () => {
   const {
+    authenticated,
     handleUploadFiles,
     handleGetFileURL,
     uploaderUpload,
@@ -17,7 +18,7 @@ const Uploader = () => {
 
   return (
     <div id="uploader">
-      <CardDisplay>
+      {authenticated &&  <CardDisplay>
         <Card status={uploaderUpload.status} msg={[uploaderUpload.msg]}>
           <button onClick={handleUploadFiles}>Upload files</button>
         </Card>
@@ -33,7 +34,7 @@ const Uploader = () => {
         </Card>
 
 
-      </CardDisplay>
+      </CardDisplay>}
     </div>
   );
 };

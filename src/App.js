@@ -9,6 +9,7 @@ import Merger from "./pages/Merger";
 import Order from "./pages/Order";
 import Start from "./pages/Start";
 import Server from "./pages/Server";
+import LogIn from "./pages/LogIn";
 import DictionaryPage from "./pages/DictionaryPage";
 import { PressUploaderContextProvider } from "./contexts/PressUploaderContext";
 // import Dictionary from "./components/Dictionary";
@@ -20,7 +21,8 @@ function App() {
         <Router>
           <NavBar />
           <Routes>
-            <Route exact path="/" element={<Start />} />
+            <Route exact path="/" element={<LogIn />} />
+            <Route path="/start" element={<Start />} />
             <Route path="/server" element={<Server />} />
             <Route path="/selector" element={<Selector />} />
             <Route path="/order" element={<Order />} />

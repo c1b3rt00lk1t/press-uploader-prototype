@@ -4,7 +4,7 @@ import PressUploaderContext from "../contexts/PressUploaderContext";
 
 const NavBar = () => {
   const {
-    readyToTagger, basicSelectorChecks, readyToOrder
+    authenticated,readyToTagger, basicSelectorChecks, readyToOrder, origin
   } = useContext(PressUploaderContext);
   const enableOrder = !readyToOrder;
   const enableTagger = !readyToTagger;
@@ -14,28 +14,28 @@ const NavBar = () => {
 
   return (
     <div className="navbar">
-      <Link to="/">Start</Link>
-      <Link to="/server">Server</Link>
-      <Link to="/selector">Folder</Link>
+      <Link to="/start">Start</Link>
+      <Link disabled={!authenticated || origin !== "server"} to="/server">Server</Link>
+      <Link disabled={origin !== "folder"} to="/selector">Folder</Link>
       <Link disabled={enableOrder} to="/order">
         Order
       </Link>
-      <Link disabled={false} to="/dictionary">
+      <Link disabled={!authenticated} to="/dictionary">
         Dictionary
       </Link>
       <Link disabled={enableTagger} to="/tagger">
         Tagger
       </Link>
-      <Link disabled={enableUploader} to="/uploader">
+      <Link disabled={!authenticated && enableUploader} to="/uploader">
         Uploader
       </Link>
-      <Link disabled={enableMerger} to="/merger">
+      <Link disabled={!authenticated && enableMerger} to="/merger">
         Merger
       </Link>
       <Link disabled={true} to="/">
         Settings
       </Link>
-      <Link disabled={true} to="/">
+      <Link to="/">
         Log in
       </Link>
     </div>

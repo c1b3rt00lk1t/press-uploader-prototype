@@ -7,6 +7,9 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { getDatabase, ref as refDb, set, update, onValue } from "firebase/database";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+
+
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -26,6 +29,32 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig, 'app');
+
+/** Authorization */
+const auth = getAuth(app);
+
+export const authenticateUser = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    return true;
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    // const errorMessage = error.message;
+    return false
+  });
+}
+
+export const signOutUser = () => {
+  signOut(auth).then(() => {
+    console.log("Logged out")
+  }).catch((error) => {
+    // An error happened.
+  });
+}
+
 
 /** Cloud Storage */
 // Initialize Cloud Storage and get a reference to the service

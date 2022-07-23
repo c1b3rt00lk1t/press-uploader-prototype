@@ -13,6 +13,11 @@ import { uploadFileToBackUp, getFileURLFromBackUp } from "../firebase2";
 const PressUploaderContext = createContext();
 
 export const PressUploaderContextProvider = ({ children }) => {
+
+  /** LOG IN CONTEXT */
+
+  const [authenticated, setAuthenticated] = useState(); 
+
   /** START CONTEXT */
   const [origin, setOrigin] = useState();
 
@@ -757,6 +762,9 @@ export const PressUploaderContextProvider = ({ children }) => {
   return (
     <PressUploaderContext.Provider
       value={{
+        //// LOGIN
+        authenticated,
+        setAuthenticated,
         //// START
         origin,
         setOrigin,

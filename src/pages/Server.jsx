@@ -7,6 +7,7 @@ import SelectableMessageBox from "../shared/SelectableMessageBox";
 
 const Server = () => {
   const {
+    authenticated,
     handleGetSessionsFromDB,
     serverGetSessions,
     uniqueSessions,
@@ -20,7 +21,7 @@ const Server = () => {
   
   return (
     <div id="server">
-      <CardDisplay>
+      {authenticated && <CardDisplay>
         <Card status={serverGetSessions.status} msg={[serverGetSessions.msg]}>
           <button onClick={handleGetSessionsFromDB} disabled={false}>
             Get Sessions
@@ -41,7 +42,7 @@ const Server = () => {
             Select session
           </button>
         </Card>
-      </CardDisplay>
+      </CardDisplay>}
     </div>
   );
 };
