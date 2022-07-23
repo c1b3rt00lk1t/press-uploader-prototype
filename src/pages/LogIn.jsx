@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 import { authenticateUser, signOutUser } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const { setAuthenticated } = useContext(PressUploaderContext);
@@ -9,6 +10,8 @@ const LogIn = () => {
   const [inputPsswd, setInputPsswd] = useState();
   const [inputMsg, setInputMsg] = useState();
 
+  const navigate = useNavigate();
+
   const handleLoginUserClick = async () => {
     const result = await authenticateUser(inputUser, inputPsswd);
     if (result) {
@@ -16,6 +19,7 @@ const LogIn = () => {
       setInputPsswd("");
       setInputMsg("");
       setAuthenticated(true);
+      navigate("/start");
     } else {
       setInputMsg("Incorrect login");
       setInputPsswd("");
