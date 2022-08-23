@@ -184,6 +184,7 @@ export const PressUploaderContextProvider = ({ children }) => {
     setPrevious([]);
     setUrls([]);
     setUrlsFromBackUp([]);
+    setSelectedTagger(null);
   };
 
   const basicFolderChecks = () => {
