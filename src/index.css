@@ -126,6 +126,16 @@ a[disabled] {
   right: 2.5vw;
   height: 2vh;
   line-height: 1vh;
+  width: 4vw;
+}
+
+.dictionary-prev{
+  position: absolute;
+  top: 14vh;
+  right: 2.5vw;
+  height: 2vh;
+  line-height: 1vh;
+  width: 4vw;
 }
 
 .dictionary-subcontainer{

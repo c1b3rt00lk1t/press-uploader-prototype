@@ -107,6 +107,22 @@ const Tagger = () => {
     );
   };
 
+  const handleGetPreviousTags = (previousItem) => {
+    handleTaggedFiles(
+      taggedFiles.map((a) => {
+        if (a.order === selected) {
+          const b = { ...a };
+          b.zones = previousItem.zones;
+          b.sectors = previousItem.sectors;
+          b.tags = previousItem.tags;
+          return b;
+        } else {
+          return a;
+        }
+      })
+    );
+  };
+
   const handleSectorsChange = (ev) => {
     handleTaggedFiles(
       taggedFiles.map((a) =>
@@ -212,8 +228,6 @@ const Tagger = () => {
       document.getElementById("loader-selector").click();
     }
 
-    // handleMergeLoad(ev)
-    // handleTagsLoad(ev)
   };
 
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
@@ -264,6 +278,10 @@ const Tagger = () => {
             handleSectorsChangeDictionary={handleSectorsChangeDictionary}
             handleTagsChangeDictionary={handleTagsChangeDictionary}
             handleResetDictionary={handleResetDictionary}
+            // added to be able to retrieve the tags, zones and sectors of the previous one
+            taggedFiles={taggedFiles}
+            previous={previous}
+            handleGetPreviousTags={handleGetPreviousTags}
           />
           <TagsForm
             selectedFile={selectedFile}

@@ -5,7 +5,6 @@ import { ErrorBoundary } from "../ErrorBoundary";
 import DictionarySelection from "./DictionarySelection";
 import DictionaryEdition from "./DictionaryEdition";
 
-
 const Dictionary = ({
   embed,
   selectedFile,
@@ -13,6 +12,10 @@ const Dictionary = ({
   handleSectorsChangeDictionary,
   handleTagsChangeDictionary,
   handleResetDictionary,
+  // included to be able to retrieve the tags, zones and sectors from the previous item
+  taggedFiles,
+  previous,
+  handleGetPreviousTags,
 }) => {
   const {
     // handleUploadDictionary,
@@ -56,14 +59,16 @@ const Dictionary = ({
     setUnfoldedZones([]);
     setUnfoldedSectors([]);
     setUnfoldedTags([]);
-  }
+  };
 
   const handleSelect = (selected, setter, embed, handler) => (input, path) => {
-    const type = input[input.length-1]
+    const type = input[input.length - 1];
     const index = selected.indexOf(type);
     if (index > -1) {
       embed && setter(selected.filter((a) => a !== type && a !== ""));
-      embed && handler && handler(selected.filter((a) => a !== type && a !== ""));
+      embed &&
+        handler &&
+        handler(selected.filter((a) => a !== type && a !== ""));
 
       !embed && !path && setAllSelectEmpty();
       !embed && !path && setPathOfSelected([]);
@@ -78,8 +83,6 @@ const Dictionary = ({
       !embed && setter(path || [type]);
     }
   };
-
-
 
   const handleSelectZones = handleSelect(
     selectedZones,
@@ -120,23 +123,45 @@ const Dictionary = ({
       <button onClick={handleUploadDictionary}>Send dictionary</button> */}
 
       <div className={`dictionary-container-vertical`}>
-        {embed && <button
-          className="dictionary-reset"
-          onClick={() => {
-            setSelectedZones([]);
-            // setUnfoldedZones([]);
-            setSelectedSectors([]);
-            // setUnfoldedSectors([]);
-            setSelectedTags([]);
-            // setUnfoldedTags([]);
-            handleResetDictionary();
-          }}
-        >
-          {" "}
-          Reset
-        </button>}
+        {embed && (
+          <button
+            className="dictionary-reset"
+            onClick={() => {
+              setSelectedZones([]);
+              // setUnfoldedZones([]);
+              setSelectedSectors([]);
+              // setUnfoldedSectors([]);
+              setSelectedTags([]);
+              // setUnfoldedTags([]);
+              handleResetDictionary();
+            }}
+          >
+            {" "}
+            Reset
+          </button>
+        )}
+        {embed && (
+          <button
+            className="dictionary-prev"
+            onClick={() => {
+              // update in the apperance of the dictionary selection, using the previous item as a reference
+              setSelectedZones(taggedFiles[previous.at(-1)].zones);
+              setSelectedSectors(taggedFiles[previous.at(-1)].sectors);
+              setSelectedTags(taggedFiles[previous.at(-1)].tags);
+              // update of the actual taggedFiles
+              handleGetPreviousTags(taggedFiles[previous.at(-1)]);
+            }}
+          >
+            {" "}
+            Prev.
+          </button>
+        )}
         <div className="dictionary-container">
-          <div className={`dictionary-subcontainer ${embed ? '' : 'dictionary-subcontainer-smaller'}`}>
+          <div
+            className={`dictionary-subcontainer ${
+              embed ? "" : "dictionary-subcontainer-smaller"
+            }`}
+          >
             <ErrorBoundary>
               {!!dictionary && (
                 <Tree
@@ -175,8 +200,19 @@ const Dictionary = ({
             </ErrorBoundary>
           </div>
         </div>
-        {embed && <DictionarySelection selectedZones={selectedZones} selectedSectors={selectedSectors} selectedTags={selectedTags} />}
-        {!embed && <DictionaryEdition selected={selectedZones[0] || selectedSectors[0] || selectedTags[0]} pathOfSelected={pathOfSelected}/>}
+        {embed && (
+          <DictionarySelection
+            selectedZones={selectedZones}
+            selectedSectors={selectedSectors}
+            selectedTags={selectedTags}
+          />
+        )}
+        {!embed && (
+          <DictionaryEdition
+            selected={selectedZones[0] || selectedSectors[0] || selectedTags[0]}
+            pathOfSelected={pathOfSelected}
+          />
+        )}
       </div>
     </>
   );
