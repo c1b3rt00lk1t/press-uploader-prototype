@@ -205,7 +205,9 @@ const Tagger = () => {
   const handleKeyDown = (ev) => {
     if (ev.key === "n" || ev.key === "N") {
       handleTagsNext(ev);
-    } 
+    } else if (ev.key === "d" || ev.key === "D"){
+      document.getElementById('doneBtn').click();
+    }
   };
 
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];

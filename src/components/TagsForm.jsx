@@ -106,7 +106,7 @@ const TagsForm = ({
           style={{ display: "none" }}
         />
 
-        <button
+        <button id="doneBtn"
           onClick={(ev) => {
             handleTagsNext(ev);
             if (origin === "folder") {
