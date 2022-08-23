@@ -200,14 +200,20 @@ const Tagger = () => {
     }
   };
 
-
   /* Handling of the onKeyDown event */
   const handleKeyDown = (ev) => {
     if (ev.key === "n" || ev.key === "N") {
       handleTagsNext(ev);
-    } else if (ev.key === "d" || ev.key === "D"){
-      document.getElementById('doneBtn').click();
+    } else if (ev.key === "d" || ev.key === "D") {
+      document.getElementById("doneBtn").click();
+    } else if (ev.key === "m" || ev.key === "M") {
+      document.getElementById("merger-selector").click();
+    } else if (ev.key === "l" || ev.key === "L") {
+      document.getElementById("loader-selector").click();
     }
+
+    // handleMergeLoad(ev)
+    // handleTagsLoad(ev)
   };
 
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
