@@ -14,6 +14,8 @@ const Tagger = () => {
     handleTaggedFiles,
     previous,
     setPrevious,
+    selectedTagger, 
+    setSelectedTagger,
     relativePath,
     session,
     setMerged,
@@ -37,10 +39,12 @@ const Tagger = () => {
 
   const maxOrder = orderArray.reduce((a, b) => Math.max(+a, +b));
 
-  const [selected, setSelected] = useState(+minOrder);
+  const [selected, setSelected] = useState(selectedTagger || +minOrder);
 
   const handleSelectItem = (ev) => {
     setSelected(+ev.target.dataset.order);
+    // used to keep a global reference to the selected file in the tagger so that it does not return to the first one every time the tagger is exited
+    setSelectedTagger(+ev.target.dataset.order)
   };
 
   /* Logic for the Tag Form */
