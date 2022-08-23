@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useEffect, useRef } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 import { useState } from "react";
 import TagsForm from "../components/TagsForm";
@@ -18,6 +19,15 @@ const Tagger = () => {
     setMerged,
     handlePreviousAfterLoad,
   } = useContext(PressUploaderContext);
+
+  // get the focus for usage of onKeyDown
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.focus();
+  }, []);
+
+  // preparations
 
   const orderArray = taggedFiles
     .filter((a) => a.source !== "label")
@@ -95,8 +105,7 @@ const Tagger = () => {
         }
       })
     );
-
-  }
+  };
 
   const handleSectorsChange = (ev) => {
     handleTaggedFiles(
@@ -191,6 +200,14 @@ const Tagger = () => {
     }
   };
 
+
+  /* Handling of the onKeyDown event */
+  const handleKeyDown = (ev) => {
+    if (ev.key === "n" || ev.key === "N") {
+      handleTagsNext(ev);
+    } 
+  };
+
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
   const url =
     origin === "folder"
@@ -198,7 +215,8 @@ const Tagger = () => {
       : selectedFile.url;
 
   return (
-    <div>
+    // ref, tabIndex are necessary to make use of onKeyDown
+    <div ref={ref} tabIndex="-1" onKeyDown={handleKeyDown}>
       <div className="horizontal">
         <ul className="orderContentList">
           {taggedFiles.map((item) => (
