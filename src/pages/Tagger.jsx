@@ -226,6 +226,10 @@ const Tagger = () => {
       document.getElementById("merger-selector").click();
     } else if (ev.key === "l" || ev.key === "L") {
       document.getElementById("loader-selector").click();
+    } else if (ev.key === "r" || ev.key === "R") {
+      document.getElementById("dict-reset").click();
+    } else if (ev.key === "p" || ev.key === "P") {
+      document.getElementById("dict-prev").click();
     }
 
   };

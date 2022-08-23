@@ -122,9 +122,10 @@ const Dictionary = ({
       </button>
       <button onClick={handleUploadDictionary}>Send dictionary</button> */}
 
-      <div className={`dictionary-container-vertical`}>
+      <div 
+      className={`dictionary-container-vertical`}>
         {embed && (
-          <button
+          <button id="dict-reset"
             className="dictionary-reset"
             onClick={() => {
               setSelectedZones([]);
@@ -141,7 +142,7 @@ const Dictionary = ({
           </button>
         )}
         {embed && (
-          <button
+          <button id="dict-prev"
             className="dictionary-prev"
             onClick={() => {
               // update in the apperance of the dictionary selection, using the previous item as a reference
