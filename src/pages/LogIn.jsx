@@ -42,7 +42,7 @@ const LogIn = () => {
         <div className="login-div">
           Psswd:{" "}
           <input
-            type="text"
+            type="password"
             value={inputPsswd}
             className="login-input"
             onChange={(ev) => setInputPsswd(ev.target.value)}

@@ -117,7 +117,7 @@ a[disabled] {
   flex-direction: row;
   justify-content: space-between;
   margin: 0;
-  width: 17.5vw;
+  width: 22.5vw;
 }
 
 .dictionary-reset{
@@ -130,7 +130,7 @@ a[disabled] {
 
 .dictionary-subcontainer{
   height: 70vh;
-  width: 17.5vw;
+  width: 22.5vw;
   overflow: scroll;
   margin-bottom: 1.25vh;
   margin-left: -1.5em;
@@ -150,7 +150,7 @@ a[disabled] {
 }
 
 .dictionary-selection{
-  width: 17.5vw;
+  width: 22.5vw;
   font-size: 0.9em;
   margin-bottom: 1vh;
   margin-left: -1.5em;
@@ -266,7 +266,7 @@ a[disabled] {
 }
 
 .previewPdf{
-  width: 67.5vw;
+  width: 66.5vw;
   height: 90vh;
   overflow-x: hidden;
 
@@ -277,7 +277,7 @@ a[disabled] {
 
 .react-pdf__Page__canvas {
   /* margin: 0 0 0 -2.5vw; */
-  width: 67.5vw !important;
+  width: 65vw !important;
   height: auto !important;
 }
 /* .react-pdf__Document{
