@@ -151,9 +151,12 @@ const Tagger = () => {
     setPrevious(previous.concat(selected));
 
     if (selected < maxOrder) {
-      setSelected(orderArray[orderArray.indexOf(selected) + 1]);
+      const index = orderArray[orderArray.indexOf(selected) + 1];
+      setSelected(index);
+      setSelectedTagger(index)
     } else if (selected >= maxOrder) {
       setSelected(minOrder);
+      setSelectedTagger(minOrder);
     }
   };
 
