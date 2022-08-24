@@ -146,11 +146,11 @@ const Dictionary = ({
             className="dictionary-prev"
             onClick={() => {
               // update in the apperance of the dictionary selection, using the previous item as a reference
-              setSelectedZones(taggedFiles[previous.at(-1)].zones);
-              setSelectedSectors(taggedFiles[previous.at(-1)].sectors);
-              setSelectedTags(taggedFiles[previous.at(-1)].tags);
+              setSelectedZones(taggedFiles.filter(file => file.order === previous.at(-1))[0].zones);
+              setSelectedSectors(taggedFiles.filter(file => file.order === previous.at(-1))[0].sectors);
+              setSelectedTags(taggedFiles.filter(file => file.order === previous.at(-1))[0].tags);
               // update of the actual taggedFiles
-              handleGetPreviousTags(taggedFiles[previous.at(-1)]);
+              handleGetPreviousTags(taggedFiles.filter(file => file.order === previous.at(-1))[0]);
             }}
           >
             {" "}
