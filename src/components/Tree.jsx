@@ -10,7 +10,7 @@ const Tree = ({
   selectedItems,
   handleUnfoldedZones,
   unfoldedZones,
-  maxDepth = 5,
+  maxDepth = 6,
 }) => {
   return currentIteration === maxDepth ? null : (
     <div className="tree">
