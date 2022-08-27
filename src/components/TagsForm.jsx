@@ -107,12 +107,10 @@ const TagsForm = ({
           style={{ display: "none" }}
         />
 
-        <button
+        {origin === "folder" && <button
           id="doneBtn"
           onClick={(ev) => {
             handleTagsNext(ev);
-            if (origin === "folder") {
-              console.log(taggedFiles);
               if (taggedFiles[0].url && taggedFiles[0].url2) {
                 console.log("Urls already merged.");
                 setMerged(taggedFiles.map((a) => formatFileTags(a)));
@@ -120,14 +118,11 @@ const TagsForm = ({
               } else {
                 navigate("/uploader");
               }
-            } else if (origin === "server") {
-              setMerged(taggedFiles.map((a) => formatFileTags(a)));
-              navigate("/merger");
-            }
+           
           }}
         >
           Done
-        </button>
+        </button>}
         {origin === "server" && (
           <button id="sendBtn"
             onClick={(ev) => {
