@@ -20,6 +20,7 @@ const Tagger = () => {
     session,
     setMerged,
     handlePreviousAfterLoad,
+    handleDirectUploadMerged
   } = useContext(PressUploaderContext);
 
   // get the focus for usage of onKeyDown
@@ -237,6 +238,8 @@ const Tagger = () => {
       document.getElementById("dict-reset").click();
     } else if (ev.key === "p" || ev.key === "P") {
       document.getElementById("dict-prev").click();
+    } else if (ev.key === "s" || ev.key === "S") {
+      document.getElementById("sendBtn").click();
     }
 
   };
@@ -308,6 +311,7 @@ const Tagger = () => {
             formatFileTags={formatFileTags}
             setMerged={setMerged}
             session={session}
+            handleDirectUploadMerged={handleDirectUploadMerged}
           />
         </div>
       </div>

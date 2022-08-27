@@ -763,6 +763,11 @@ export const PressUploaderContextProvider = ({ children }) => {
     });
   };
 
+
+  const handleDirectUploadMerged = (input) => {
+    writeDataSession(input,session)
+  }
+
   return (
     <PressUploaderContext.Provider
       value={{
@@ -815,6 +820,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         session,
         setMerged,
         handlePreviousAfterLoad,
+        handleDirectUploadMerged,
 
         //// UPLOADER
         // clickSelector,

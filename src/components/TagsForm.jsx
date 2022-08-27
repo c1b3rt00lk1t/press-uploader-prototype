@@ -15,6 +15,7 @@ const TagsForm = ({
   origin,
   formatFileTags,
   setMerged,
+  handleDirectUploadMerged,
 }) => {
   // let { zones, sectors, tags } = selectedFile;
 
@@ -72,7 +73,7 @@ const TagsForm = ({
             JSON.stringify(taggedFiles)
           )}`}
           download={`${
-            (taggedFiles[0].url && taggedFiles[0].url2) ? "merged" : "tagged"
+            taggedFiles[0].url && taggedFiles[0].url2 ? "merged" : "tagged"
           }_${session}_${new Date().getFullYear()}${(new Date().getMonth() + 1)
             .toString()
             .padStart(2, "0")}${new Date().getDate()}_${new Date()
@@ -106,13 +107,14 @@ const TagsForm = ({
           style={{ display: "none" }}
         />
 
-        <button id="doneBtn"
+        <button
+          id="doneBtn"
           onClick={(ev) => {
             handleTagsNext(ev);
             if (origin === "folder") {
-              console.log(taggedFiles)
+              console.log(taggedFiles);
               if (taggedFiles[0].url && taggedFiles[0].url2) {
-                console.log('Urls already merged.')
+                console.log("Urls already merged.");
                 setMerged(taggedFiles.map((a) => formatFileTags(a)));
                 navigate("/merger");
               } else {
@@ -126,6 +128,19 @@ const TagsForm = ({
         >
           Done
         </button>
+        {origin === "server" && (
+          <button id="sendBtn"
+            onClick={(ev) => {
+              // handleTagsNext(ev);
+              const newMerged = taggedFiles.map((a) => formatFileTags(a));
+              setMerged(newMerged);
+              handleDirectUploadMerged(newMerged);
+            }}
+          >
+            {" "}
+            Send
+          </button>
+        )}
       </div>
     </div>
   );
