@@ -267,7 +267,7 @@ export const PressUploaderContextProvider = ({ children }) => {
           source: arr.arr.slice(0, arr.arr.indexOf("-") - 1).join(""),
           title: arr.arr
             .slice(arr.arr.indexOf("-") + 2, arr.arr.length)
-            .join(""),
+            .join("").replace(/\t/g,''),
           order: arr.order,
         };
       }
@@ -285,6 +285,9 @@ export const PressUploaderContextProvider = ({ children }) => {
       };
     };
 
+    console.log(orderFileContent.map((item, i) =>
+    enhanceTaggedFiles(getSourceTitle(getDate([...item], i)))
+  ))
     setTaggedFiles(
       orderFileContent.map((item, i) =>
         enhanceTaggedFiles(getSourceTitle(getDate([...item], i)))
