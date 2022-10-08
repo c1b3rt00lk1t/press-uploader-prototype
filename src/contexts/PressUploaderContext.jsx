@@ -5,7 +5,7 @@ import {
   writeDataSession,
   getDataFromDBDictionary,
   writeDataDictionary,
-  updateDataDictionary
+  updateDataDictionary,
 } from "../firebase";
 import { uploadFile, getFileURL } from "../firebase";
 import { uploadFileToBackUp, getFileURLFromBackUp } from "../firebase2";
@@ -13,10 +13,9 @@ import { uploadFileToBackUp, getFileURLFromBackUp } from "../firebase2";
 const PressUploaderContext = createContext();
 
 export const PressUploaderContextProvider = ({ children }) => {
-
   /** LOG IN CONTEXT */
 
-  const [authenticated, setAuthenticated] = useState(); 
+  const [authenticated, setAuthenticated] = useState();
 
   /** START CONTEXT */
   const [origin, setOrigin] = useState();
@@ -217,23 +216,48 @@ export const PressUploaderContextProvider = ({ children }) => {
         fr.readAsText(orderFile[0], "UTF-8");
       });
 
-      const content = [await fileSelection][0].split("\r\n").filter((a) => a !== "");
-      const checkPfdsInOrder = pdfFiles.map(a => a.name.replace(/.pdf/g,'')).filter(name => !content.reduce((acc, file) => acc || file.includes(name),false) ).map(a => '=> ' + a);
-      if(checkPfdsInOrder.length){
-        const msg = [`The following pdfs are not found in the order:`,...checkPfdsInOrder];
-        console.log(msg)
+      const content = [await fileSelection][0]
+        .split("\r\n")
+        .filter((a) => a !== "");
+      const checkPfdsInOrder = pdfFiles
+        .map((a) => a.name.replace(/.pdf/g, ""))
+        .filter(
+          (name) =>
+            !content.reduce((acc, file) => acc || file.includes(name), false)
+        )
+        .map((a) => "=> " + a);
+      if (checkPfdsInOrder.length) {
+        const msg = [
+          `The following pdfs are not found in the order:`,
+          ...checkPfdsInOrder,
+        ];
+        console.log(msg);
         setSelectorBasicChecksCard({ status: false, msg: msg });
         console.log("There are pdfs that are not found in the order.");
         return;
       }
 
-      const checkOrderInPdfs = content.map(a => a.replace(/\t/g,'')).filter(name => !isNaN(name[0]) && !pdfFiles.map(a => a.name.replace(/.pdf/g,'')).reduce((acc, file) => acc || file.includes(name),false) ).map(a => '=> ' + a);
-      console.log(checkOrderInPdfs)
-      if(checkOrderInPdfs.length){
-        const msg = [`The following order entries are not found in the folders:`,...checkOrderInPdfs];
-        console.log(msg)
+      const checkOrderInPdfs = content
+        .map((a) => a.replace(/\t/g, ""))
+        .filter(
+          (name) =>
+            !isNaN(name[0]) &&
+            !pdfFiles
+              .map((a) => a.name.replace(/.pdf/g, ""))
+              .reduce((acc, file) => acc || file.includes(name), false)
+        )
+        .map((a) => "=> " + a);
+      console.log(checkOrderInPdfs);
+      if (checkOrderInPdfs.length) {
+        const msg = [
+          `The following order entries are not found in the folders:`,
+          ...checkOrderInPdfs,
+        ];
+        console.log(msg);
         setSelectorBasicChecksCard({ status: false, msg: msg });
-        console.log("There are order entries that are not found in the folders.");
+        console.log(
+          "There are order entries that are not found in the folders."
+        );
         return;
       }
 
@@ -243,8 +267,6 @@ export const PressUploaderContextProvider = ({ children }) => {
       setOrderFileContent(
         [await fileSelection][0].split("\r\n").filter((a) => a !== "")
       );
-
-
 
       const name = orderFile[0].name;
       setSession([...name].slice(0, 8).join(""));
@@ -297,7 +319,8 @@ export const PressUploaderContextProvider = ({ children }) => {
           source: arr.arr.slice(0, arr.arr.indexOf("-") - 1).join(""),
           title: arr.arr
             .slice(arr.arr.indexOf("-") + 2, arr.arr.length)
-            .join("").replace(/\t/g,''),
+            .join("")
+            .replace(/\t/g, ""),
           order: arr.order,
         };
       }
@@ -315,9 +338,11 @@ export const PressUploaderContextProvider = ({ children }) => {
       };
     };
 
-    console.log(orderFileContent.map((item, i) =>
-    enhanceTaggedFiles(getSourceTitle(getDate([...item], i)))
-  ))
+    console.log(
+      orderFileContent.map((item, i) =>
+        enhanceTaggedFiles(getSourceTitle(getDate([...item], i)))
+      )
+    );
     setTaggedFiles(
       orderFileContent.map((item, i) =>
         enhanceTaggedFiles(getSourceTitle(getDate([...item], i)))
@@ -336,38 +361,34 @@ export const PressUploaderContextProvider = ({ children }) => {
 
   const [dictionary, setDictionary] = useState(
     JSON.parse(window.localStorage.getItem("PrUp_dictionary"))
-  //   {
-  //   "zones": true,
-  //   "sectors": true,
-  //   "tags": true
-  // }
-  )
+    //   {
+    //   "zones": true,
+    //   "sectors": true,
+    //   "tags": true
+    // }
+  );
   const handleUploadDictionary = () => {
     writeDataDictionary(dictionary);
   };
 
   const handleAddToDictionary = (item, subpath) => {
-    updateDataDictionary(item, subpath)
-  }
-
-  
+    updateDataDictionary(item, subpath);
+  };
 
   useEffect(() => {
     const handleGetDictionaryFromDB = () => {
-    
       const handleDataFromDB = (data) => {
-        window.localStorage.setItem("PrUp_dictionary", JSON.stringify(data)); 
-        setDictionary(data)
+        window.localStorage.setItem("PrUp_dictionary", JSON.stringify(data));
+        setDictionary(data);
       };
       getDataFromDBDictionary(handleDataFromDB);
     };
 
     handleGetDictionaryFromDB();
-  }, [])
-
+  }, []);
 
   // const handleDictionary = (zones, sectors, tags) => () => {
-    
+
   //   setDictionary(
   //     {
   //       "zones": {
@@ -735,7 +756,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       const url2 = urlsFromBackUp.filter((url) =>
         url.name.includes(tagged.title)
       );
-      if ( url.length && url2.length) {
+      if (url.length && url2.length) {
         // console.log(url[0].url)
         mergedTmp.push({
           ...tagged,
@@ -784,7 +805,7 @@ export const PressUploaderContextProvider = ({ children }) => {
 
   const handleUploadMerged = () => {
     setMergerSendToServer({ status: undefined, msg: "Sending..." });
-    writeDataSession(merged,session).then((result) => {
+    writeDataSession(merged, session).then((result) => {
       if (result) {
         setMergerSendToServer({ status: true, msg: "Tags and urls sent." });
       } else {
@@ -796,10 +817,9 @@ export const PressUploaderContextProvider = ({ children }) => {
     });
   };
 
-
   const handleDirectUploadMerged = (input) => {
-    writeDataSession(input,session)
-  }
+    writeDataSession(input, session);
+  };
 
   return (
     <PressUploaderContext.Provider
@@ -848,7 +868,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         handleTaggedFiles,
         previous,
         setPrevious,
-        selectedTagger, 
+        selectedTagger,
         setSelectedTagger,
         session,
         setMerged,
