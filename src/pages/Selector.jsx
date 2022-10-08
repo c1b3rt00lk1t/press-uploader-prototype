@@ -41,7 +41,7 @@ const Selector = () => {
             webkitdirectory="true"
           />
         </Card>
-        <Card status={selectorBasicChecksCard.status} msg={[selectorBasicChecksCard.msg]}>
+        <Card status={selectorBasicChecksCard.status} msg={selectorBasicChecksCard.msg}>
           <button onClick={basicFolderChecks} disabled={!selectorSelectCard.status}>Basic checks</button>
         </Card>
         <Card status={undefined} msg={[]}>

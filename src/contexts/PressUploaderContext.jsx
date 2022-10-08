@@ -160,6 +160,9 @@ export const PressUploaderContextProvider = ({ children }) => {
     );
     setFiles(filesArray);
     setPdfFiles(pdfFilesArray);
+    // console.log('files',filesArray)
+    // console.log('pdfs',pdfFilesArray)
+    // console.log('pdfs',pdfFilesArray.map(a => a.name))
 
     const msg =
       pdfFilesArray.length +
@@ -213,9 +216,36 @@ export const PressUploaderContextProvider = ({ children }) => {
         fr.onload = () => resolve(fr.result);
         fr.readAsText(orderFile[0], "UTF-8");
       });
+
+      const content = [await fileSelection][0].split("\r\n").filter((a) => a !== "");
+      const checkPfdsInOrder = pdfFiles.map(a => a.name.replace(/.pdf/g,'')).filter(name => !content.reduce((acc, file) => acc || file.includes(name),false) ).map(a => '=> ' + a);
+      if(checkPfdsInOrder.length){
+        const msg = [`The following pdfs are not found in the order:`,...checkPfdsInOrder];
+        console.log(msg)
+        setSelectorBasicChecksCard({ status: false, msg: msg });
+        console.log("There are pdfs that are not found in the order.");
+        return;
+      }
+
+      const checkOrderInPdfs = content.map(a => a.replace(/\t/g,'')).filter(name => !isNaN(name[0]) && !pdfFiles.map(a => a.name.replace(/.pdf/g,'')).reduce((acc, file) => acc || file.includes(name),false) ).map(a => '=> ' + a);
+      console.log(checkOrderInPdfs)
+      if(checkOrderInPdfs.length){
+        const msg = [`The following order entries are not found in the folders:`,...checkOrderInPdfs];
+        console.log(msg)
+        setSelectorBasicChecksCard({ status: false, msg: msg });
+        console.log("There are order entries that are not found in the folders.");
+        return;
+      }
+
+      // const checkWierdCharacters = content.filter( name => name !== name.replace(/[“”‘’&\\#+()$~%'":*?<>{}]/g,'_'))
+      // console.log(checkWierdCharacters)
+
       setOrderFileContent(
         [await fileSelection][0].split("\r\n").filter((a) => a !== "")
       );
+
+
+
       const name = orderFile[0].name;
       setSession([...name].slice(0, 8).join(""));
       setBasicSelectorChecks(true);
