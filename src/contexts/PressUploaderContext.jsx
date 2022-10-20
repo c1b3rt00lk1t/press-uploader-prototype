@@ -236,7 +236,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         console.log("There are pdfs that are not found in the order.");
         return;
       }
-
+      console.log(content)
       const checkOrderInPdfs = content
         .map((a) => a.replace(/\t/g, ""))
         .filter(
@@ -247,17 +247,14 @@ export const PressUploaderContextProvider = ({ children }) => {
               .reduce((acc, file) => acc || file.includes(name), false)
         )
         .map((a) => "=> " + a);
-      console.log(checkOrderInPdfs);
+
       if (checkOrderInPdfs.length) {
         const msg = [
-          `The following order entries are not found in the folders:`,
-          ...checkOrderInPdfs,
+          `The following order entries are not found in the folders:\n`,
+          ...checkOrderInPdfs
         ];
         console.log(msg);
         setSelectorBasicChecksCard({ status: false, msg: msg });
-        console.log(
-          "There are order entries that are not found in the folders."
-        );
         return;
       }
 
