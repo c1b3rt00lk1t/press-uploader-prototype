@@ -159,9 +159,6 @@ export const PressUploaderContextProvider = ({ children }) => {
     );
     setFiles(filesArray);
     setPdfFiles(pdfFilesArray);
-    // console.log('files',filesArray)
-    // console.log('pdfs',pdfFilesArray)
-    // console.log('pdfs',pdfFilesArray.map(a => a.name))
 
     const msg =
       pdfFilesArray.length +
@@ -190,6 +187,7 @@ export const PressUploaderContextProvider = ({ children }) => {
   };
 
   const basicFolderChecks = () => {
+    console.log('basic checks');
     readOrderFile(files);
     checkFilesSizes(pdfFiles);
   };
@@ -214,18 +212,21 @@ export const PressUploaderContextProvider = ({ children }) => {
       const fileSelection = new Promise((resolve) => {
         fr.onload = () => resolve(fr.result);
         fr.readAsText(orderFile[0], "UTF-8");
+        document.getElementById("file-selector").value = '';
       });
 
       const content = [await fileSelection][0]
         .split("\r\n")
         .filter((a) => a !== "");
-      const checkPfdsInOrder = pdfFiles
+
+        const checkPfdsInOrder = pdfFiles
         .map((a) => a.name.replace(/.pdf/g, ""))
         .filter(
           (name) =>
             !content.reduce((acc, file) => acc || file.includes(name), false)
         )
         .map((a) => "=> " + a);
+
       if (checkPfdsInOrder.length) {
         const msg = [
           `The following pdfs are not found in the order:`,
@@ -236,7 +237,7 @@ export const PressUploaderContextProvider = ({ children }) => {
         console.log("There are pdfs that are not found in the order.");
         return;
       }
-      console.log(content)
+
       const checkOrderInPdfs = content
         .map((a) => a.replace(/\t/g, ""))
         .filter(
