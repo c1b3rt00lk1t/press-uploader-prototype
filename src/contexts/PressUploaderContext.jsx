@@ -208,6 +208,8 @@ export const PressUploaderContextProvider = ({ children }) => {
       console.log("There are too many order files.");
       return;
     } else {
+      let msgOrderContent = [];
+      // if there is one and only one order, let's check its content
       const fr = new FileReader();
       const fileSelection = new Promise((resolve) => {
         fr.onload = () => resolve(fr.result);
@@ -228,14 +230,11 @@ export const PressUploaderContextProvider = ({ children }) => {
         .map((a) => "=> " + a);
 
       if (checkPfdsInOrder.length) {
-        const msg = [
-          `The following pdfs are not found in the order:`,
+        msgOrderContent.concat(msgOrderContent = [
+          `\nThe following pdfs are not found in the ORDER:`,
           ...checkPfdsInOrder,
-        ];
-        console.log(msg);
-        setSelectorBasicChecksCard({ status: false, msg: msg });
+        ]);
         console.log("There are pdfs that are not found in the order.");
-        return;
       }
 
       const checkOrderInPdfs = content
@@ -250,12 +249,15 @@ export const PressUploaderContextProvider = ({ children }) => {
         .map((a) => "=> " + a);
 
       if (checkOrderInPdfs.length) {
-        const msg = [
-          `The following order entries are not found in the folders:\n`,
+        msgOrderContent = msgOrderContent.concat([
+          `\nThe following order entries are not found in the FOLDERS:`,
           ...checkOrderInPdfs
-        ];
-        console.log(msg);
-        setSelectorBasicChecksCard({ status: false, msg: msg });
+        ]);
+        console.log("There are order entries that are not found in the folders.");
+      }
+
+      if (checkOrderInPdfs.length || checkPfdsInOrder.length) {
+        setSelectorBasicChecksCard({ status: false, msg: msgOrderContent });
         return;
       }
 

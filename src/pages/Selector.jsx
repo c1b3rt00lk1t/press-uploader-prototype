@@ -43,18 +43,19 @@ const Selector = () => {
           status={selectorBasicChecksCard.status}
           msg={selectorBasicChecksCard.msg}
         >
-          <a
-            href={`data:text/json;charset=utf-8,${encodeURIComponent(
-              selectorBasicChecksCard.msg.join("\n")
-            )}`}
-            download={"BasicChecks.txt"}
-          >
             <button
               onClick={basicFolderChecks}
               disabled={!selectorSelectCard.status}
             >
               Basic checks
             </button>
+          <a
+            href={`data:text/json;charset=utf-8,${encodeURIComponent(
+              selectorBasicChecksCard.msg.join("\n")
+            )}`}
+            download={"BasicChecks.txt"}
+          >
+            download
           </a>
         </Card>
         <Card status={undefined} msg={[]}>
