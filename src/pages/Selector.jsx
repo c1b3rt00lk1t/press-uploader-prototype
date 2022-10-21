@@ -4,6 +4,11 @@ import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
 import { useNavigate } from "react-router-dom";
 
+import {BsDownload} from 'react-icons/bs';
+
+import {BsCloudDownload} from 'react-icons/bs';
+import {FiDownloadCloud} from 'react-icons/fi';
+
 const Selector = () => {
   const {
     clickSelector,
@@ -48,15 +53,16 @@ const Selector = () => {
               disabled={!selectorSelectCard.status}
             >
               Basic checks
-            </button>
-          <a
+              <a
             href={`data:text/json;charset=utf-8,${encodeURIComponent(
               selectorBasicChecksCard.msg.join("\n")
             )}`}
             download={"BasicChecks.txt"}
           >
-            download
+            <FiDownloadCloud style={{color: "black", display: selectorBasicChecksCard.msg.length < 2 ? "none" : "inline", marginLeft:"5px"}}/>
           </a>
+            </button>
+          
         </Card>
         <Card status={undefined} msg={[]}>
           <button onClick={() => {}} disabled={true}>
