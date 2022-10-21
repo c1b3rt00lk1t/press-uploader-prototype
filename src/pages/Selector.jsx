@@ -4,9 +4,6 @@ import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
 import { useNavigate } from "react-router-dom";
 
-import {BsDownload} from 'react-icons/bs';
-
-import {BsCloudDownload} from 'react-icons/bs';
 import {FiDownloadCloud} from 'react-icons/fi';
 
 const Selector = () => {
