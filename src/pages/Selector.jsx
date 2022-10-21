@@ -5,7 +5,6 @@ import CardDisplay from "../shared/CardDisplay";
 import { useNavigate } from "react-router-dom";
 
 const Selector = () => {
-
   const {
     clickSelector,
     handleSelectFolder,
@@ -14,15 +13,14 @@ const Selector = () => {
     basicSelectorChecks,
     selectorSelectCard,
     selectorBasicChecksCard,
-    selectorPrepareTaggerCard
+    selectorPrepareTaggerCard,
   } = useContext(PressUploaderContext);
-  
+
   const navigate = useNavigate();
   const handleClickPrepareTagger = () => {
     prepareTaggedFiles();
     navigate("/tagger");
-
-  }
+  };
 
   return (
     <div id="selector">
@@ -41,18 +39,41 @@ const Selector = () => {
             webkitdirectory="true"
           />
         </Card>
-        <Card status={selectorBasicChecksCard.status} msg={selectorBasicChecksCard.msg}>
-          <button onClick={basicFolderChecks} disabled={!selectorSelectCard.status}>Basic checks</button>
+        <Card
+          status={selectorBasicChecksCard.status}
+          msg={selectorBasicChecksCard.msg}
+        >
+          <a
+            href={`data:text/json;charset=utf-8,${encodeURIComponent(
+              selectorBasicChecksCard.msg.join("\n")
+            )}`}
+            download={"BasicChecks.txt"}
+          >
+            <button
+              onClick={basicFolderChecks}
+              disabled={!selectorSelectCard.status}
+            >
+              Basic checks
+            </button>
+          </a>
         </Card>
         <Card status={undefined} msg={[]}>
-          <button onClick={() =>{}} disabled={true}>Edit order</button>
+          <button onClick={() => {}} disabled={true}>
+            Edit order
+          </button>
         </Card>
-        <Card status={selectorPrepareTaggerCard.status} msg={[selectorPrepareTaggerCard.msg]}>
-          <button onClick={handleClickPrepareTagger} disabled={!basicSelectorChecks}>
+        <Card
+          status={selectorPrepareTaggerCard.status}
+          msg={[selectorPrepareTaggerCard.msg]}
+        >
+          <button
+            onClick={handleClickPrepareTagger}
+            disabled={!basicSelectorChecks}
+          >
             Prepare tagger
           </button>
         </Card>
-        </CardDisplay>
+      </CardDisplay>
     </div>
   );
 };
