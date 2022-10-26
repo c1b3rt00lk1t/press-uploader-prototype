@@ -5,10 +5,10 @@ const Folder = ({folder}) => {
   console.log(folder)
 
   return (
-    <li>  
+    <li draggable>  
       {folder.folder}
-      <ul>
-        {folder.files.map(file => <li key={file.file.id}>{file.file.name.replace(/.pdf/g,'')}</li>)}
+      <ul >
+        {folder.files.map(file => <li draggable key={file.file.id}>{file.file.name.replace(/.pdf/g,'')}</li>)}
       </ul>
     </li>
   )
