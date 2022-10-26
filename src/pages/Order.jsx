@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 
 import { v4 as uuidv4 } from "uuid";
 import Folder from "../components/Folder";
 
+
 const Order = () => {
+
+  const [fileHandle, setFileHandle] = useState();
+
   const {
     pdfFiles, relativePath
   } = useContext(PressUploaderContext);
@@ -38,11 +42,20 @@ const Order = () => {
 
     }, []);
 
+const renameFileTest = () => {
+  window.showOpenFilePicker().then(res => setFileHandle(res[0]));
+};
 
-  // folders.length && console.log(folders);
+const selectFileTest = () => {
+  fileHandle.move('hello');
+};
+
+
 
   return (
     <div>
+      <button onClick={selectFileTest}> Select file</button>
+      <button onClick={renameFileTest}> Rename test</button>
       <div className="horizontal">
         <ul className="orderContentList" style={{ width: "40vw" }}>
           {folders.map((folder) => (
