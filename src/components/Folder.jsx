@@ -1,6 +1,6 @@
 import React from "react";
 
-const Folder = ({ folder }) => {
+const Folder = ({ folder, draggableFiles }) => {
   return (
     <li
       className="orderFolder"
@@ -17,7 +17,7 @@ const Folder = ({ folder }) => {
         {folder.files.map((file) => (
           <li
             className="orderFile"
-            draggable
+            draggable={draggableFiles}
             onDragStart={(ev) => {
               ev.stopPropagation();
               console.log("dragstart:", file.id);
