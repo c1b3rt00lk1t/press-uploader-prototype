@@ -39,39 +39,51 @@ const Order = () => {
         return acc.concat({folder: b.folder, files: [{file: b.file, id: b.id}], id: b.folder})
       }
 
-    }, []).filter(folder => !newOrder.map(a => a.id).includes(folder.id));
+    }, [])
+    // This last filter make the folder block disappear once it is dropped to the new order.
+    .filter(folder => !newOrder.map(a => a.id).includes(folder.id));
 
 
 
   return (
     <div className="horizontal">
       <div className="horizontal">
-        <ul className="orderContentList" style={{ width: "37.5vw" }}>
+        <ul className="orderContentList" style={{ width: "25vw" }}>
           {folders.map((folder) => (
-            <Folder key={folder.id} folder={folder}/>
+            <Folder key={folder.id} folder={folder} draggableFiles={false}/>
           ))}
         </ul>
       </div>
       <div className="horizontal">
-        <ul className="orderContentList" style={{ width: "37.5vw", marginRight: "5vw" }} onDragOver={(ev) => ev.preventDefault()}
+        <ul className="orderContentList" style={{ width: "60vw", marginRight: "5vw" }} onDragOver={(ev) => ev.preventDefault()}
         onDrop={(ev) => {
           ev.stopPropagation();
-          const id = ev.dataTransfer.getData("id");
+          const onDragId = ev.dataTransfer.getData("id");
+          console.log('onDragId',onDragId)
+
+          // Handling of the folder block
           if(ev.target.className==='orderFolder'){
             const onDropId = ev.target.id;
             const onDropIdx = newOrder.findIndex( folder => folder.id === onDropId);
-            const draggedFolder = folders.filter( folder => folder.id === id);
+          
+            // First time handling
+            if(!newOrder.filter( folder => folder.id === onDragId).length){
+              const draggedFolder = folders.filter( folder => folder.id === onDragId);
+              setNewOrder(newOrder.slice(0,onDropIdx).concat(draggedFolder).concat(newOrder.slice(onDropIdx)));
+            } else {
+              // Folder block movements 
+              const draggedFolder = newOrder.filter( folder => folder.id === onDragId);
+              const onDragIdx = newOrder.findIndex(folder => folder.id === onDragId);
 
-            if(!newOrder.filter( folder => folder.id === id).length){
-              setNewOrder(newOrder.slice(0,onDropIdx).concat(draggedFolder).concat(newOrder.slice(onDropIdx)))
-            }      
-            console.log('orderFolder hit')
-            console.log(ev.target, onDropId,onDropIdx )
-          }
+              onDragIdx > onDropIdx ? 
+                      setNewOrder(newOrder.slice(0,onDropIdx).concat(draggedFolder).concat(newOrder.slice(onDropIdx,onDragIdx)).concat(newOrder.slice(onDragIdx + 1))) : 
+                      setNewOrder(newOrder.slice(0,onDragIdx).concat(newOrder.slice(onDragIdx + 1, onDropIdx)).concat(draggedFolder).concat(newOrder.slice(onDropIdx)));
+            }     
+          } 
         
         }}>
            {newOrder.map((folder) => (
-            <Folder key={folder.id} folder={folder}/>
+            <Folder key={folder.id} folder={folder} draggableFiles={true}/>
           ))}
           </ul></div>
     </div>
