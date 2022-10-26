@@ -3,6 +3,7 @@ import React from "react";
 const Folder = ({ folder }) => {
   return (
     <li
+      className="orderFolder"
       key={folder.id}
       draggable
       onDragStart={(ev) => {
@@ -14,6 +15,7 @@ const Folder = ({ folder }) => {
       <ul>
         {folder.files.map((file) => (
           <li
+            className="orderFile"
             draggable
             onDragStart={(ev) => {
               ev.stopPropagation();
