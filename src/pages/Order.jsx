@@ -43,11 +43,11 @@ const Order = () => {
     }, []);
 
 const renameFileTest = () => {
-  window.showOpenFilePicker().then(res => setFileHandle(res[0]));
+  fileHandle.move('hello');
 };
 
 const selectFileTest = () => {
-  fileHandle.move('hello');
+  window.showOpenFilePicker().then(res => setFileHandle(res[0]));
 };
 
 
