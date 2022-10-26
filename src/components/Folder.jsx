@@ -6,6 +6,7 @@ const Folder = ({ folder }) => {
       className="orderFolder"
       key={folder.id}
       draggable
+      id={folder.id}
       onDragStart={(ev) => {
         console.log("dragstart:", folder.id);
         ev.dataTransfer.setData("id", folder.id);
@@ -23,6 +24,7 @@ const Folder = ({ folder }) => {
               ev.dataTransfer.setData("id", file.id);
             }}
             key={file.id}
+            id={file.id}
           >
             {file.file.name.replace(/.pdf/g, "")}
           </li>
