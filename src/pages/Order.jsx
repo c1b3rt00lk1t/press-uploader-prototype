@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 
-import { v4 as uuidv4 } from "uuid";
 import Folder from "../components/Folder";
 
 
 const Order = () => {
 
+  const [newOrder, setNewOrder] = useState([]);
 
   const {
     pdfFiles, relativePath
@@ -14,7 +14,7 @@ const Order = () => {
 
   const files = pdfFiles.map((file) => ({
     file: file,
-    id: uuidv4(),
+    id: file.name,
     folder: file.webkitRelativePath
       .replace(`${relativePath}/`, "")
       .replace(`/${file.name}`, ""),
@@ -26,7 +26,7 @@ const Order = () => {
     .reduce((acc, b) => {
       if (acc.length){
         if (acc[acc.length - 1].folder !== b.folder){
-           return acc.concat({folder: b.folder, files: [{file: b.file, id: b.id}], id: uuidv4()})
+           return acc.concat({folder: b.folder, files: [{file: b.file, id: b.id}], id: b.folder})
         } else {
           const arrayPrev = acc.slice(0,acc.length - 1);
           const changedItem = acc[acc.length - 1];
@@ -36,7 +36,7 @@ const Order = () => {
 
 
       } else {
-        return acc.concat({folder: b.folder, files: [{file: b.file, id: b.id}], id: uuidv4()})
+        return acc.concat({folder: b.folder, files: [{file: b.file, id: b.id}], id: b.folder})
       }
 
     }, []);
@@ -47,7 +47,6 @@ const Order = () => {
 
   return (
     <div className="horizontal">
-
       <div className="horizontal">
         <ul className="orderContentList" style={{ width: "45vw" }}>
           {folders.map((folder) => (
@@ -56,7 +55,19 @@ const Order = () => {
         </ul>
       </div>
       <div className="horizontal">
-        <ul className="orderContentList" style={{ width: "45vw" }} onDragOver={(ev) => ev.preventDefault()}></ul></div>
+        <ul className="orderContentList" style={{ width: "45vw" }} onDragOver={(ev) => ev.preventDefault()}
+        onDrop={(ev) => {
+          const id = ev.dataTransfer.getData("id");
+          if(!newOrder.filter( folder => folder.id === id).length){
+            setNewOrder(newOrder.concat(folders.filter( folder => folder.id === id))); 
+          }      
+          console.log(ev.target)
+        
+        }}>
+           {newOrder.map((folder) => (
+            <Folder key={folder.id} folder={folder}/>
+          ))}
+          </ul></div>
     </div>
   );
 };
