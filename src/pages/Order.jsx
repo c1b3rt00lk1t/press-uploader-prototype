@@ -6,7 +6,7 @@ import Folder from "../components/Folder";
 
 const Order = () => {
 
-  const [newOrder, setNewOrder] = useState([]);
+  const [newOrder, setNewOrder] = useState([{folder: 'Add folder...', files:[], id: 'Add folder...'}]);
 
   const {
     pdfFiles, relativePath
@@ -43,25 +43,31 @@ const Order = () => {
 
 
 
-
-
   return (
     <div className="horizontal">
       <div className="horizontal">
-        <ul className="orderContentList" style={{ width: "45vw" }}>
+        <ul className="orderContentList" style={{ width: "37.5vw" }}>
           {folders.map((folder) => (
             <Folder key={folder.id} folder={folder}/>
           ))}
         </ul>
       </div>
       <div className="horizontal">
-        <ul className="orderContentList" style={{ width: "45vw" }} onDragOver={(ev) => ev.preventDefault()}
+        <ul className="orderContentList" style={{ width: "37.5vw", marginRight: "5vw" }} onDragOver={(ev) => ev.preventDefault()}
         onDrop={(ev) => {
+          ev.stopPropagation();
           const id = ev.dataTransfer.getData("id");
-          if(!newOrder.filter( folder => folder.id === id).length){
-            setNewOrder(newOrder.concat(folders.filter( folder => folder.id === id))); 
-          }      
-          console.log(ev.target)
+          if(ev.target.className==='orderFolder'){
+            const onDropId = ev.target.id;
+            const onDropIdx = newOrder.findIndex( folder => folder.id === onDropId);
+            const draggedFolder = folders.filter( folder => folder.id === id);
+
+            if(!newOrder.filter( folder => folder.id === id).length){
+              setNewOrder(newOrder.slice(0,onDropIdx).concat(draggedFolder).concat(newOrder.slice(onDropIdx)))
+            }      
+            console.log('orderFolder hit')
+            console.log(ev.target, onDropId,onDropIdx )
+          }
         
         }}>
            {newOrder.map((folder) => (
