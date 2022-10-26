@@ -8,7 +8,6 @@ const Folder = ({ folder, draggableFiles }) => {
       draggable
       id={folder.id}
       onDragStart={(ev) => {
-        console.log("dragstart:", folder.id);
         ev.dataTransfer.setData("id", folder.id);
       }}
     >
@@ -20,7 +19,6 @@ const Folder = ({ folder, draggableFiles }) => {
             draggable={draggableFiles}
             onDragStart={(ev) => {
               ev.stopPropagation();
-              console.log("dragstart:", file.id);
               ev.dataTransfer.setData("id", file.id);
             }}
             key={file.id}
