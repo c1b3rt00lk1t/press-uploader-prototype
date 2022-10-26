@@ -39,7 +39,7 @@ const Order = () => {
         return acc.concat({folder: b.folder, files: [{file: b.file, id: b.id}], id: b.folder})
       }
 
-    }, []);
+    }, []).filter(folder => !newOrder.map(a => a.id).includes(folder.id));
 
 
 
