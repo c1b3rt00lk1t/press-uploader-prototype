@@ -47,7 +47,10 @@ const renameFileTest = () => {
 };
 
 const selectFileTest = () => {
-  window.showOpenFilePicker().then(res => setFileHandle(res[0]));
+  window.showOpenFilePicker().then(res => {
+    setFileHandle(res[0]);
+    console.log(res[0]);
+  });
 };
 
 
