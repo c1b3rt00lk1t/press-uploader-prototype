@@ -46,15 +46,17 @@ const Order = () => {
 
 
   return (
-    <div>
+    <div className="horizontal">
 
       <div className="horizontal">
-        <ul className="orderContentList" style={{ width: "40vw" }}>
+        <ul className="orderContentList" style={{ width: "45vw" }}>
           {folders.map((folder) => (
             <Folder key={folder.id} folder={folder}/>
           ))}
         </ul>
       </div>
+      <div className="horizontal">
+        <ul className="orderContentList" style={{ width: "45vw" }} onDragOver={(ev) => ev.preventDefault()}></ul></div>
     </div>
   );
 };
