@@ -82,17 +82,20 @@ const Order = () => {
           } else if (ev.target.className==='orderFile') {
             // Handling of files reorders inside the same folder block
             const folderOfDraggedFile = newOrder.filter( folder => folder.files.map(file => file.id).includes(onDragId));
-            const folderOfDraggedFileIdx = newOrder.findIndex( folder => folder.id === folderOfDraggedFile[0].id);
-            const draggedFileRelIdx = folderOfDraggedFile[0].files.findIndex(file => file.id === onDragId);
-            const draggedFileRel = folderOfDraggedFile[0].files.filter(file => file.id === onDragId)[0];
-            const dropFileRelIdx = folderOfDraggedFile[0].files.findIndex(file => file.id === onDropId);
-           
-            const newOrderCopy = [...newOrder];
-            newOrderCopy[folderOfDraggedFileIdx].files.splice(dropFileRelIdx, 0, draggedFileRel);
-            newOrderCopy[folderOfDraggedFileIdx].files.splice(draggedFileRelIdx > dropFileRelIdx ? draggedFileRelIdx + 1 : draggedFileRelIdx, 1);
-
-            setNewOrder(newOrderCopy);
-
+            const folderOfDroppedFile = newOrder.filter( folder => folder.files.map(file => file.id).includes(onDropId));
+            if(folderOfDraggedFile[0].id === folderOfDroppedFile[0].id){
+              const folderOfDraggedFileIdx = newOrder.findIndex( folder => folder.id === folderOfDraggedFile[0].id);
+              const draggedFileRelIdx = folderOfDraggedFile[0].files.findIndex(file => file.id === onDragId);
+              const draggedFileRel = folderOfDraggedFile[0].files.filter(file => file.id === onDragId)[0];
+              
+              const dropFileRelIdx = folderOfDraggedFile[0].files.findIndex(file => file.id === onDropId);
+             
+              const newOrderCopy = [...newOrder];
+              newOrderCopy[folderOfDraggedFileIdx].files.splice(dropFileRelIdx, 0, draggedFileRel);
+              newOrderCopy[folderOfDraggedFileIdx].files.splice(draggedFileRelIdx > dropFileRelIdx ? draggedFileRelIdx + 1 : draggedFileRelIdx, 1);
+  
+              setNewOrder(newOrderCopy);
+            }
 
           }
         
