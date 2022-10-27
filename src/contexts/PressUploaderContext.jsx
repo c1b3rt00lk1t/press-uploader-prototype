@@ -217,6 +217,10 @@ export const PressUploaderContextProvider = ({ children }) => {
         document.getElementById("file-selector").value = '';
       });
 
+      setOrderFileContent(
+        [await fileSelection][0].split("\r\n").filter((a) => a !== "")
+      );
+      
       const content = [await fileSelection][0]
         .split("\r\n")
         .filter((a) => a !== "");
@@ -264,9 +268,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       // const checkWierdCharacters = content.filter( name => name !== name.replace(/[“”‘’&\\#+()$~%'":*?<>{}]/g,'_'))
       // console.log(checkWierdCharacters)
 
-      setOrderFileContent(
-        [await fileSelection][0].split("\r\n").filter((a) => a !== "")
-      );
+
 
       const name = orderFile[0].name;
       setSession([...name].slice(0, 8).join(""));
