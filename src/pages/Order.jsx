@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 
 import Folder from "../components/Folder";
+import {FiDownloadCloud} from 'react-icons/fi';
 
 
 const Order = () => {
@@ -46,6 +47,18 @@ const Order = () => {
 
 
   return (
+    <>
+      <button onClick={() => {console.log(newOrder)}}>                
+                <a style={{color: "black"}}
+              href={`data:text/json;charset=utf-8,${encodeURIComponent(
+                newOrder.slice(0,-1).map(a => `${a.folder}\n${a.files.map(file => file.id.replace(/.pdf/g,'')).join('\n')}`).join("\n\n")
+              )}`}
+              download={"Order.txt"}
+            >Download order
+              <FiDownloadCloud style={{color: "black", marginLeft:"5px"}}/>
+            </a>
+      </button>
+
     <div className="horizontal">
       <div className="horizontal">
         <ul className="orderContentList" style={{ width: "25vw" }}>
@@ -104,7 +117,11 @@ const Order = () => {
             <Folder key={folder.id} folder={folder} draggableFiles={true}/>
           ))}
           </ul></div>
+          
+          
+
     </div>
+    </>
   );
 };
 
