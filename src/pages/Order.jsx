@@ -14,7 +14,18 @@ const Order = () => {
   } = useContext(PressUploaderContext);
 
 
-  console.log(orderFileContent)
+  const target = orderFileContent.reduce( (acc, b) => {
+    if(isNaN(b[0])){
+      acc.result.push({folder: b, files: [], id: b});
+      acc.index++;
+    } else {
+      acc.result[acc.index].files.push({file: null, id: b});
+    }
+    return acc;
+
+  }, {result: [], index: -1}).result;
+  
+console.log(orderFileContent)
 
   const files = pdfFiles.map((file) => ({
     file: file,
@@ -47,19 +58,19 @@ const Order = () => {
     // This last filter make the folder block disappear once it is dropped to the new order.
     .filter(folder => !newOrder.map(a => a.id).includes(folder.id));
 
-console.log(folders)
+// console.log(newOrder)
 
   return (
     <>
-      <button onClick={() => setNewOrder([{folder: 'Folder uploaded', files:[], id: 'Folder uploaded'}])}>
+      <button onClick={() => setNewOrder([...target,{folder: 'Add folder...', files:[], id: 'Add folder...'}])}>
         Upload order
         <FiUpload style={{color: "black", marginLeft:"5px"}}/>
 
       </button>
-      <button onClick={() => {console.log(newOrder)}}>                
+      <button onClick={() => {}}>                
                 <a style={{color: "black"}}
               href={`data:text/json;charset=utf-8,${encodeURIComponent(
-                newOrder.slice(0,-1).map(a => `${a.folder}\n${a.files.map(file => file.id.replace(/.pdf/g,'')).join('\n')}`).join("\n\n")
+                newOrder.slice(0,-1).map(a => `${a.folder}\r\n${a.files.map(file => file.id.replace(/.pdf/g,'')).join('\r\n')}`).join("\r\n\r\n")
               )}`}
               download={"Order.txt"}
             >Download order
