@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
     const tagStyle = {
@@ -12,7 +12,9 @@ const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
         lineHeight: "20px",
         height: "20px",
       };
-      
+
+      const [hover, setHover] = useState(false);
+
   return (
     <li
             className="orderFile"
