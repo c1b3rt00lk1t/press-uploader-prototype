@@ -148,28 +148,31 @@ const Order = () => {
                   );
                 } else {
                   // Folder block movements
-                  const draggedFolder = newOrder.filter(
-                    (folder) => folder.id === onDragId
-                  );
-                  const onDragIdx = newOrder.findIndex(
-                    (folder) => folder.id === onDragId
-                  );
+                  // Check to prevent duplicate folder blocks
+                  if (onDragId !== onDropId) {
+                    const draggedFolder = newOrder.filter(
+                      (folder) => folder.id === onDragId
+                    );
+                    const onDragIdx = newOrder.findIndex(
+                      (folder) => folder.id === onDragId
+                    );
 
-                  onDragIdx > onDropIdx
-                    ? setNewOrder(
-                        newOrder
-                          .slice(0, onDropIdx)
-                          .concat(draggedFolder)
-                          .concat(newOrder.slice(onDropIdx, onDragIdx))
-                          .concat(newOrder.slice(onDragIdx + 1))
-                      )
-                    : setNewOrder(
-                        newOrder
-                          .slice(0, onDragIdx)
-                          .concat(newOrder.slice(onDragIdx + 1, onDropIdx))
-                          .concat(draggedFolder)
-                          .concat(newOrder.slice(onDropIdx))
-                      );
+                    onDragIdx > onDropIdx
+                      ? setNewOrder(
+                          newOrder
+                            .slice(0, onDropIdx)
+                            .concat(draggedFolder)
+                            .concat(newOrder.slice(onDropIdx, onDragIdx))
+                            .concat(newOrder.slice(onDragIdx + 1))
+                        )
+                      : setNewOrder(
+                          newOrder
+                            .slice(0, onDragIdx)
+                            .concat(newOrder.slice(onDragIdx + 1, onDropIdx))
+                            .concat(draggedFolder)
+                            .concat(newOrder.slice(onDropIdx))
+                        );
+                    }
                 }
               } else if (ev.target.className === "orderFile") {
                 // Handling of files reorders
