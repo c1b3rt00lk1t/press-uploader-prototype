@@ -18,6 +18,8 @@ const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
   return (
     <li
             className="orderFile"
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
             draggable={draggableFiles}
             onDragStart={(ev) => {
               ev.stopPropagation();
@@ -32,9 +34,9 @@ const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
                   : "black",
               textOverflow: "ellipsis",
               overflow: "hidden",
-              whiteSpace: "nowrap",
             }}
           >
+            {hover && <span >Edit</span>}{" "}
             {srcFilesObj &&
               srcFilesObj[file.id] !== folder.id &&
               (srcFilesObj[file.id] ? (
@@ -45,6 +47,8 @@ const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
                 <span style={tagStyle}>not found </span>
               ))}{" "}
             {file.id}
+
+            
           </li>
   )
 }
