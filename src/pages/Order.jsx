@@ -110,13 +110,18 @@ const Order = () => {
       </button>
 
       <div className="horizontal">
-        <div className="horizontal">
-          <ul className="orderContentList" style={{ width: "25vw" }}>
-            {folders.map((folder) => (
-              <Folder key={folder.id} folder={folder} draggableFiles={true} />
-            ))}
-          </ul>
+        <div>
+        <h3 style={{marginLeft: "15px"}}>Source folders:</h3>
+          <div className="horizontal">
+            <ul className="orderContentList" style={{ width: "25vw" }}>
+              {folders.map((folder) => (
+                <Folder key={folder.id} folder={folder} draggableFiles={true} />
+              ))}
+            </ul>
+          </div>
         </div>
+        <div>
+        <h3 style={{marginLeft: "15px"}}>Order:</h3>
         <div className="horizontal">
           <ul
             className="orderContentList"
@@ -267,6 +272,7 @@ const Order = () => {
               <Folder key={folder.id} folder={folder} draggableFiles={true} srcFilesObj={srcFilesObj}/>
             ))}
           </ul>
+        </div>
         </div>
       </div>
     </>
