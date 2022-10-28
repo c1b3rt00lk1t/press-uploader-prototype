@@ -33,9 +33,13 @@ const Folder = ({ folder, draggableFiles, srcFilesObj }) => {
             }}
           >
             {srcFilesObj && srcFilesObj[file.id] !== folder.id && (
+              srcFilesObj[file.id] ?
               <span style={tagStyle}>
                 check: {srcFilesObj && srcFilesObj[file.id]}{" "}
-              </span>
+              </span> : 
+              <span style={tagStyle}>
+               not found{" "}
+            </span>
             )}{" "}
             {file.id}
           </li>
