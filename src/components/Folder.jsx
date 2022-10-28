@@ -24,7 +24,7 @@ const Folder = ({
         ev.dataTransfer.setData("id", folder.id);
       }}
     >
-      {hover && folder.folder !== "Add folder..." && <Edit handleDelete={handleDeleteFolder} editId={folder.id}/>}
+      {hover && folder.folder !== "Drag a folder and drop it here..." && <Edit handleDelete={handleDeleteFolder} editId={folder.id}/>}
       {folder.folder}
       <ul>
         {folder.files.map((file) => (

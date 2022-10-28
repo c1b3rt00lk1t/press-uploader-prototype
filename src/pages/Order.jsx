@@ -7,7 +7,7 @@ import { FiDownloadCloud, FiUpload } from "react-icons/fi";
 const Order = () => {
   // state for the new order
   const [newOrder, setNewOrder] = useState([
-    { folder: "Add folder...", files: [], id: "Add folder..." },
+    { folder: "Drag a folder and drop it here...", files: [], id: "Add folder..." },
   ]);
 
   // pdffiles and order file content are retrieved from context
@@ -82,7 +82,7 @@ const Order = () => {
     if (target.length) {
       setNewOrder([
         ...target,
-        { folder: "Add folder...", files: [], id: "Add folder..." },
+        { folder: "Drag a folder and drop it here...", files: [], id: "Add folder..." },
       ]);
     } else {
       window.alert("Missing order file or basic checks not done.");
