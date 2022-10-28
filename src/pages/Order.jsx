@@ -10,8 +10,11 @@ const Order = () => {
   const [newOrder, setNewOrder] = useState([{folder: 'Add folder...', files:[], id: 'Add folder...'}]);
 
   const {
-    pdfFiles, relativePath
+    pdfFiles, relativePath, orderFileContent
   } = useContext(PressUploaderContext);
+
+
+  console.log(orderFileContent)
 
   const files = pdfFiles.map((file) => ({
     file: file,
@@ -44,10 +47,15 @@ const Order = () => {
     // This last filter make the folder block disappear once it is dropped to the new order.
     .filter(folder => !newOrder.map(a => a.id).includes(folder.id));
 
-
+console.log(folders)
 
   return (
     <>
+      <button onClick={() => setNewOrder([{folder: 'Folder uploaded', files:[], id: 'Folder uploaded'}])}>
+        Upload order
+        <FiDownloadCloud style={{color: "black", marginLeft:"5px"}}/>
+
+      </button>
       <button onClick={() => {console.log(newOrder)}}>                
                 <a style={{color: "black"}}
               href={`data:text/json;charset=utf-8,${encodeURIComponent(
