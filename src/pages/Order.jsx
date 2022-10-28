@@ -35,8 +35,6 @@ const Order = () => {
   .filter(item => !newOrder.flatMap((folder) => folder.files.map(file => file.id)).includes(item.id));
   ;
 
-  console.log(newOrder.flatMap((folder) => folder.files.map(file => file.id)));
-
   const folders = files
     .sort((a, b) => (a.folder > b.folder ? 1 : -1))
     .reduce((acc, b) => {
@@ -106,7 +104,7 @@ const Order = () => {
         <div className="horizontal">
           <ul className="orderContentList" style={{ width: "25vw" }}>
             {folders.map((folder) => (
-              <Folder key={folder.id} folder={folder} draggableFiles={false} />
+              <Folder key={folder.id} folder={folder} draggableFiles={true} />
             ))}
           </ul>
         </div>
@@ -165,36 +163,65 @@ const Order = () => {
                       );
                 }
               } else if (ev.target.className === "orderFile") {
+                console.log(onDragId)
                 // Handling of files reorders inside the same folder block
                 const folderOfDraggedFile = newOrder.filter((folder) =>
                   folder.files.map((file) => file.id).includes(onDragId)
                 );
+
                 const folderOfDroppedFile = newOrder.filter((folder) =>
                   folder.files.map((file) => file.id).includes(onDropId)
                 );
-                if (folderOfDraggedFile[0].id === folderOfDroppedFile[0].id) {
-                  const folderOfDraggedFileIdx = newOrder.findIndex(
-                    (folder) => folder.id === folderOfDraggedFile[0].id
+
+                if (!folderOfDraggedFile.length){
+                  const folderOfDroppedFileIdx = newOrder.findIndex(
+                    (folder) => folder.id === folderOfDroppedFile[0].id
+                  );
+                  const dropFileRelIdx = folderOfDroppedFile[0].files.findIndex(
+                    (file) => file.id === onDropId
+                  );
+
+
+
+
+                  const newOrderCopy = [...newOrder];
+                  newOrderCopy[folderOfDroppedFileIdx].files.splice(
+                    dropFileRelIdx,
+                    0,
+                    // draggedFileRel
+                    {file: null, id: onDragId}
+                  );
+                  
+
+                  setNewOrder(newOrderCopy);
+
+
+
+                } else if (folderOfDraggedFile[0].id === folderOfDroppedFile[0].id) {
+                 // Checks that the source and target folder are the same in the new order side
+                 const folderOfDroppedFileIdx = newOrder.findIndex(
+                    (folder) => folder.id === folderOfDroppedFile[0].id
                   );
                   const draggedFileRelIdx =
-                    folderOfDraggedFile[0].files.findIndex(
+                      folderOfDroppedFile[0].files.findIndex(
                       (file) => file.id === onDragId
                     );
-                  const draggedFileRel = folderOfDraggedFile[0].files.filter(
+                  const draggedFileRel = folderOfDroppedFile[0].files.filter(
                     (file) => file.id === onDragId
                   )[0];
+                  console.log(draggedFileRel)
 
-                  const dropFileRelIdx = folderOfDraggedFile[0].files.findIndex(
+                  const dropFileRelIdx = folderOfDroppedFile[0].files.findIndex(
                     (file) => file.id === onDropId
                   );
 
                   const newOrderCopy = [...newOrder];
-                  newOrderCopy[folderOfDraggedFileIdx].files.splice(
+                  newOrderCopy[folderOfDroppedFileIdx].files.splice(
                     dropFileRelIdx,
                     0,
                     draggedFileRel
                   );
-                  newOrderCopy[folderOfDraggedFileIdx].files.splice(
+                  newOrderCopy[folderOfDroppedFileIdx].files.splice(
                     draggedFileRelIdx > dropFileRelIdx
                       ? draggedFileRelIdx + 1
                       : draggedFileRelIdx,
@@ -202,7 +229,7 @@ const Order = () => {
                   );
 
                   setNewOrder(newOrderCopy);
-                }
+                } 
               }
             }}
           >
