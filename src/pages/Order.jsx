@@ -217,7 +217,7 @@ const Order = () => {
                           );
                     }
                   }
-                } else if (ev.target.className === "orderFile") {
+                } else if (ev.target.className === "orderFile" && !isNaN(onDragId[0])) {
                   // Handling of files reorders
                   const folderOfDraggedFile = newOrder.filter((folder) =>
                     folder.files.map((file) => file.id).includes(onDragId)
