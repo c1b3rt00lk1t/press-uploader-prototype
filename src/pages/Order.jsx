@@ -163,7 +163,6 @@ const Order = () => {
                       );
                 }
               } else if (ev.target.className === "orderFile") {
-                console.log(onDragId)
                 // Handling of files reorders inside the same folder block
                 const folderOfDraggedFile = newOrder.filter((folder) =>
                   folder.files.map((file) => file.id).includes(onDragId)
@@ -209,7 +208,6 @@ const Order = () => {
                   const draggedFileRel = folderOfDroppedFile[0].files.filter(
                     (file) => file.id === onDragId
                   )[0];
-                  console.log(draggedFileRel)
 
                   const dropFileRelIdx = folderOfDroppedFile[0].files.findIndex(
                     (file) => file.id === onDropId
