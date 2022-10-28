@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Edit from './Edit';
 
-const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
+const File = ({draggableFiles,folder ,file, srcFilesObj, hoverOn}) => {
     const tagStyle = {
         fontSize: "10px",
         border: "solid",
@@ -19,7 +19,7 @@ const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
   return (
     <li
             className="orderFile"
-            onMouseEnter={() => setHover(true)}
+            onMouseEnter={() => setHover(true && hoverOn)}
             onMouseLeave={() => setHover(false)}
             draggable={draggableFiles}
             onDragStart={(ev) => {

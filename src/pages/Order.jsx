@@ -269,7 +269,7 @@ const Order = () => {
             }}
           >
             {newOrder.map((folder) => (
-              <Folder key={folder.id} folder={folder} draggableFiles={true} srcFilesObj={srcFilesObj}/>
+              <Folder key={folder.id} folder={folder} draggableFiles={true} srcFilesObj={srcFilesObj} hoverOn={true}/>
             ))}
           </ul>
         </div>
