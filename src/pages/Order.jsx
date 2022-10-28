@@ -163,7 +163,7 @@ const Order = () => {
                       );
                 }
               } else if (ev.target.className === "orderFile") {
-                // Handling of files reorders inside the same folder block
+                // Handling of files reorders
                 const folderOfDraggedFile = newOrder.filter((folder) =>
                   folder.files.map((file) => file.id).includes(onDragId)
                 );
@@ -171,41 +171,61 @@ const Order = () => {
                 const folderOfDroppedFile = newOrder.filter((folder) =>
                   folder.files.map((file) => file.id).includes(onDropId)
                 );
+                const folderOfDroppedFileIdx = newOrder.findIndex(
+                  (folder) => folder.id === folderOfDroppedFile[0].id
+                );
 
                 if (!folderOfDraggedFile.length){
-                  const folderOfDroppedFileIdx = newOrder.findIndex(
-                    (folder) => folder.id === folderOfDroppedFile[0].id
-                  );
+                  
                   const dropFileRelIdx = folderOfDroppedFile[0].files.findIndex(
                     (file) => file.id === onDropId
                   );
-
-
-
 
                   const newOrderCopy = [...newOrder];
                   newOrderCopy[folderOfDroppedFileIdx].files.splice(
                     dropFileRelIdx,
                     0,
-                    // draggedFileRel
                     {file: null, id: onDragId}
                   );
                   
+                  setNewOrder(newOrderCopy);
+
+                } else if (folderOfDraggedFile[0].id !== folderOfDroppedFile[0].id) { 
+                // Handling of files reorders across different folder blocks
+                  const folderOfDraggedFileIdx = newOrder.findIndex(
+                    (folder) => folder.id === folderOfDraggedFile[0].id
+                  );
+                  const draggedFileRelIdx =
+                      folderOfDraggedFile[0].files.findIndex(
+                      (file) => file.id === onDragId
+                    );
+                  const draggedFileRel = folderOfDraggedFile[0].files.filter(
+                    (file) => file.id === onDragId
+                  )[0];
+                  const dropFileRelIdx = folderOfDroppedFile[0].files.findIndex(
+                    (file) => file.id === onDropId
+                  );
+                  const newOrderCopy = [...newOrder];
+                  newOrderCopy[folderOfDroppedFileIdx].files.splice(
+                    dropFileRelIdx,
+                    0,
+                    draggedFileRel
+                  );
+                  newOrderCopy[folderOfDraggedFileIdx].files.splice(
+                    draggedFileRelIdx,
+                    1
+                  );
 
                   setNewOrder(newOrderCopy);
 
 
-
                 } else if (folderOfDraggedFile[0].id === folderOfDroppedFile[0].id) {
-                 // Checks that the source and target folder are the same in the new order side
-                 const folderOfDroppedFileIdx = newOrder.findIndex(
-                    (folder) => folder.id === folderOfDroppedFile[0].id
-                  );
+                 // Handling of files reorders inside the same folder block
                   const draggedFileRelIdx =
-                      folderOfDroppedFile[0].files.findIndex(
+                      folderOfDraggedFile[0].files.findIndex(
                       (file) => file.id === onDragId
                     );
-                  const draggedFileRel = folderOfDroppedFile[0].files.filter(
+                  const draggedFileRel = folderOfDraggedFile[0].files.filter(
                     (file) => file.id === onDragId
                   )[0];
 
