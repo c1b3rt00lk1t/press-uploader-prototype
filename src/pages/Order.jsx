@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import PressUploaderContext from "../contexts/PressUploaderContext";
 
 import Folder from "../components/Folder";
-import {FiDownloadCloud} from 'react-icons/fi';
+import {FiDownloadCloud, FiUpload} from 'react-icons/fi';
 
 
 const Order = () => {
@@ -53,7 +53,7 @@ console.log(folders)
     <>
       <button onClick={() => setNewOrder([{folder: 'Folder uploaded', files:[], id: 'Folder uploaded'}])}>
         Upload order
-        <FiDownloadCloud style={{color: "black", marginLeft:"5px"}}/>
+        <FiUpload style={{color: "black", marginLeft:"5px"}}/>
 
       </button>
       <button onClick={() => {console.log(newOrder)}}>                
