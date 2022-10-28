@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Edit from './Edit';
 
 const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
     const tagStyle = {
@@ -36,7 +37,7 @@ const File = ({draggableFiles,folder ,file, srcFilesObj}) => {
               overflow: "hidden",
             }}
           >
-            {hover && <span >Edit</span>}{" "}
+            {hover && <Edit />}{" "}
             {srcFilesObj &&
               srcFilesObj[file.id] !== folder.id &&
               (srcFilesObj[file.id] ? (
