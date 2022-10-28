@@ -1,7 +1,7 @@
 import React from "react";
 import File from "./File";
 
-const Folder = ({ folder, draggableFiles, srcFilesObj, hoverOn }) => {
+const Folder = ({ folder, draggableFiles, srcFilesObj, hoverOn, handleDeleteFile }) => {
   
 
   return (
@@ -17,7 +17,7 @@ const Folder = ({ folder, draggableFiles, srcFilesObj, hoverOn }) => {
       {folder.folder}
       <ul>
         {folder.files.map((file) => (
-          <File draggableFiles={draggableFiles} folder={folder} file={file} srcFilesObj={srcFilesObj} hoverOn={hoverOn}/>
+          <File draggableFiles={draggableFiles} folder={folder} file={file} srcFilesObj={srcFilesObj} hoverOn={hoverOn} handleDeleteFile={handleDeleteFile}/>
         ))}
       </ul>
     </li>

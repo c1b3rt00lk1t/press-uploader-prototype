@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Edit from './Edit';
 
-const File = ({draggableFiles,folder ,file, srcFilesObj, hoverOn}) => {
+const File = ({draggableFiles,folder ,file, srcFilesObj, hoverOn, handleDeleteFile}) => {
     const tagStyle = {
         fontSize: "10px",
         border: "solid",
@@ -37,7 +37,7 @@ const File = ({draggableFiles,folder ,file, srcFilesObj, hoverOn}) => {
               overflow: "hidden",
             }}
           >
-            {hover && <Edit />}{" "}
+            {hover && <Edit handleDeleteFile={handleDeleteFile} fileId={file.id}/>}{" "}
             {srcFilesObj &&
               srcFilesObj[file.id] !== folder.id &&
               (srcFilesObj[file.id] ? (
