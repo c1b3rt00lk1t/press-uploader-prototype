@@ -1,6 +1,8 @@
 import React from "react";
 
-import { FiTrash2, FiEdit2 } from "react-icons/fi";
+import { FiTrash2, 
+    // FiEdit2 
+} from "react-icons/fi";
 
 const Edit = ({handleDeleteFile, fileId}) => {
   const editStyle = {
