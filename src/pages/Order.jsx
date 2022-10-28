@@ -5,13 +5,16 @@ import Folder from "../components/Folder";
 import { FiDownloadCloud, FiUpload } from "react-icons/fi";
 
 const Order = () => {
+  // state for the new order
   const [newOrder, setNewOrder] = useState([
     { folder: "Add folder...", files: [], id: "Add folder..." },
   ]);
 
+  // pdffiles and order file content are retrieved from context
   const { pdfFiles, relativePath, orderFileContent } =
     useContext(PressUploaderContext);
 
+  // the order file content is transformed to the folders variable (see below) format
   const target = orderFileContent.reduce(
     (acc, b) => {
       if (isNaN(b[0])) {
@@ -25,6 +28,7 @@ const Order = () => {
     { result: [], index: -1 }
   ).result;
 
+  // the pdf files info is simmplified
   const files = pdfFiles.map((file) => ({
     file: file,
     id: file.name.replace(/.pdf/g, ""),
@@ -32,9 +36,11 @@ const Order = () => {
       .replace(`${relativePath}/`, "")
       .replace(`/${file.name}`, ""),
   }))
+  // the files that are already in the new order are filtered out
   .filter(item => !newOrder.flatMap((folder) => folder.files.map(file => file.id)).includes(item.id));
   ;
 
+  // the pdf files info is restructured so that are grouped by folder
   const folders = files
     .sort((a, b) => (a.folder > b.folder ? 1 : -1))
     .reduce((acc, b) => {
@@ -59,9 +65,8 @@ const Order = () => {
         });
       }
     }, [])
-    // This last filter make the folder block disappear once it is dropped to the new order.
-    // .filter((folder) => !newOrder.map((a) => a.id).includes(folder.id));
 
+  // in case there is an order file content, it can be loaded, overwriting the new order content
   const handleUploadOrderClick = () => {
     if (target.length) {
       setNewOrder([
