@@ -1,6 +1,8 @@
 import React from "react";
 
-const Folder = ({ folder, draggableFiles }) => {
+const Folder = ({ folder, draggableFiles, srcFilesObj }) => {
+  const tagStyle = { fontSize: "10px", border: "solid", borderRadius: "5px", borderWidth: "1px", marginRight: "5px", paddingLeft: "2px", textAlign: "center", lineHeight:"20px", height: "20px"};
+
   return (
     <li
       className="orderFolder"
@@ -23,7 +25,18 @@ const Folder = ({ folder, draggableFiles }) => {
             }}
             key={file.id}
             id={file.id}
+            style={{
+              color:
+                srcFilesObj && srcFilesObj[file.id] !== folder.id
+                  ? "rgb(220, 0, 0)"
+                  : "black",
+            }}
           >
+            {srcFilesObj && srcFilesObj[file.id] !== folder.id && (
+              <span style={tagStyle}>
+                check: {srcFilesObj && srcFilesObj[file.id]}{" "}
+              </span>
+            )}{" "}
             {file.id}
           </li>
         ))}

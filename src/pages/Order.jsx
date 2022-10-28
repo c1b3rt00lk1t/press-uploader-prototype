@@ -29,16 +29,20 @@ const Order = () => {
   ).result;
 
   // the pdf files info is simmplified
-  const files = pdfFiles.map((file) => ({
+  const srcFiles = pdfFiles.map((file) => ({
     file: file,
     id: file.name.replace(/.pdf/g, ""),
     folder: file.webkitRelativePath
       .replace(`${relativePath}/`, "")
       .replace(`/${file.name}`, ""),
-  }))
-  // the files that are already in the new order are filtered out
+  }));
+
+  // Hashtable (object) with ids and folders
+  const srcFilesObj = srcFiles.reduce((acc,b) => ({...acc,[b.id]:b.folder}),{});
+
+// the files that are already in the new order are filtered out
+  const files = srcFiles
   .filter(item => !newOrder.flatMap((folder) => folder.files.map(file => file.id)).includes(item.id));
-  ;
 
   // the pdf files info is restructured so that are grouped by folder
   const folders = files
@@ -257,7 +261,7 @@ const Order = () => {
             }}
           >
             {newOrder.map((folder) => (
-              <Folder key={folder.id} folder={folder} draggableFiles={true} />
+              <Folder key={folder.id} folder={folder} draggableFiles={true} srcFilesObj={srcFilesObj}/>
             ))}
           </ul>
         </div>
