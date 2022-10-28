@@ -4,7 +4,7 @@ import { FiTrash2,
     // FiEdit2 
 } from "react-icons/fi";
 
-const Edit = ({handleDeleteFile, fileId}) => {
+const Edit = ({handleDelete, editId}) => {
   const editStyle = {
     fontSize: "12px",
     border: "solid",
@@ -21,7 +21,7 @@ const Edit = ({handleDeleteFile, fileId}) => {
   return (
     <span style={editStyle}>
       {/* <FiEdit2 />  */}
-      <FiTrash2 onClick={() => handleDeleteFile(fileId) }/>
+      <FiTrash2 onClick={() => handleDelete(editId) }/>
     </span>
   );
 };

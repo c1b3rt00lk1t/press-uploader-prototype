@@ -37,7 +37,7 @@ const File = ({draggableFiles,folder ,file, srcFilesObj, hoverOn, handleDeleteFi
               overflow: "hidden",
             }}
           >
-            {hover && <Edit handleDeleteFile={handleDeleteFile} fileId={file.id}/>}{" "}
+            {hover && <Edit handleDelete={handleDeleteFile} editId={file.id}/>}{" "}
             {srcFilesObj &&
               srcFilesObj[file.id] !== folder.id &&
               (srcFilesObj[file.id] ? (

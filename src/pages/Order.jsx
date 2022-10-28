@@ -108,6 +108,18 @@ const Order = () => {
     setNewOrder(newOrderCopy);
   };
 
+  const handleDeleteFolder = (deleteId) => {
+    const deletedFolderIdx = newOrder.findIndex(
+      (folder) => folder.id === deleteId
+    );
+
+    const newOrderCopy = [...newOrder];
+    newOrderCopy.splice(deletedFolderIdx, 1);
+
+    setNewOrder(newOrderCopy);
+
+  }
+
   return (
     <>
       <button onClick={handleUploadOrderClick}>
@@ -305,6 +317,7 @@ const Order = () => {
                   srcFilesObj={srcFilesObj}
                   hoverOn={true}
                   handleDeleteFile={handleDeleteFile}
+                  handleDeleteFolder={handleDeleteFolder}
                 />
               ))}
             </ul>
