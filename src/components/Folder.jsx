@@ -24,7 +24,7 @@ const Folder = ({ folder, draggableFiles }) => {
             key={file.id}
             id={file.id}
           >
-            {file.file.name.replace(/.pdf/g, "")}
+            {file.id}
           </li>
         ))}
       </ul>
