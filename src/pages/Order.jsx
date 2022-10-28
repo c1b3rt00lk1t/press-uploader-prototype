@@ -25,15 +25,17 @@ const Order = () => {
     { result: [], index: -1 }
   ).result;
 
-  console.log(orderFileContent);
-
   const files = pdfFiles.map((file) => ({
     file: file,
-    id: file.name,
+    id: file.name.replace(/.pdf/g, ""),
     folder: file.webkitRelativePath
       .replace(`${relativePath}/`, "")
       .replace(`/${file.name}`, ""),
-  }));
+  }))
+  .filter(item => !newOrder.flatMap((folder) => folder.files.map(file => file.id)).includes(item.id));
+  ;
+
+  console.log(newOrder.flatMap((folder) => folder.files.map(file => file.id)));
 
   const folders = files
     .sort((a, b) => (a.folder > b.folder ? 1 : -1))
@@ -60,7 +62,7 @@ const Order = () => {
       }
     }, [])
     // This last filter make the folder block disappear once it is dropped to the new order.
-    .filter((folder) => !newOrder.map((a) => a.id).includes(folder.id));
+    // .filter((folder) => !newOrder.map((a) => a.id).includes(folder.id));
 
   const handleUploadOrderClick = () => {
     if (target.length) {
@@ -88,7 +90,7 @@ const Order = () => {
               .map(
                 (a) =>
                   `${a.folder}\r\n${a.files
-                    .map((file) => file.id.replace(/.pdf/g, ""))
+                    .map((file) => file.id)
                     .join("\r\n")}`
               )
               .join("\r\n\r\n")
