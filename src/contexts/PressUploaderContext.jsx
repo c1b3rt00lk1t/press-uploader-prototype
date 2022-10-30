@@ -154,9 +154,19 @@ export const PressUploaderContextProvider = ({ children }) => {
   const handleSelectFolder = (ev) => {
     const filesArray = [...ev.target.files];
     const relativePathString = filesArray[0].webkitRelativePath;
+    
     const pdfFilesArray = filesArray.filter(
       (file) => file.type === "application/pdf"
     );
+
+    const pdfsOutsideSubFolders = pdfFilesArray.reduce((acc, b) => acc || b.webkitRelativePath.split('/').length < 3, false);
+    if(pdfsOutsideSubFolders){
+      alert('This does not look like an appropriate folder...\nSelect a correct one.');
+      setSelectorSelectCard(emptyCard);
+      return;
+    }
+
+
     setFiles(filesArray);
     setPdfFiles(pdfFilesArray);
 
