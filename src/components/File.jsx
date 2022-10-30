@@ -26,7 +26,7 @@ const File = ({draggableFiles,folder ,file, srcFilesObj, hoverOn, handleDeleteFi
               ev.stopPropagation();
               ev.dataTransfer.setData("id", file.id);
             }}
-            key={file.id}
+
             id={file.id}
             style={{
               color:

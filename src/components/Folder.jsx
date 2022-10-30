@@ -31,6 +31,7 @@ const Folder = ({
           <File
             draggableFiles={draggableFiles}
             folder={folder}
+            key={file.id}
             file={file}
             srcFilesObj={srcFilesObj}
             hoverOn={hoverOn}
