@@ -53,7 +53,7 @@ const Order = () => {
 
   // the pdf files info is restructured so that are grouped by folder
   const folders = files
-    .sort((a, b) => (a.folder > b.folder ? 1 : -1))
+    .sort((a, b) => (a.folder < b.folder ? -1 : 1))
     .reduce((acc, b) => {
       if (acc.length) {
         if (acc[acc.length - 1].folder !== b.folder) {
