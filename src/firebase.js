@@ -115,4 +115,5 @@ const getDataFromDB = (path) => (handleDataFromDB) => {
 
 export const getDataFromDBSession =  getDataFromDB("/sessions/");
 export const getDataFromDBDictionary =  getDataFromDB("/dictionary/");
+export const getDataFromDBSessionList =  getDataFromDB("/sys/sessions/");
 
