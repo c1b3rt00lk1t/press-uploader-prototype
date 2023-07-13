@@ -91,6 +91,7 @@ const writeData =  (path) => async (data,subpath) => {
 };
 export const writeDataSession = writeData("/sessions/");
 export const writeDataDictionary = writeData("/dictionary/");
+export const writeDataSysSession = writeData("/sys/sessions/");
 
 const updateData = (path) => async (data, subpath) =>{
   try {
