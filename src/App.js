@@ -12,6 +12,7 @@ import Server from "./pages/Server";
 import LogIn from "./pages/LogIn";
 import DictionaryPage from "./pages/DictionaryPage";
 import { PressUploaderContextProvider } from "./contexts/PressUploaderContext";
+import Checkout from "./pages/Checkout";
 // import Dictionary from "./components/Dictionary";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/tagger" element={<Tagger />} />
             <Route path="/uploader" element={<Uploader />} />
             <Route path="/merger" element={<Merger />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </Router>
       </PressUploaderContextProvider>
