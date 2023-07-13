@@ -32,6 +32,9 @@ const NavBar = () => {
       <Link disabled={!authenticated && enableMerger} to="/merger">
         Merger
       </Link>
+      <Link disabled={!authenticated} to="/checkout">
+        Checkout
+      </Link>
       <Link disabled={true} to="/">
         Settings
       </Link>
