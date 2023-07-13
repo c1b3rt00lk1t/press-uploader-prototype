@@ -154,18 +154,22 @@ export const PressUploaderContextProvider = ({ children }) => {
   const handleSelectFolder = (ev) => {
     const filesArray = [...ev.target.files];
     const relativePathString = filesArray[0].webkitRelativePath;
-    
+
     const pdfFilesArray = filesArray.filter(
       (file) => file.type === "application/pdf"
     );
 
-    const pdfsOutsideSubFolders = pdfFilesArray.reduce((acc, b) => acc || b.webkitRelativePath.split('/').length < 3, false);
-    if(pdfsOutsideSubFolders){
-      alert('This does not look like an appropriate folder...\nSelect a correct one.');
+    const pdfsOutsideSubFolders = pdfFilesArray.reduce(
+      (acc, b) => acc || b.webkitRelativePath.split("/").length < 3,
+      false
+    );
+    if (pdfsOutsideSubFolders) {
+      alert(
+        "This does not look like an appropriate folder...\nSelect a correct one."
+      );
       setSelectorSelectCard(emptyCard);
       return;
     }
-
 
     setFiles(filesArray);
     setPdfFiles(pdfFilesArray);
@@ -197,7 +201,7 @@ export const PressUploaderContextProvider = ({ children }) => {
   };
 
   const basicFolderChecks = () => {
-    console.log('basic checks');
+    console.log("basic checks");
     readOrderFile(files);
     checkFilesSizes(pdfFiles);
   };
@@ -224,18 +228,18 @@ export const PressUploaderContextProvider = ({ children }) => {
       const fileSelection = new Promise((resolve) => {
         fr.onload = () => resolve(fr.result);
         fr.readAsText(orderFile[0], "UTF-8");
-        document.getElementById("file-selector").value = '';
+        document.getElementById("file-selector").value = "";
       });
 
       setOrderFileContent(
         [await fileSelection][0].split("\r\n").filter((a) => a !== "")
       );
-      
+
       const content = [await fileSelection][0]
         .split("\r\n")
         .filter((a) => a !== "");
 
-        const checkPfdsInOrder = pdfFiles
+      const checkPfdsInOrder = pdfFiles
         .map((a) => a.name.replace(/.pdf/g, ""))
         .filter(
           (name) =>
@@ -244,10 +248,12 @@ export const PressUploaderContextProvider = ({ children }) => {
         .map((a) => "=> " + a);
 
       if (checkPfdsInOrder.length) {
-        msgOrderContent.concat(msgOrderContent = [
-          `\nThe following pdfs are not found in the ORDER:`,
-          ...checkPfdsInOrder,
-        ]);
+        msgOrderContent.concat(
+          (msgOrderContent = [
+            `\nThe following pdfs are not found in the ORDER:`,
+            ...checkPfdsInOrder,
+          ])
+        );
         console.log("There are pdfs that are not found in the order.");
       }
 
@@ -265,9 +271,11 @@ export const PressUploaderContextProvider = ({ children }) => {
       if (checkOrderInPdfs.length) {
         msgOrderContent = msgOrderContent.concat([
           `\nThe following order entries are not found in the FOLDERS:`,
-          ...checkOrderInPdfs
+          ...checkOrderInPdfs,
         ]);
-        console.log("There are order entries that are not found in the folders.");
+        console.log(
+          "There are order entries that are not found in the folders."
+        );
       }
 
       if (checkOrderInPdfs.length || checkPfdsInOrder.length) {
@@ -277,8 +285,6 @@ export const PressUploaderContextProvider = ({ children }) => {
 
       // const checkWierdCharacters = content.filter( name => name !== name.replace(/[“”‘’&\\#+()$~%'":*?<>{}]/g,'_'))
       // console.log(checkWierdCharacters)
-
-
 
       const name = orderFile[0].name;
       setSession([...name].slice(0, 8).join(""));
@@ -833,6 +839,20 @@ export const PressUploaderContextProvider = ({ children }) => {
     writeDataSession(input, session);
   };
 
+  /* Logic for the Checkout */
+  const [checkoutSession, setCheckoutSession] = useState("");
+  const [checkoutSessionURL, setCheckoutSessionURL] = useState("");
+
+  const handleChangeCheckoutSession = (e) => setCheckoutSession(e.target.value);
+
+  const handleChangeCheckoutSessionURL = (e) =>
+    setCheckoutSessionURL(e.target.value);
+
+  const resetCheckout = () => {
+    setCheckoutSession("");
+    setCheckoutSessionURL("");
+  };
+
   return (
     <PressUploaderContext.Provider
       value={{
@@ -906,6 +926,13 @@ export const PressUploaderContextProvider = ({ children }) => {
         mergerBasicChecksCard,
         mergerMergeCard,
         mergerSendToServer,
+
+        //// CHECKOUT
+        checkoutSession,
+        checkoutSessionURL,
+        handleChangeCheckoutSession,
+        handleChangeCheckoutSessionURL,
+        resetCheckout,
 
         //// NAVBAR
         readyToTagger,
