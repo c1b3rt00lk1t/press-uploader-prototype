@@ -1,8 +1,14 @@
 import React from 'react'
+import Card from "../shared/Card";
+import CardDisplay from "../shared/CardDisplay";
 
 const Checkout = () => {
   return (
-    <div>Checkout</div>
+    <CardDisplay>
+        <Card status={true} msg={['Hello']}>
+          <button onClick={() => {console.log('bye')}}>Checkout</button>
+        </Card>
+    </CardDisplay>
   )
 }
 
