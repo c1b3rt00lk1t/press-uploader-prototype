@@ -6,6 +6,8 @@ import {
   getDataFromDBDictionary,
   writeDataDictionary,
   updateDataDictionary,
+  getDataFromDBSessionList,
+  writeDataSysSession,
 } from "../firebase";
 import { uploadFile, getFileURL } from "../firebase";
 import { uploadFileToBackUp, getFileURLFromBackUp } from "../firebase2";
@@ -133,6 +135,8 @@ export const PressUploaderContextProvider = ({ children }) => {
   const [mergerBasicChecksCard, setMergerBasicChecksCard] = useState(emptyCard);
   const [mergerMergeCard, setMergerMergeCard] = useState(emptyCard);
   const [mergerSendToServer, setMergerSendToServer] = useState(emptyCard);
+
+  const [checkoutCard, setCheckoutCard] = useState(emptyCard);
 
   /* States for controlling the enabling of next components */
   const [readyToOrder, setReadyToOrder] = useState(false);
@@ -842,6 +846,8 @@ export const PressUploaderContextProvider = ({ children }) => {
   /* Logic for the Checkout */
   const [checkoutSession, setCheckoutSession] = useState("");
   const [checkoutSessionURL, setCheckoutSessionURL] = useState("");
+  const [checkoutSessionList, setCheckoutSessionList] = useState();
+  
 
   const handleChangeCheckoutSession = (e) => setCheckoutSession(e.target.value);
 
@@ -852,6 +858,22 @@ export const PressUploaderContextProvider = ({ children }) => {
     setCheckoutSession("");
     setCheckoutSessionURL("");
   };
+
+  
+   const handleGetSessionList = (data) => {
+    setCheckoutSessionList(data);
+  };
+
+  const handleClickCheckout = () => {
+    const updatedSessionList = {...checkoutSessionList,[checkoutSession]: checkoutSessionURL};
+    writeDataSysSession(updatedSessionList);
+    setCheckoutSessionList(updatedSessionList);
+    setCheckoutCard({status: undefined, msg: `${checkoutSession} checked out.`})
+    resetCheckout();
+  };
+
+
+
 
   return (
     <PressUploaderContext.Provider
@@ -932,7 +954,10 @@ export const PressUploaderContextProvider = ({ children }) => {
         checkoutSessionURL,
         handleChangeCheckoutSession,
         handleChangeCheckoutSessionURL,
-        resetCheckout,
+        getDataFromDBSessionList,
+        handleGetSessionList,
+        handleClickCheckout,
+        checkoutCard,
 
         //// NAVBAR
         readyToTagger,

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Card from "../shared/Card";
 import CardDisplay from "../shared/CardDisplay";
 import PressUploaderContext from "../contexts/PressUploaderContext";
@@ -9,12 +9,19 @@ const Checkout = () => {
     checkoutSessionURL,
     handleChangeCheckoutSession,
     handleChangeCheckoutSessionURL,
-    resetCheckout
+    getDataFromDBSessionList,
+    handleGetSessionList,
+    handleClickCheckout,
+    checkoutCard,
    } = useContext(PressUploaderContext);
+
+   useEffect(() => {
+    getDataFromDBSessionList(handleGetSessionList);
+   },[]);
 
   return (
     <CardDisplay>
-      <Card status={undefined} msg={[""]}>
+      <Card status={checkoutCard.status} msg={[checkoutCard.msg]}>
         <div
           style={{
             display: "flex",
@@ -37,10 +44,7 @@ const Checkout = () => {
           ></input>
         </div>
         <button
-          onClick={() => {
-            console.log("fake checkout", checkoutSession, checkoutSessionURL);
-            resetCheckout();
-          }}
+          onClick={handleClickCheckout}
         >
           Checkout
         </button>
