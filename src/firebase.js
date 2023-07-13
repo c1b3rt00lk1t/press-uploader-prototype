@@ -80,8 +80,8 @@ const writeData =  (path) => async (data,subpath) => {
   if(!subpath){
       subpath = ''
   }
-  console.log(path + subpath)
-  console.log(data)
+  // console.log(path + subpath)
+  // console.log(data)
   try {
     await set(refDb(database, path + subpath), data);
   } catch (error) {
