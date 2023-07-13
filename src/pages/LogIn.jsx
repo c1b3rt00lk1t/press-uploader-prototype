@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 const LogIn = () => {
   const { setAuthenticated } = useContext(PressUploaderContext);
 
-  const [inputUser, setInputUser] = useState();
-  const [inputPsswd, setInputPsswd] = useState();
+  const [inputUser, setInputUser] = useState("");
+  const [inputPsswd, setInputPsswd] = useState("");
   const [inputMsg, setInputMsg] = useState();
 
   const navigate = useNavigate();
