@@ -5,13 +5,13 @@ import { render, screen } from "@testing-library/react";
 import SearchBox from "./SearchBox";
 
 describe("Testing the Search box", () => {
-  test("Should render content", () => {
+  it("Should render content", () => {
     render(<SearchBox />);
     const element = screen.getByPlaceholderText(/Type a zone, sector or tag.../i);
     expect(element).toBeDefined();
   });
 
-  test("Should be an input text type", () => {
+  it("Should be an input text type", () => {
     render(<SearchBox />);
     const element = screen.getByRole('textbox');
     expect(element).toBeDefined();
