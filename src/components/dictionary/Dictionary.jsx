@@ -17,6 +17,8 @@ const Dictionary = ({
   taggedFiles,
   previous,
   handleGetPreviousTags,
+  handleSearchBoxFocus,
+  handleSearchBoxBlur
 }) => {
   const {
     dictionary,
@@ -137,7 +139,7 @@ const Dictionary = ({
 
   return (
     <>
-      <SearchBox />
+      <SearchBox handleSearchBoxFocus={handleSearchBoxFocus} handleSearchBoxBlur={handleSearchBoxBlur}/>
       <div 
       className={`dictionary-container-vertical`}>
         {embed && (

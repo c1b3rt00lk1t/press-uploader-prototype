@@ -226,8 +226,16 @@ const Tagger = () => {
   };
 
   /* Handling of the onKeyDown event */
+
+  // sets the state of the focus for the search box component
+  const [searchBoxfocus, setSearchBoxFocus] = useState(false);
+  const handleSearchBoxFocus = () => setSearchBoxFocus(true);
+  const handleSearchBoxBlur = () => setSearchBoxFocus(false);
+
   const handleKeyDown = (ev) => {
-    if (ev.key === "n" || ev.key === "N") {
+   // enables only the keyboard shortcuts if the focus is not in the search box component
+   if( !searchBoxfocus ) {
+    if (ev.key === "n" || ev.key === "N")  {
       handleTagsNext(ev);
     } else if (ev.key === "d" || ev.key === "D") {
       document.getElementById("doneBtn").click();
@@ -241,7 +249,12 @@ const Tagger = () => {
       document.getElementById("dict-prev").click();
     } else if (ev.key === "s" || ev.key === "S") {
       document.getElementById("sendBtn").click();
-    }
+    } else if (ev.key === "f" || ev.key === "F")  {
+      // allows to focus on the search box
+      ev.preventDefault();
+      document.querySelector("input").focus();
+    } 
+   }
 
   };
 
@@ -297,6 +310,8 @@ const Tagger = () => {
             taggedFiles={taggedFiles}
             previous={previous}
             handleGetPreviousTags={handleGetPreviousTags}
+            handleSearchBoxFocus={handleSearchBoxFocus}
+            handleSearchBoxBlur={handleSearchBoxBlur}
           />
           <TagsForm
             selectedFile={selectedFile}

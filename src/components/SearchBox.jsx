@@ -1,8 +1,8 @@
 import React from 'react'
 
-const SearchBox = () => {
+const SearchBox = ({handleSearchBoxFocus, handleSearchBoxBlur}) => {
   return (
-    <input placeholder="Type a zone, sector or tag..."></input>
+    <input onChange={(ev) => {console.log(ev.target.value)}} onFocus={handleSearchBoxFocus} onBlur={handleSearchBoxBlur} placeholder="Type a zone, sector or tag..."></input>
   )
 }
 

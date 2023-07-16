@@ -1,6 +1,7 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
+import userEvent from '@testing-library/user-event'
 
 import Tagger from "./Tagger";
 import PressUploaderContext from "../contexts/PressUploaderContext";
@@ -94,5 +95,47 @@ describe("Tests for the Tagger page", () => {
 
     expect(resetButton).toBeDefined();
   });
+  it("Should display the text that is written even if it is a keyboard shorcut, when the focus is in the search box", async () => {
+    render(
+      <PressUploaderContext.Provider value={{ taggedFiles, previous }}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Tagger />} />
+          </Routes>
+        </Router>
+      </PressUploaderContext.Provider>
+    );
 
+    const user = userEvent.setup();
+    // sends the focus to the search box
+    await user.keyboard('f');
+    // writes three keyboard shortcut letters
+    await user.keyboard('n');
+    await user.keyboard('s');
+    await user.keyboard('l');
+    const searchtext = screen.getByDisplayValue(/nsl/i);
+      expect(searchtext).toBeDefined();
+
+  });
+
+  it("Should not display the values in the searchbox if the focus is not in it", async () => {
+    render(
+      <PressUploaderContext.Provider value={{ taggedFiles, previous }}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Tagger />} />
+          </Routes>
+        </Router>
+      </PressUploaderContext.Provider>
+    );
+
+    const user = userEvent.setup();
+    await user.keyboard('g');
+    // it searches for the placeholder as no new text should have been added
+    const placeholder = screen.getByPlaceholderText(
+      /Type a zone, sector or tag.../i
+    );
+    expect(placeholder).toBeDefined();
+
+  })
 });
