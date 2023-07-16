@@ -21,7 +21,6 @@ const Dictionary = ({
   const {
     // handleUploadDictionary,
     // handleGetDictionaryFromDB,
-    // handleDictionary,
     dictionary,
   } = useContext(PressUploaderContext);
 
