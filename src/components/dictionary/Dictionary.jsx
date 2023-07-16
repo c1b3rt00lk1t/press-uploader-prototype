@@ -112,6 +112,20 @@ const Dictionary = ({
   );
   const handleUnfoldedTags = handleSelect(unfoldedTags, setUnfoldedTags, embed);
 
+  const handleClickResetDictionary = () => {
+    // resets the state of the dictionary component
+    setSelectedZones([]);
+    setSelectedSectors([]);
+    setSelectedTags([]);
+    // resets the TaggedFiles properties for the selected file
+    handleResetDictionary();
+
+    /* would reset to all sub-levels to be hidden*/
+    // setUnfoldedTags([]);
+    // setUnfoldedSectors([]);
+    // setUnfoldedZones([]);
+  };
+
   return (
     <>
       <SearchBox />
@@ -120,15 +134,7 @@ const Dictionary = ({
         {embed && (
           <button id="dict-reset"
             className="dictionary-reset"
-            onClick={() => {
-              setSelectedZones([]);
-              // setUnfoldedZones([]);
-              setSelectedSectors([]);
-              // setUnfoldedSectors([]);
-              setSelectedTags([]);
-              // setUnfoldedTags([]);
-              handleResetDictionary();
-            }}
+            onClick={handleClickResetDictionary}
           >
             {" "}
             Reset
