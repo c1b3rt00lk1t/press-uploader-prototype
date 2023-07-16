@@ -19,8 +19,6 @@ const Dictionary = ({
   handleGetPreviousTags,
 }) => {
   const {
-    // handleUploadDictionary,
-    // handleGetDictionaryFromDB,
     dictionary,
   } = useContext(PressUploaderContext);
 
