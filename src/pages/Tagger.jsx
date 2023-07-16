@@ -5,7 +5,7 @@ import { useState } from "react";
 import TagsForm from "../components/TagsForm";
 import PreviewPdf from "../components/PreviewPdf";
 import Dictionary from "../components/dictionary/Dictionary";
-import SearchBox from "../components/SearchBox";
+
 
 const Tagger = () => {
   const {
@@ -286,7 +286,6 @@ const Tagger = () => {
           />
         </div>
         <div>
-          <SearchBox />
           <Dictionary
             embed={true}
             selectedFile={selectedFile}

@@ -4,6 +4,7 @@ import Tree from "../Tree";
 import { ErrorBoundary } from "../ErrorBoundary";
 import DictionarySelection from "./DictionarySelection";
 import DictionaryEdition from "./DictionaryEdition";
+import SearchBox from "../SearchBox";
 
 const Dictionary = ({
   embed,
@@ -116,12 +117,7 @@ const Dictionary = ({
 
   return (
     <>
-      {/* <button onClick={handleGetDictionaryFromDB}>Get dictionary</button> */}
-      {/* <button onClick={handleDictionary("america", true, true)}>
-        Set dictionary
-      </button>
-      <button onClick={handleUploadDictionary}>Send dictionary</button> */}
-
+      <SearchBox />
       <div 
       className={`dictionary-container-vertical`}>
         {embed && (
