@@ -126,6 +126,15 @@ const Dictionary = ({
     // setUnfoldedZones([]);
   };
 
+  const handleClickPrevious = () => {
+    // update in the apperance of the dictionary selection, using the previous item as a reference
+    setSelectedZones(taggedFiles.filter(file => file.order === previous.at(-1))[0].zones);
+    setSelectedSectors(taggedFiles.filter(file => file.order === previous.at(-1))[0].sectors);
+    setSelectedTags(taggedFiles.filter(file => file.order === previous.at(-1))[0].tags);
+    // update of the actual taggedFiles
+    handleGetPreviousTags(taggedFiles.filter(file => file.order === previous.at(-1))[0]);
+  };
+
   return (
     <>
       <SearchBox />
@@ -143,14 +152,7 @@ const Dictionary = ({
         {embed && (
           <button id="dict-prev"
             className="dictionary-prev"
-            onClick={() => {
-              // update in the apperance of the dictionary selection, using the previous item as a reference
-              setSelectedZones(taggedFiles.filter(file => file.order === previous.at(-1))[0].zones);
-              setSelectedSectors(taggedFiles.filter(file => file.order === previous.at(-1))[0].sectors);
-              setSelectedTags(taggedFiles.filter(file => file.order === previous.at(-1))[0].tags);
-              // update of the actual taggedFiles
-              handleGetPreviousTags(taggedFiles.filter(file => file.order === previous.at(-1))[0]);
-            }}
+            onClick={handleClickPrevious}
           >
             {" "}
             Prev.
