@@ -95,7 +95,7 @@ describe("Tests for the Tagger page", () => {
 
     expect(resetButton).toBeDefined();
   });
-  it("Should display the text that is written even if it is a keyboard shorcut, when the focus is in the search box", async () => {
+  it("Should display the text that is written even if it is a keyboard shortcut, when the focus is in the search box", async () => {
     render(
       <PressUploaderContext.Provider value={{ taggedFiles, previous }}>
         <Router>
