@@ -79,8 +79,6 @@ const Tagger = () => {
   };
 
   const handleChangeDictionary = (type) => (input) => {
-    console.log(input);
-
     handleTaggedFiles(
       taggedFiles.map((a) => {
         if (a.order === selected) {
@@ -254,6 +252,11 @@ const Tagger = () => {
       ev.preventDefault();
       document.querySelector("input").focus();
     } 
+   } else if (ev.key === "AltGraph") {
+      ev.preventDefault();
+      document.querySelector('#dictionary-search-box-check').click();
+   } else if (ev.key === "Shift") {
+    document.getElementById('nextBtn').focus()
    }
 
   };
