@@ -697,7 +697,7 @@ describe("Tests for the Tagger page", () => {
   });
   it("Should display the text that is written even if it is a keyboard shortcut, when the focus is in the search box", async () => {
     render(
-      <PressUploaderContext.Provider value={{ taggedFiles, previous }}>
+      <PressUploaderContext.Provider value={{ taggedFiles, previous, dictionary }}>
         <Router>
           <Routes>
             <Route path="/" element={<Tagger />} />

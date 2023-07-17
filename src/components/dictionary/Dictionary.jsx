@@ -6,6 +6,7 @@ import DictionarySelection from "./DictionarySelection";
 import DictionaryEdition from "./DictionaryEdition";
 import SearchBox from "../SearchBox";
 
+
 const Dictionary = ({
   embed,
   selectedFile,
@@ -18,11 +19,9 @@ const Dictionary = ({
   previous,
   handleGetPreviousTags,
   handleSearchBoxFocus,
-  handleSearchBoxBlur
+  handleSearchBoxBlur,
 }) => {
-  const {
-    dictionary,
-  } = useContext(PressUploaderContext);
+  const { dictionary } = useContext(PressUploaderContext);
 
   const [selectedZones, setSelectedZones] = useState([]);
   const [unfoldedZones, setUnfoldedZones] = useState([]);
@@ -64,6 +63,7 @@ const Dictionary = ({
   const handleSelect = (selected, setter, embed, handler) => (input, path) => {
     const type = input[input.length - 1];
     const index = selected.indexOf(type);
+
     if (index > -1) {
       embed && setter(selected.filter((a) => a !== type && a !== ""));
       embed &&
@@ -130,20 +130,37 @@ const Dictionary = ({
 
   const handleClickPrevious = () => {
     // update in the apperance of the dictionary selection, using the previous item as a reference
-    setSelectedZones(taggedFiles.filter(file => file.order === previous.at(-1))[0].zones);
-    setSelectedSectors(taggedFiles.filter(file => file.order === previous.at(-1))[0].sectors);
-    setSelectedTags(taggedFiles.filter(file => file.order === previous.at(-1))[0].tags);
+    setSelectedZones(
+      taggedFiles.filter((file) => file.order === previous.at(-1))[0].zones
+    );
+    setSelectedSectors(
+      taggedFiles.filter((file) => file.order === previous.at(-1))[0].sectors
+    );
+    setSelectedTags(
+      taggedFiles.filter((file) => file.order === previous.at(-1))[0].tags
+    );
     // update of the actual taggedFiles
-    handleGetPreviousTags(taggedFiles.filter(file => file.order === previous.at(-1))[0]);
+    handleGetPreviousTags(
+      taggedFiles.filter((file) => file.order === previous.at(-1))[0]
+    );
   };
+
 
   return (
     <>
-      <SearchBox handleSearchBoxFocus={handleSearchBoxFocus} handleSearchBoxBlur={handleSearchBoxBlur}/>
-      <div 
-      className={`dictionary-container-vertical`}>
+      <SearchBox
+        handleSearchBoxFocus={handleSearchBoxFocus}
+        handleSearchBoxBlur={handleSearchBoxBlur}
+        setUnfoldedZones={setUnfoldedZones}
+        setUnfoldedTags={setUnfoldedTags}
+        setUnfoldedSectors={setUnfoldedSectors}
+        setAllUnfoldedEmpty={setAllUnfoldedEmpty}
+        dictionary={dictionary}
+      />
+      <div className={`dictionary-container-vertical`}>
         {embed && (
-          <button id="dict-reset"
+          <button
+            id="dict-reset"
             className="dictionary-reset"
             onClick={handleClickResetDictionary}
           >
@@ -152,7 +169,8 @@ const Dictionary = ({
           </button>
         )}
         {embed && (
-          <button id="dict-prev"
+          <button
+            id="dict-prev"
             className="dictionary-prev"
             onClick={handleClickPrevious}
           >
