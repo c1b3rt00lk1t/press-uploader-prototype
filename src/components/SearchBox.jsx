@@ -14,7 +14,7 @@ const SearchBox = ({
     // if the length of the input is below the 3 characters, everything is kept folded
     if (ev.target.value.length < 3) {
       setAllUnfoldedEmpty();
-      setSearched([]);
+      setSearched({zones:[],sectors:[],tags:[]});
       return;
     }
 
@@ -68,7 +68,7 @@ const SearchBox = ({
       setUnfoldedTags((prev) => [...new Set(prev.concat(unfold))])
     );
 
-    // a list of searched items is consolidated between zones, sectors and tags, filtering out empty strings
+    // a list of searched items is stored differentiating zones, sectors and tags as props of an object
     const searching = (items) => [
       ...new Set(
         items
@@ -78,12 +78,12 @@ const SearchBox = ({
           .split("/")
       ),
     ];
-    setSearched(
-      searching(zones)
-                .concat(searching(sectors))
-                .concat(searching(tags))
-                .filter(item => item.length > 1)
-    );
+   
+    setSearched({
+      zones: searching(zones),
+      sectors: searching(sectors),
+      tags: searching(tags),
+    });
   };
 
   return (

@@ -36,7 +36,7 @@ const Dictionary = ({
 
   const [pathOfSelected, setPathOfSelected] = useState([]);
 
-  const [searched, setSearched] = useState([]);
+  const [searched, setSearched] = useState({zones:[],sectors:[],tags:[]});
 
   useEffect(() => {
     embed && setSelectedZones(selectedFile.zones);
