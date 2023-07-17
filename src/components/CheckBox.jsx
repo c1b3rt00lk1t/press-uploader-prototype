@@ -11,7 +11,7 @@ const CheckBox = ({
   input,
   handleSelectItems,
   selectedItems,
-  handleUnfoldedZones,
+  handleUnfoldedItems,
   unfolded,
   unfoldable,
 }) => {
@@ -25,13 +25,13 @@ const CheckBox = ({
   };
 
   const unfoldItem = () => {
-    handleUnfoldedZones(path, path);
+    handleUnfoldedItems(path, path);
   };
 
   return (
-    <div className="check-box">
+    <div className="check-box" data-testid="unfoldCheck">
       {!unfolded && unfoldable && (
-        <AiOutlinePlusSquare onClick={unfoldItem} style={{ color: "grey" }} />
+        <AiOutlinePlusSquare  onClick={unfoldItem} style={{ color: "grey" }} />
       )}
       {unfolded && unfoldable && (
         <AiOutlineMinusSquare onClick={unfoldItem} style={{ color: "grey" }} />

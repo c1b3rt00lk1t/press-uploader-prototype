@@ -9,8 +9,8 @@ const TreeBlock = ({
   input,
   handleSelectItems,
   selectedItems,
-  handleUnfoldedZones,
-  unfoldedZones,
+  handleUnfoldedItems,
+  unfoldedItems,
   currentIteration,
 }) => {
 
@@ -24,7 +24,7 @@ const TreeBlock = ({
   };
 
   const next = !checkNextInput(inputs[input]);
-  const unfolded = unfoldedZones.indexOf(input) > -1;
+  const unfolded = unfoldedItems.indexOf(input) > -1;
 
   return (
     <div key={uuidv4()} style={{ marginLeft: "2em" }}>
@@ -33,7 +33,7 @@ const TreeBlock = ({
         path={path.concat(input)}
         input={input}
         selectedItems={selectedItems}
-        handleUnfoldedZones={handleUnfoldedZones}
+        handleUnfoldedItems={handleUnfoldedItems}
         unfolded={unfolded}
         unfoldable={next}
       />
@@ -47,8 +47,8 @@ const TreeBlock = ({
               currentIteration={++currentIteration}
               handleSelectItems={handleSelectItems}
               selectedItems={selectedItems}
-              handleUnfoldedZones={handleUnfoldedZones}
-              unfoldedZones={unfoldedZones}
+              handleUnfoldedItems={handleUnfoldedItems}
+              unfoldedItems={unfoldedItems}
             />
           )}
     </div>

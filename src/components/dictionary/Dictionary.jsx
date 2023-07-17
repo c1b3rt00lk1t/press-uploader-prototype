@@ -173,8 +173,8 @@ const Dictionary = ({
                   path={[]}
                   handleSelectItems={handleSelectZones}
                   selectedItems={selectedZones}
-                  handleUnfoldedZones={handleUnfoldedZones}
-                  unfoldedZones={unfoldedZones}
+                  handleUnfoldedItems={handleUnfoldedZones}
+                  unfoldedItems={unfoldedZones}
                 />
               )}
             </ErrorBoundary>
@@ -185,8 +185,8 @@ const Dictionary = ({
                   path={[]}
                   handleSelectItems={handleSelectSectors}
                   selectedItems={selectedSectors}
-                  handleUnfoldedZones={handleUnfoldedSectors}
-                  unfoldedZones={unfoldedSectors}
+                  handleUnfoldedItems={handleUnfoldedSectors}
+                  unfoldedItems={unfoldedSectors}
                 />
               )}
             </ErrorBoundary>
@@ -197,8 +197,8 @@ const Dictionary = ({
                   path={[]}
                   handleSelectItems={handleSelectTags}
                   selectedItems={selectedTags}
-                  handleUnfoldedZones={handleUnfoldedTags}
-                  unfoldedZones={unfoldedTags}
+                  handleUnfoldedItems={handleUnfoldedTags}
+                  unfoldedItems={unfoldedTags}
                 />
               )}
             </ErrorBoundary>

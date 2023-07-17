@@ -8,8 +8,8 @@ const Tree = ({
   path,
   handleSelectItems,
   selectedItems,
-  handleUnfoldedZones,
-  unfoldedZones,
+  handleUnfoldedItems,
+  unfoldedItems,
   maxDepth = 6,
 }) => {
   return currentIteration === maxDepth ? null : (
@@ -24,8 +24,8 @@ const Tree = ({
             input={input}
             handleSelectItems={handleSelectItems}
             selectedItems={selectedItems}
-            handleUnfoldedZones={handleUnfoldedZones}
-            unfoldedZones={unfoldedZones}
+            handleUnfoldedItems={handleUnfoldedItems}
+            unfoldedItems={unfoldedItems}
             currentIteration={currentIteration}
           />
         ))}
