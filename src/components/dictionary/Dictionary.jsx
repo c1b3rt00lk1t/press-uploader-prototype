@@ -161,6 +161,8 @@ const Dictionary = ({
         setAllUnfoldedEmpty={setAllUnfoldedEmpty}
         dictionary={dictionary}
         setSearched={setSearched}
+        searched={searched}
+        handleSelectItems={{zones: handleSelectZones, sectors: handleSelectSectors, tags: handleSelectTags}}
       />
       <div className={`dictionary-container-vertical`}>
         {embed && (
