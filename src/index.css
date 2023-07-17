@@ -133,7 +133,7 @@ a[disabled] {
   width: 4vw;
 }
 
-.dictionary-subcontainer{
+.dictionary-container{
   height: 70vh;
   width: 22.5vw;
   overflow: scroll;
@@ -146,11 +146,11 @@ a[disabled] {
   border-radius: 5px;
 }
 
-.dictionary-subcontainer::-webkit-scrollbar {
+.dictionary-container::-webkit-scrollbar {
   display: none;
 }
 
-.dictionary-subcontainer-smaller{
+.dictionary-container-smaller{
   height: 70vh;
 }
 

@@ -25,8 +25,8 @@ const DictionaryContainer = (
 ) => {
   return (
     <div
-            className={`dictionary-subcontainer ${
-              embed ? "" : "dictionary-subcontainer-smaller"
+            className={`dictionary-container ${
+              embed ? "" : "dictionary-container-smaller"
             }`}
           >
             <ErrorBoundary>
