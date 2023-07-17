@@ -19,7 +19,8 @@ const DictionaryContainer = ({
   unfoldedTags,
   embed,
 }) => {
-
+ const searchedAll = [...new Set(searched.zones.concat(searched.sectors).concat(searched.tags).filter(item => item !== ''))]
+ console.log([...new Set(searched.zones.concat(searched.sectors).concat(searched.tags).filter(item => item !== ''))])
 
   return (
     <div
@@ -49,7 +50,7 @@ const DictionaryContainer = ({
             selectedItems={selectedZones}
             handleUnfoldedItems={handleUnfoldedZones}
             unfoldedItems={unfoldedZones}
-            searched={searched.zones}
+            searched={searchedAll}
           />
         )}
       </ErrorBoundary>
@@ -62,7 +63,7 @@ const DictionaryContainer = ({
             selectedItems={selectedSectors}
             handleUnfoldedItems={handleUnfoldedSectors}
             unfoldedItems={unfoldedSectors}
-            searched={searched.sectors}
+            searched={searchedAll}
           />
         )}
       </ErrorBoundary>
@@ -75,7 +76,7 @@ const DictionaryContainer = ({
             selectedItems={selectedTags}
             handleUnfoldedItems={handleUnfoldedTags}
             unfoldedItems={unfoldedTags}
-            searched={searched.tags}
+            searched={searchedAll}
           />
         )}
       </ErrorBoundary>

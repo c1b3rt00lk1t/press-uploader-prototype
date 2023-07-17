@@ -16,9 +16,6 @@ const CheckBox = ({
   unfoldable,
   searched,
 }) => {
-
-
-
   const checked = selectedItems.indexOf(input) > -1;
 
   const avoid = input === "zones" || input === "sectors" || input === "tags";
@@ -35,21 +32,42 @@ const CheckBox = ({
   return (
     <div className="check-box" data-testid="unfoldCheck">
       {!unfolded && unfoldable && (
-        <AiOutlinePlusSquare  onClick={unfoldItem} style={{ color: "grey" }} />
+        <AiOutlinePlusSquare onClick={unfoldItem} style={{ color: "grey" }} />
       )}
       {unfolded && unfoldable && (
         <AiOutlineMinusSquare onClick={unfoldItem} style={{ color: "grey" }} />
       )}
-      {!checked && <AiOutlineBorder onClick={checkItem} />}
+      {!checked && (
+        <AiOutlineBorder
+          onClick={checkItem}
+          style={{
+            color:
+              searched.length === 1 && searched.includes(input)
+                ? "green"
+                : searched.includes(input)
+                ? "crimson"
+                : "inherited",
+          }}
+        />
+      )}
       {checked && (
-        <AiOutlineCheckSquare onClick={checkItem} style={{ color: "blue"}} />
+        <AiOutlineCheckSquare onClick={checkItem} style={{ color: "blue" }} />
       )}
 
-
-      <div className={searched.includes(input) ? "dictionary-searched" : ""} style={{ color: checked ? "blue" 
-                                   : searched.includes(input) ? "crimson"
-                                   : "inherited" }}>{input}</div>
-
+      <div
+        className={searched.includes(input) ? "dictionary-searched" : ""}
+        style={{
+          color: checked
+            ? "blue"
+            : searched.length === 1 && searched.includes(input)
+            ? "green"
+            : searched.includes(input)
+            ? "crimson"
+            : "inherited",          
+        }}
+      >
+        {input}
+      </div>
     </div>
   );
 };
