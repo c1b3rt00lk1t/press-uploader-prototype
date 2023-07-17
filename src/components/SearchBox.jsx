@@ -8,11 +8,14 @@ const SearchBox = ({
   setUnfoldedSectors,
   setAllUnfoldedEmpty,
   setSearched,
+  searched,
+  handleSelectItems,
   dictionary,
 }) => {
   const handleChangeSearchBox = (ev) => {
-    // if the length of the input is below the 3 characters, everything is kept folded
-    if (ev.target.value.length < 3) {
+    
+    // if the length of the input is below the 2 characters, everything is kept folded
+    if (ev.target.value.length < 2) {
       setAllUnfoldedEmpty();
       setSearched({zones:[],sectors:[],tags:[]});
       return;
@@ -87,9 +90,24 @@ const SearchBox = ({
 
     // A scroll into view is send to the event queue to be executed after the re-render
     setTimeout(() => document.getElementById('dictionary-scroll').click(), 0);
+    
   };
 
+  // const checkItem = () => {
+  //   // The first item selected for each category (sector, tag, zone) is checked
+  //   handleSelectItems.zones(searched.zones);
+  //   handleSelectItems.sectors(searched.sectors);
+  //   handleSelectItems.tags(searched.tags);
+  //   // When an item is checked in, the searchbox content is cleaned up
+  //   setTimeout( () => {
+  //   document.querySelector('.dictionary-search-box').value="";
+  //   setAllUnfoldedEmpty();
+  //   setSearched({zones:[],sectors:[],tags:[]});
+  //   }, 0);
+  // };
+
   return (
+    <>
     <input
       className="dictionary-search-box"
       onChange={handleChangeSearchBox}
@@ -97,6 +115,8 @@ const SearchBox = ({
       onBlur={handleSearchBoxBlur}
       placeholder="Type a zone, sector or tag..."
     ></input>
+    {/* <button id="dictionary-search-box-check" onClick={checkItem} style={{visibility:"hidden", position: "absolute"}}></button> */}
+    </>
   );
 };
 

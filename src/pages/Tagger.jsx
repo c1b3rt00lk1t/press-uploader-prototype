@@ -254,7 +254,7 @@ const Tagger = () => {
     } 
    } else if (ev.key === "AltGraph") {
       ev.preventDefault();
-      document.querySelector('#dictionary-search-box-check').click();
+      // document.querySelector('#dictionary-search-box-check').click();
    } else if (ev.key === "Shift") {
     document.getElementById('nextBtn').focus()
    }
