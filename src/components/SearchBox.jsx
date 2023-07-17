@@ -7,12 +7,14 @@ const SearchBox = ({
   setUnfoldedTags,
   setUnfoldedSectors,
   setAllUnfoldedEmpty,
+  setSearched,
   dictionary,
 }) => {
   const handleChangeSearchBox = (ev) => {
     // if the length of the input is below the 3 characters, everything is kept folded
     if (ev.target.value.length < 3) {
       setAllUnfoldedEmpty();
+      setSearched([]);
       return;
     }
 
@@ -64,6 +66,23 @@ const SearchBox = ({
     );
     toBeUnfolded(tags).forEach((unfold) =>
       setUnfoldedTags((prev) => [...new Set(prev.concat(unfold))])
+    );
+
+    // a list of searched items is consolidated between zones, sectors and tags, filtering out empty strings
+    const searching = (items) => [
+      ...new Set(
+        items
+          .filter(({ item }) => item.includes(ev.target.value))
+          .map(({ item }) => item)
+          .join("/")
+          .split("/")
+      ),
+    ];
+    setSearched(
+      searching(zones)
+                .concat(searching(sectors))
+                .concat(searching(tags))
+                .filter(item => item.length > 1)
     );
   };
 

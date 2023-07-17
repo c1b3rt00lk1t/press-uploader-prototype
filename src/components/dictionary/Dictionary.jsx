@@ -36,6 +36,8 @@ const Dictionary = ({
 
   const [pathOfSelected, setPathOfSelected] = useState([]);
 
+  const [searched, setSearched] = useState([]);
+
   useEffect(() => {
     embed && setSelectedZones(selectedFile.zones);
   }, [selectedFile.zones, embed]);
@@ -145,6 +147,7 @@ const Dictionary = ({
     );
   };
 
+  console.log(searched)
 
   return (
     <>
@@ -156,6 +159,7 @@ const Dictionary = ({
         setUnfoldedSectors={setUnfoldedSectors}
         setAllUnfoldedEmpty={setAllUnfoldedEmpty}
         dictionary={dictionary}
+        setSearched={setSearched}
       />
       <div className={`dictionary-container-vertical`}>
         {embed && (
