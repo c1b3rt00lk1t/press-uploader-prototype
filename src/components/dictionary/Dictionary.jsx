@@ -197,6 +197,7 @@ const Dictionary = ({
                   selectedItems={selectedZones}
                   handleUnfoldedItems={handleUnfoldedZones}
                   unfoldedItems={unfoldedZones}
+                  searched={searched.zones}
                 />
               )}
             </ErrorBoundary>
@@ -209,6 +210,7 @@ const Dictionary = ({
                   selectedItems={selectedSectors}
                   handleUnfoldedItems={handleUnfoldedSectors}
                   unfoldedItems={unfoldedSectors}
+                  searched={searched.sectors}
                 />
               )}
             </ErrorBoundary>
@@ -221,6 +223,7 @@ const Dictionary = ({
                   selectedItems={selectedTags}
                   handleUnfoldedItems={handleUnfoldedTags}
                   unfoldedItems={unfoldedTags}
+                  searched={searched.tags}
                 />
               )}
             </ErrorBoundary>

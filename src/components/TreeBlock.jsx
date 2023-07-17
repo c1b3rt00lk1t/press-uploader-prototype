@@ -11,6 +11,7 @@ const TreeBlock = ({
   selectedItems,
   handleUnfoldedItems,
   unfoldedItems,
+  searched,
   currentIteration,
 }) => {
 
@@ -36,6 +37,7 @@ const TreeBlock = ({
         handleUnfoldedItems={handleUnfoldedItems}
         unfolded={unfolded}
         unfoldable={next}
+        searched={searched}
       />
 
       {!unfolded || !next
@@ -49,6 +51,7 @@ const TreeBlock = ({
               selectedItems={selectedItems}
               handleUnfoldedItems={handleUnfoldedItems}
               unfoldedItems={unfoldedItems}
+              searched={searched}
             />
           )}
     </div>

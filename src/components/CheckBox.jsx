@@ -28,7 +28,9 @@ const CheckBox = ({
   const unfoldItem = () => {
     handleUnfoldedItems(path, path);
   };
-
+  console.log('searched',searched);
+  console.log('input', input)
+  console.log('check', searched.includes(input))
   return (
     <div className="check-box" data-testid="unfoldCheck">
       {!unfolded && unfoldable && (
@@ -42,8 +44,9 @@ const CheckBox = ({
         <AiOutlineCheckSquare onClick={checkItem} style={{ color: "blue"}} />
       )}
 
+
       <div style={{ color: checked ? "blue" 
-                                   : searched ? "red"
+                                   : searched.includes(input) ? "crimson"
                                    : "inherited" }}>{input}</div>
 
     </div>
