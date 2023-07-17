@@ -16,6 +16,9 @@ const CheckBox = ({
   unfoldable,
   searched,
 }) => {
+
+
+
   const checked = selectedItems.indexOf(input) > -1;
 
   const avoid = input === "zones" || input === "sectors" || input === "tags";
@@ -28,9 +31,7 @@ const CheckBox = ({
   const unfoldItem = () => {
     handleUnfoldedItems(path, path);
   };
-  console.log('searched',searched);
-  console.log('input', input)
-  console.log('check', searched.includes(input))
+
   return (
     <div className="check-box" data-testid="unfoldCheck">
       {!unfolded && unfoldable && (
@@ -45,7 +46,7 @@ const CheckBox = ({
       )}
 
 
-      <div style={{ color: checked ? "blue" 
+      <div className={searched.includes(input) ? "dictionary-searched" : ""} style={{ color: checked ? "blue" 
                                    : searched.includes(input) ? "crimson"
                                    : "inherited" }}>{input}</div>
 

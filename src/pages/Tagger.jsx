@@ -254,6 +254,9 @@ const Tagger = () => {
       ev.preventDefault();
       document.querySelector("input").focus();
     } 
+   } else if (ev.key === "Alt" ){
+    ev.preventDefault();
+     document.getElementById('dictionary-scroll').click();
    }
 
   };
