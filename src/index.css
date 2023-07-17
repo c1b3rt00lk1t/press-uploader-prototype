@@ -113,13 +113,7 @@ a[disabled] {
   /* margin-left: 1vw; */
 }
 
-.dictionary-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0;
-  width: 22.5vw;
-}
+
 
 .dictionary-reset{
   position: absolute;

@@ -182,7 +182,7 @@ const Dictionary = ({
             Prev.
           </button>
         )}
-        <div className="dictionary-container">
+
           <div
             className={`dictionary-subcontainer ${
               embed ? "" : "dictionary-subcontainer-smaller"
@@ -228,7 +228,7 @@ const Dictionary = ({
               )}
             </ErrorBoundary>
           </div>
-        </div>
+
         {embed && (
           <DictionarySelection
             selectedZones={selectedZones}
