@@ -17,7 +17,7 @@ const SearchBox = ({
     // if the length of the input is below the 2 characters, everything is kept folded
     if (ev.target.value.length < 2) {
       setAllUnfoldedEmpty();
-      setSearched({zones:[],sectors:[],tags:[]});
+      setSearched([]);
       return;
     }
 
@@ -82,11 +82,7 @@ const SearchBox = ({
       ),
     ];
    
-    setSearched({
-      zones: searching(zones),
-      sectors: searching(sectors),
-      tags: searching(tags),
-    });
+    setSearched([...new Set(searching(zones).concat(searching(sectors)).concat(searching(tags)).filter(item => item !== ''))]);
 
     // A scroll into view is send to the event queue to be executed after the re-render
     setTimeout(() => document.getElementById('dictionary-scroll').click(), 0);
@@ -102,7 +98,7 @@ const SearchBox = ({
   //   setTimeout( () => {
   //   document.querySelector('.dictionary-search-box').value="";
   //   setAllUnfoldedEmpty();
-  //   setSearched({zones:[],sectors:[],tags:[]});
+  //   setSearched([]);
   //   }, 0);
   // };
 
