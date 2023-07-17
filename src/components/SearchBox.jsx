@@ -84,6 +84,9 @@ const SearchBox = ({
       sectors: searching(sectors),
       tags: searching(tags),
     });
+
+    // A scroll into view is send to the event queue to be executed after the re-render
+    setTimeout(() => document.getElementById('dictionary-scroll').click(), 0);
   };
 
   return (
