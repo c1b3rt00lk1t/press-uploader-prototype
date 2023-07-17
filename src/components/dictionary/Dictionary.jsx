@@ -149,7 +149,6 @@ const Dictionary = ({
     );
   };
 
-  console.log(searched);
 
   return (
     <>
