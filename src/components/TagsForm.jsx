@@ -67,7 +67,7 @@ const TagsForm = ({
         </div>
       </div> */}
       <div className={"tagFormBtns"}>
-        <button onClick={handleTagsNext}>Next</button>
+        <button id="nextBtn" onClick={handleTagsNext}>Next</button>
         <a
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(taggedFiles)
