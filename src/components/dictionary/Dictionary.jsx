@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import PressUploaderContext from "../../contexts/PressUploaderContext";
-import Tree from "../Tree";
-import { ErrorBoundary } from "../ErrorBoundary";
 import DictionarySelection from "./DictionarySelection";
 import DictionaryEdition from "./DictionaryEdition";
 import SearchBox from "../SearchBox";
-
+import DictionaryContainer from "./DictionaryContainer";
 
 const Dictionary = ({
   embed,
@@ -36,7 +34,11 @@ const Dictionary = ({
 
   const [pathOfSelected, setPathOfSelected] = useState([]);
 
-  const [searched, setSearched] = useState({zones:[],sectors:[],tags:[]});
+  const [searched, setSearched] = useState({
+    zones: [],
+    sectors: [],
+    tags: [],
+  });
 
   useEffect(() => {
     embed && setSelectedZones(selectedFile.zones);
@@ -147,7 +149,7 @@ const Dictionary = ({
     );
   };
 
-  console.log(searched)
+  console.log(searched);
 
   return (
     <>
@@ -183,51 +185,23 @@ const Dictionary = ({
           </button>
         )}
 
-          <div
-            className={`dictionary-subcontainer ${
-              embed ? "" : "dictionary-subcontainer-smaller"
-            }`}
-          >
-            <ErrorBoundary>
-              {!!dictionary && (
-                <Tree
-                  inputs={{ zones: dictionary.zones }}
-                  path={[]}
-                  handleSelectItems={handleSelectZones}
-                  selectedItems={selectedZones}
-                  handleUnfoldedItems={handleUnfoldedZones}
-                  unfoldedItems={unfoldedZones}
-                  searched={searched.zones}
-                />
-              )}
-            </ErrorBoundary>
-            <ErrorBoundary>
-              {!!dictionary && (
-                <Tree
-                  inputs={{ sectors: dictionary.sectors }}
-                  path={[]}
-                  handleSelectItems={handleSelectSectors}
-                  selectedItems={selectedSectors}
-                  handleUnfoldedItems={handleUnfoldedSectors}
-                  unfoldedItems={unfoldedSectors}
-                  searched={searched.sectors}
-                />
-              )}
-            </ErrorBoundary>
-            <ErrorBoundary>
-              {!!dictionary && (
-                <Tree
-                  inputs={{ tags: dictionary.tags }}
-                  path={[]}
-                  handleSelectItems={handleSelectTags}
-                  selectedItems={selectedTags}
-                  handleUnfoldedItems={handleUnfoldedTags}
-                  unfoldedItems={unfoldedTags}
-                  searched={searched.tags}
-                />
-              )}
-            </ErrorBoundary>
-          </div>
+        <DictionaryContainer
+          handleSelectZones={handleSelectZones}
+          selectedZones={selectedZones}
+          handleUnfoldedZones={handleUnfoldedZones}
+          unfoldedZones={unfoldedZones}
+          searched={searched}
+          dictionary={dictionary}
+          handleSelectSectors={handleSelectSectors}
+          selectedSectors={selectedSectors}
+          handleUnfoldedSectors={handleUnfoldedSectors}
+          unfoldedSectors={unfoldedSectors}
+          handleSelectTags={handleSelectTags}
+          selectedTags={selectedTags}
+          handleUnfoldedTags={handleUnfoldedTags}
+          unfoldedTags={unfoldedTags}
+          embed={embed}
+        />
 
         {embed && (
           <DictionarySelection
