@@ -298,7 +298,7 @@ const Tagger = () => {
             selectedFileSource={selectedFile.source}
           />
         </div>
-        <div>
+        <div className="vertical">
           <Dictionary
             embed={true}
             selectedFile={selectedFile}

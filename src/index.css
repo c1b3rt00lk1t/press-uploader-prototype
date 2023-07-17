@@ -109,7 +109,8 @@ a[disabled] {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 1vw;
+  /* width: 22.5vw; */
+  /* margin-left: 1vw; */
 }
 
 .dictionary-container{
@@ -122,7 +123,7 @@ a[disabled] {
 
 .dictionary-reset{
   position: absolute;
-  top: 11.5vh;
+  top: 15.5vh;
   right: 2.5vw;
   height: 2vh;
   line-height: 1vh;
@@ -131,7 +132,7 @@ a[disabled] {
 
 .dictionary-prev{
   position: absolute;
-  top: 14vh;
+  top: 18vh;
   right: 2.5vw;
   height: 2vh;
   line-height: 1vh;
@@ -143,7 +144,7 @@ a[disabled] {
   width: 22.5vw;
   overflow: scroll;
   margin-bottom: 1.25vh;
-  margin-left: -1.5em;
+  /* margin-left: -1.5em; */
   background-color: whitesmoke;
   padding: 1vh 0;
   border-style: solid;
@@ -163,7 +164,7 @@ a[disabled] {
   width: 22.5vw;
   font-size: 0.9em;
   margin-bottom: 1vh;
-  margin-left: -1.5em;
+  /* margin-left: -1.5em; */
   height: 12.5vh;
   overflow: scroll;
   background-color: whitesmoke;
@@ -209,12 +210,24 @@ a[disabled] {
   height: 1.45em;
 }
 
+.dictionary-search-box{
+  width: 22.5vw;
+}
+
+
 /* css for the tagger page*/
 .horizontal{
   margin-top: 3vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.vertical{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 1vw;
 }
 
 .orderContentList{
@@ -260,19 +273,20 @@ a[disabled] {
   flex-direction: column;
   justify-content: space-evenly;
   /* height: 30vh; */
-  width: 15vw;
+  width: 22.5vw;
   padding: 0.25vh 0.5vw; 
-  margin: 0 3.25vw 0 0 ; 
   font-size: 0.9em;
   font-weight: bold;
+  
   
 }
 
 .tagFormBtns{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 15vw;
+  justify-content: space-around;
+  align-self: center;
+  width: 20.5vw;
 }
 
 .previewPdf{
