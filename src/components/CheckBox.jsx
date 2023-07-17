@@ -14,6 +14,7 @@ const CheckBox = ({
   handleUnfoldedItems,
   unfolded,
   unfoldable,
+  searched,
 }) => {
   const checked = selectedItems.indexOf(input) > -1;
 
@@ -41,7 +42,9 @@ const CheckBox = ({
         <AiOutlineCheckSquare onClick={checkItem} style={{ color: "blue"}} />
       )}
 
-      <div style={{ color: checked ? "blue" : "inherited" }}>{input}</div>
+      <div style={{ color: checked ? "blue" 
+                                   : searched ? "red"
+                                   : "inherited" }}>{input}</div>
 
     </div>
   );
