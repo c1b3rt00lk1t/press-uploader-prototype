@@ -2,7 +2,6 @@ import React from "react";
 import {
   AiOutlineMinusSquare,
   AiOutlinePlusSquare,
-  //   AiOutlinePlus,
   AiOutlineCheckSquare,
   AiOutlineBorder,
 } from "react-icons/ai";
