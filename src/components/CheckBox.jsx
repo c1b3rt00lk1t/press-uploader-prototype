@@ -21,6 +21,7 @@ const CheckBox = ({
   const avoid = input === "zones" || input === "sectors" || input === "tags";
   const checkItem = () => {
     if (!avoid) {
+      // The "path" is an array of string with each step of the path, including the chosen item
       handleSelectItems(path);
     }
   };
