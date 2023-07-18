@@ -668,7 +668,7 @@ const dictionary = {
 describe("Tests for the Tagger page", () => {
   it("Should render an input component with a placeholder", () => {
     render(
-      <PressUploaderContext.Provider value={{ taggedFiles, previous }}>
+      <PressUploaderContext.Provider value={{ taggedFiles, previous, dictionary }}>
         <Router>
           <Routes>
             <Route path="/" element={<Tagger />} />
@@ -683,7 +683,7 @@ describe("Tests for the Tagger page", () => {
   });
   it("Should render a button to reset the dictionary", () => {
     render(
-      <PressUploaderContext.Provider value={{ taggedFiles, previous }}>
+      <PressUploaderContext.Provider value={{ taggedFiles, previous, dictionary }}>
         <Router>
           <Routes>
             <Route path="/" element={<Tagger />} />
@@ -709,17 +709,17 @@ describe("Tests for the Tagger page", () => {
     const user = userEvent.setup();
     // sends the focus to the search box
     await user.keyboard("f");
-    // writes three keyboard shortcut letters
+    // writes keyboard shortcut letters
     await user.keyboard("n");
-    await user.keyboard("s");
-    await user.keyboard("l");
-    const searchtext = screen.getByDisplayValue(/nsl/i);
+    await user.keyboard("n");
+    await user.keyboard("n");
+    const searchtext = screen.getByDisplayValue(/nnn/i);
     expect(searchtext).toBeDefined();
   });
 
   it("Should not display the values in the searchbox if the focus is not in it", async () => {
     render(
-      <PressUploaderContext.Provider value={{ taggedFiles, previous }}>
+      <PressUploaderContext.Provider value={{ taggedFiles, previous, dictionary }}>
         <Router>
           <Routes>
             <Route path="/" element={<Tagger />} />
