@@ -11,6 +11,7 @@ const Tree = ({
   handleUnfoldedItems,
   unfoldedItems,
   searched,
+  searchString,
   maxDepth = 6,
 }) => {
   return currentIteration === maxDepth ? null : (
@@ -29,6 +30,7 @@ const Tree = ({
             unfoldedItems={unfoldedItems}
             currentIteration={currentIteration}
             searched={searched}
+            searchString={searchString}
           />
         ))}
     </div>

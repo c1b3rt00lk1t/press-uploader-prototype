@@ -8,6 +8,7 @@ const DictionaryContainer = ({
   handleUnfoldedZones,
   unfoldedZones,
   searched,
+  searchString,
   dictionary,
   handleSelectSectors,
   selectedSectors,
@@ -50,6 +51,7 @@ const DictionaryContainer = ({
             handleUnfoldedItems={handleUnfoldedZones}
             unfoldedItems={unfoldedZones}
             searched={searched}
+            searchString={searchString}
           />
         )}
       </ErrorBoundary>
@@ -63,6 +65,7 @@ const DictionaryContainer = ({
             handleUnfoldedItems={handleUnfoldedSectors}
             unfoldedItems={unfoldedSectors}
             searched={searched}
+            searchString={searchString}
           />
         )}
       </ErrorBoundary>
@@ -76,6 +79,7 @@ const DictionaryContainer = ({
             handleUnfoldedItems={handleUnfoldedTags}
             unfoldedItems={unfoldedTags}
             searched={searched}
+            searchString={searchString}
           />
         )}
       </ErrorBoundary>

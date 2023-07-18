@@ -36,6 +36,9 @@ const Dictionary = ({
 
   const [searched, setSearched] = useState([]);
 
+  // searchString contains the actual input value of searchbox so that can be used in other components like checkbox
+  const [searchString, setSearchString] = useState("");
+
   useEffect(() => {
     embed && setSelectedZones(selectedFile.zones);
   }, [selectedFile.zones, embed]);
@@ -158,6 +161,7 @@ const Dictionary = ({
         dictionary={dictionary}
         setSearched={setSearched}
         searched={searched}
+        setSearchString={setSearchString}
         handleSelectItems={{zones: handleSelectZones, sectors: handleSelectSectors, tags: handleSelectTags}}
       />
       <div className={`dictionary-container-vertical`}>
@@ -188,6 +192,7 @@ const Dictionary = ({
           handleUnfoldedZones={handleUnfoldedZones}
           unfoldedZones={unfoldedZones}
           searched={searched}
+          searchString={searchString}
           dictionary={dictionary}
           handleSelectSectors={handleSelectSectors}
           selectedSectors={selectedSectors}

@@ -9,6 +9,7 @@ const SearchBox = ({
   setAllUnfoldedEmpty,
   setSearched,
   searched,
+  setSearchString,
   handleSelectItems,
   dictionary,
 }) => {
@@ -44,10 +45,16 @@ const SearchBox = ({
       setFlatTags(destructureItems(tags)("tags")(dictionary.tags));
   },[dictionary.sectors, dictionary.tags, dictionary.zones])
   
-
+  // As the input value is controlled inside the component but also set in a higher level
+  // this function ensures both things are done always together
+  const handleSetInputValue = (input) => {
+    setInputValue(input);
+    setSearchString(input);
+  }
 
   const handleChangeSearchBox = (ev) => {
-    setInputValue(ev.target.value);
+    handleSetInputValue(ev.target.value);
+    
     // if the length of the input is below the 2 characters, everything is kept folded
     if (ev.target.value.length < 2) {
       setAllUnfoldedEmpty();
@@ -108,40 +115,50 @@ const SearchBox = ({
   };
 
   const checkItem = () => {
-    // The function will only check the item if there is only one possible sector, tag or zone
-    if (searched.length === 1 && searched[0].includes(inputValue)) {
+    // The function will only check the item if:
+    // 1) there is only one possible sector, tag or zone or 
+    // 2) if the input is exactly equal than a sector, tag or zone
+    const isTheOnlyOne = searched.length === 1 && searched[0].includes(inputValue);
+    const isSameText = searched.includes(inputValue);
+
+    if (!isSameText && !isTheOnlyOne) return;
+
+
+    const itemToCheck = isTheOnlyOne
+                        ? searched[0]
+                        : searched.filter(item => item === inputValue)[0];
 
       // It has to be determined if the searched string corresponds to a sector, tag or zone
-      const isZone = flatZones.map(({ item }) => item).includes(searched[0]);
+      const isZone = flatZones.map(({ item }) => item).includes(itemToCheck);
       const isSector = flatSectors
         .map(({ item }) => item)
-        .includes(searched[0]);
-      const isTag = flatTags.map(({ item }) => item).includes(searched[0]);
+        .includes(itemToCheck);
+      const isTag = flatTags.map(({ item }) => item).includes(itemToCheck);
 
       // The setter function to select a zone, sector or tag is called conditionally
       isZone &&
         handleSelectItems.zones(
           flatZones
-            .filter(({ item }) => item === searched[0])
+            .filter(({ item }) => item === itemToCheck)
             .flatMap(({ item, path }) => path.split("/").concat(item))
         );
       isSector &&
         handleSelectItems.sectors(
           flatSectors
-            .filter(({ item }) => item === searched[0])
+            .filter(({ item }) => item === itemToCheck)
             .flatMap(({ item, path }) => path.split("/").concat(item))
         );
       isTag &&
         handleSelectItems.tags(
           flatTags
-            .filter(({ item }) => item === searched[0])
+            .filter(({ item }) => item === itemToCheck)
             .flatMap(({ item, path }) => path.split("/").concat(item))
         );
 
       // When an item is checked in, the searchbox content is cleaned up
-      setInputValue("");
+      handleSetInputValue("");
       setSearched([]);
-    }
+
   };
 
   return (

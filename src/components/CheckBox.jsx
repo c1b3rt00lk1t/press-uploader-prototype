@@ -15,6 +15,7 @@ const CheckBox = ({
   unfolded,
   unfoldable,
   searched,
+  searchString
 }) => {
   const checked = selectedItems.indexOf(input) > -1;
 
@@ -38,6 +39,8 @@ const CheckBox = ({
         backgroundColor:
           searched.length === 1 && searched.includes(input)
             ? "rgba(60, 114, 60, 0.1)"
+            : searchString === input
+            ? "rgba(255, 183, 0, 0.1)"
             : "inherited",
       }}
     >
