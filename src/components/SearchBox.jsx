@@ -137,7 +137,7 @@ const SearchBox = ({
       const isTag = flatTags.map(({ item }) => item).includes(itemToCheck);
 
 
-      // setLastSelectedItem
+      // The path to check is selected
       const pathToCheck = (isZone && flatZones
                                       .filter(({ item }) => item === itemToCheck)
                                       .flatMap(({ item, path }) => path.split("/").concat(item))) ||
@@ -148,6 +148,7 @@ const SearchBox = ({
                             .filter(({ item }) => item === itemToCheck)
                             .flatMap(({ item, path }) => path.split("/").concat(item)));
       
+      // The last path selected is kept for future reference 
       setLastSelectedItem(pathToCheck);
 
       // The setter function to select a zone, sector or tag is called conditionally
