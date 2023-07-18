@@ -13,6 +13,7 @@ const TreeBlock = ({
   unfoldedItems,
   searched,
   searchString,
+  setLastSelectedItem,
   currentIteration,
 }) => {
 
@@ -40,6 +41,7 @@ const TreeBlock = ({
         unfoldable={next}
         searched={searched}
         searchString={searchString}
+        setLastSelectedItem={setLastSelectedItem}
       />
 
       {!unfolded || !next
@@ -55,6 +57,7 @@ const TreeBlock = ({
               unfoldedItems={unfoldedItems}
               searched={searched}
               searchString={searchString}
+              setLastSelectedItem={setLastSelectedItem}
             />
           )}
     </div>

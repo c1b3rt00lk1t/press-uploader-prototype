@@ -240,7 +240,7 @@ const Tagger = () => {
     } else if (ev.key === "m" || ev.key === "M") {
       document.getElementById("merger-selector").click();
     } else if (ev.key === "l" || ev.key === "L") {
-      document.getElementById("loader-selector").click();
+      document.getElementById("select-last").click();
     } else if (ev.key === "r" || ev.key === "R") {
       document.getElementById("dict-reset").click();
     } else if (ev.key === "p" || ev.key === "P") {

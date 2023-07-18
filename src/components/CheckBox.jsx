@@ -15,7 +15,8 @@ const CheckBox = ({
   unfolded,
   unfoldable,
   searched,
-  searchString
+  searchString,
+  setLastSelectedItem,
 }) => {
   const checked = selectedItems.indexOf(input) > -1;
 
@@ -24,6 +25,7 @@ const CheckBox = ({
     if (!avoid) {
       // The "path" is an array of string with each step of the path, including the chosen item
       handleSelectItems(path);
+      setLastSelectedItem(path);
     }
   };
 

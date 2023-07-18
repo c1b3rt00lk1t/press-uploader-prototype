@@ -18,6 +18,7 @@ const DictionaryContainer = ({
   selectedTags,
   handleUnfoldedTags,
   unfoldedTags,
+  setLastSelectedItem,
   embed,
 }) => {
 
@@ -52,6 +53,7 @@ const DictionaryContainer = ({
             unfoldedItems={unfoldedZones}
             searched={searched}
             searchString={searchString}
+            setLastSelectedItem={setLastSelectedItem}
           />
         )}
       </ErrorBoundary>
@@ -66,6 +68,7 @@ const DictionaryContainer = ({
             unfoldedItems={unfoldedSectors}
             searched={searched}
             searchString={searchString}
+            setLastSelectedItem={setLastSelectedItem}
           />
         )}
       </ErrorBoundary>
@@ -80,6 +83,7 @@ const DictionaryContainer = ({
             unfoldedItems={unfoldedTags}
             searched={searched}
             searchString={searchString}
+            setLastSelectedItem={setLastSelectedItem}
           />
         )}
       </ErrorBoundary>

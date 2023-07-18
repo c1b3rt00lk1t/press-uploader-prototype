@@ -11,6 +11,7 @@ const SearchBox = ({
   searched,
   setSearchString,
   handleSelectItems,
+  setLastSelectedItem,
   dictionary,
 }) => {
   const [inputValue, setInputValue] = useState("");
@@ -135,25 +136,27 @@ const SearchBox = ({
         .includes(itemToCheck);
       const isTag = flatTags.map(({ item }) => item).includes(itemToCheck);
 
+
+      // setLastSelectedItem
+      const pathToCheck = (isZone && flatZones
+                                      .filter(({ item }) => item === itemToCheck)
+                                      .flatMap(({ item, path }) => path.split("/").concat(item))) ||
+                          (isSector && flatSectors
+                                      .filter(({ item }) => item === itemToCheck)
+                                      .flatMap(({ item, path }) => path.split("/").concat(item))) ||
+                          (isTag && flatTags
+                            .filter(({ item }) => item === itemToCheck)
+                            .flatMap(({ item, path }) => path.split("/").concat(item)));
+      
+      setLastSelectedItem(pathToCheck);
+
       // The setter function to select a zone, sector or tag is called conditionally
       isZone &&
-        handleSelectItems.zones(
-          flatZones
-            .filter(({ item }) => item === itemToCheck)
-            .flatMap(({ item, path }) => path.split("/").concat(item))
-        );
+        handleSelectItems.zones(pathToCheck);
       isSector &&
-        handleSelectItems.sectors(
-          flatSectors
-            .filter(({ item }) => item === itemToCheck)
-            .flatMap(({ item, path }) => path.split("/").concat(item))
-        );
+        handleSelectItems.sectors(pathToCheck);
       isTag &&
-        handleSelectItems.tags(
-          flatTags
-            .filter(({ item }) => item === itemToCheck)
-            .flatMap(({ item, path }) => path.split("/").concat(item))
-        );
+        handleSelectItems.tags(pathToCheck);
 
       // When an item is checked in, the searchbox content is cleaned up
       handleSetInputValue("");

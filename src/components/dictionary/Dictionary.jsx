@@ -32,6 +32,9 @@ const Dictionary = ({
   );
   const [unfoldedTags, setUnfoldedTags] = useState([]);
 
+  // stores the last zone, sector or tag to be able to keep pasting it
+  const [lastSelectedItem, setLastSelectedItem] = useState([]);
+
   const [pathOfSelected, setPathOfSelected] = useState([]);
 
   const [searched, setSearched] = useState([]);
@@ -148,6 +151,13 @@ const Dictionary = ({
     );
   };
 
+  // applies the last zone, sector or tag selected
+  const applyLastSelectedItem = () => {
+    lastSelectedItem[0] === "zones" && handleSelectZones(lastSelectedItem);
+    lastSelectedItem[0] === "sectors" && handleSelectSectors(lastSelectedItem);
+    lastSelectedItem[0] === "tags" && handleSelectTags(lastSelectedItem);
+ 
+  }
 
   return (
     <>
@@ -163,6 +173,7 @@ const Dictionary = ({
         searched={searched}
         setSearchString={setSearchString}
         handleSelectItems={{zones: handleSelectZones, sectors: handleSelectSectors, tags: handleSelectTags}}
+        setLastSelectedItem={setLastSelectedItem}
       />
       <div className={`dictionary-container-vertical`}>
         {embed && (
@@ -202,6 +213,7 @@ const Dictionary = ({
           selectedTags={selectedTags}
           handleUnfoldedTags={handleUnfoldedTags}
           unfoldedTags={unfoldedTags}
+          setLastSelectedItem={setLastSelectedItem}
           embed={embed}
         />
 
@@ -217,6 +229,9 @@ const Dictionary = ({
             selected={selectedZones[0] || selectedSectors[0] || selectedTags[0]}
             pathOfSelected={pathOfSelected}
           />
+        )}
+        {embed && (
+          <button id="select-last" onClick={applyLastSelectedItem} style={{visibility:'hidden', position: 'absolute'}}></button>
         )}
       </div>
     </>
