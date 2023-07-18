@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SearchBox = ({
   handleSearchBoxFocus,
@@ -12,8 +12,13 @@ const SearchBox = ({
   handleSelectItems,
   dictionary,
 }) => {
+  const [inputValue, setInputValue] = useState("");
+  const [flatZones, setFlatZones] = useState([]);
+  const [flatSectors, setFlatSectors] = useState([]);
+  const [flatTags, setFlatTags] = useState([]);
+
   const handleChangeSearchBox = (ev) => {
-    
+    setInputValue(ev.target.value);
     // if the length of the input is below the 2 characters, everything is kept folded
     if (ev.target.value.length < 2) {
       setAllUnfoldedEmpty();
@@ -37,11 +42,11 @@ const SearchBox = ({
           target.push({ item: prop, path: `${path}` });
         }
       }
+      return target;
     };
-
-    destructureItems(zones)("zones")(dictionary.zones);
-    destructureItems(sectors)("sectors")(dictionary.sectors);
-    destructureItems(tags)("tags")(dictionary.tags);
+    setFlatZones(destructureItems(zones)("zones")(dictionary.zones));
+    setFlatSectors(destructureItems(sectors)("sectors")(dictionary.sectors));
+    setFlatTags(destructureItems(tags)("tags")(dictionary.tags));
 
     // it gets the event target value and filters with it the list of items to obtain their path
     // the result is an array of strings that has to be joined in a string first
@@ -81,37 +86,72 @@ const SearchBox = ({
           .split("/")
       ),
     ];
-   
-    setSearched([...new Set(searching(zones).concat(searching(sectors)).concat(searching(tags)).filter(item => item !== ''))]);
+
+    setSearched([
+      ...new Set(
+        searching(zones)
+          .concat(searching(sectors))
+          .concat(searching(tags))
+          .filter((item) => item !== "")
+      ),
+    ]);
 
     // A scroll into view is send to the event queue to be executed after the re-render
-    setTimeout(() => document.getElementById('dictionary-scroll').click(), 0);
-    
+    setTimeout(() => document.getElementById("dictionary-scroll").click(), 0);
   };
 
-  // const checkItem = () => {
-  //   // The first item selected for each category (sector, tag, zone) is checked
-  //   handleSelectItems.zones(searched.zones);
-  //   handleSelectItems.sectors(searched.sectors);
-  //   handleSelectItems.tags(searched.tags);
-  //   // When an item is checked in, the searchbox content is cleaned up
-  //   setTimeout( () => {
-  //   document.querySelector('.dictionary-search-box').value="";
-  //   setAllUnfoldedEmpty();
-  //   setSearched([]);
-  //   }, 0);
-  // };
+  const checkItem = () => {
+    // The function will only check the item if there is only one possible sector, tag or zone
+    if (searched.length === 1 && searched[0].includes(inputValue)) {
+
+      // It has to be determined if the searched string corresponds to a sector, tag or zone
+      const isZone = flatZones.map(({ item }) => item).includes(searched[0]);
+      const isSector = flatSectors
+        .map(({ item }) => item)
+        .includes(searched[0]);
+      const isTag = flatTags.map(({ item }) => item).includes(searched[0]);
+
+      // The setter function to select a zone, sector or tag is called conditionally
+      isZone &&
+        handleSelectItems.zones(
+          flatZones
+            .filter(({ item }) => item === searched[0])
+            .flatMap(({ item, path }) => path.split("/").concat(item))
+        );
+      isSector &&
+        handleSelectItems.sectors(
+          flatSectors
+            .filter(({ item }) => item === searched[0])
+            .flatMap(({ item, path }) => path.split("/").concat(item))
+        );
+      isTag &&
+        handleSelectItems.tags(
+          flatTags
+            .filter(({ item }) => item === searched[0])
+            .flatMap(({ item, path }) => path.split("/").concat(item))
+        );
+
+      // When an item is checked in, the searchbox content is cleaned up
+      setInputValue("");
+      setSearched([]);
+    }
+  };
 
   return (
     <>
-    <input
-      className="dictionary-search-box"
-      onChange={handleChangeSearchBox}
-      onFocus={handleSearchBoxFocus}
-      onBlur={handleSearchBoxBlur}
-      placeholder="Type a zone, sector or tag..."
-    ></input>
-    {/* <button id="dictionary-search-box-check" onClick={checkItem} style={{visibility:"hidden", position: "absolute"}}></button> */}
+      <input
+        className="dictionary-search-box"
+        value={inputValue}
+        onChange={handleChangeSearchBox}
+        onFocus={handleSearchBoxFocus}
+        onBlur={handleSearchBoxBlur}
+        placeholder="Type a zone, sector or tag..."
+      ></input>
+      <button
+        id="dictionary-search-box-check"
+        onClick={checkItem}
+        style={{ visibility: "hidden", position: "absolute" }}
+      ></button>
     </>
   );
 };
