@@ -21,10 +21,10 @@ const TagsForm = ({
 
   const navigate = useNavigate();
 
-  const clickLoader = () => {
-    // Triggers the event
-    document.getElementById("loader-selector").click();
-  };
+  // const clickLoader = () => {
+  //   // Triggers the event
+  //   document.getElementById("loader-selector").click();
+  // };
 
   const clickMerger = () => {
     // Triggers the event
@@ -84,9 +84,9 @@ const TagsForm = ({
           <button>{`Save`}</button>
         </a>
 
-        <button onClick={clickLoader} id="display-loader">
+        {/* <button onClick={clickLoader} id="display-loader">
           Load
-        </button>
+        </button> */}
         <input
           onChange={handleTagsLoad}
           type="file"
