@@ -31,7 +31,16 @@ const CheckBox = ({
   };
 
   return (
-    <div className="check-box" data-testid="unfoldCheck">
+    <div
+      className="check-box"
+      data-testid="unfoldCheck"
+      style={{
+        backgroundColor:
+          searched.length === 1 && searched.includes(input)
+            ? "rgba(60, 114, 60, 0.1)"
+            : "inherited",
+      }}
+    >
       {!unfolded && unfoldable && (
         <AiOutlinePlusSquare onClick={unfoldItem} style={{ color: "grey" }} />
       )}
@@ -64,7 +73,7 @@ const CheckBox = ({
             ? "green"
             : searched.includes(input)
             ? "crimson"
-            : "inherited",          
+            : "inherited",
         }}
       >
         {input}
