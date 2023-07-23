@@ -31,6 +31,7 @@ const Tagger = () => {
   const refDoneBtn = useRef();
   const refMergerSelector = useRef();
   const refSendBtn = useRef();
+  const refNextBtn = useRef();
 
   // ref for the searchBox focus
   const refSearchBoxInput = useRef();
@@ -269,7 +270,7 @@ const Tagger = () => {
       ev.preventDefault();
       document.querySelector('#dictionary-search-box-check').click();
    } else if (ev.key === "Shift") {
-    document.getElementById('nextBtn').focus()
+    refNextBtn.current.focus()
    }
 
   };
@@ -351,6 +352,7 @@ const Tagger = () => {
             refDoneBtn={refDoneBtn}
             refMergerSelector={refMergerSelector}
             refSendBtn={refSendBtn}
+            refNextBtn={refNextBtn}
           />
         </div>
       </div>

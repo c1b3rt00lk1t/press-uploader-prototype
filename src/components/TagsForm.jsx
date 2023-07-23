@@ -18,7 +18,8 @@ const TagsForm = ({
   handleDirectUploadMerged,
   refDoneBtn,
   refMergerSelector,
-  refSendBtn
+  refSendBtn,
+  refNextBtn,
 }) => {
   // let { zones, sectors, tags } = selectedFile;
 
@@ -37,7 +38,9 @@ const TagsForm = ({
   return (
     <div className="tagsForm">
       <div className={"tagFormBtns"}>
-        <button id="nextBtn" onClick={handleTagsNext}>Next</button>
+        <button id="nextBtn" ref={refNextBtn} onClick={handleTagsNext}>
+          Next
+        </button>
         <a
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(taggedFiles)
@@ -78,11 +81,12 @@ const TagsForm = ({
           style={{ display: "none" }}
         />
 
-        {origin === "folder" && <button
-          id="doneBtn"
-          ref={refDoneBtn}
-          onClick={(ev) => {
-            handleTagsNext(ev);
+        {origin === "folder" && (
+          <button
+            id="doneBtn"
+            ref={refDoneBtn}
+            onClick={(ev) => {
+              handleTagsNext(ev);
               if (taggedFiles[0].url && taggedFiles[0].url2) {
                 console.log("Urls already merged.");
                 setMerged(taggedFiles.map((a) => formatFileTags(a)));
@@ -90,14 +94,15 @@ const TagsForm = ({
               } else {
                 navigate("/uploader");
               }
-           
-          }}
-        >
-          Done
-        </button>}
+            }}
+          >
+            Done
+          </button>
+        )}
         {origin === "server" && (
-          <button id="sendBtn"
-          ref={refSendBtn}
+          <button
+            id="sendBtn"
+            ref={refSendBtn}
             onClick={(ev) => {
               // handleTagsNext(ev);
               const newMerged = taggedFiles.map((a) => formatFileTags(a));
