@@ -30,6 +30,7 @@ const Tagger = () => {
   // ref for buttons in TagsForm
   const refDoneBtn = useRef();
   const refMergerSelector = useRef();
+  const refSendBtn = useRef();
 
   useEffect(() => {
     refFocus.current.focus();
@@ -252,7 +253,8 @@ const Tagger = () => {
     } else if (ev.key === "p" || ev.key === "P") {
       document.getElementById("dict-prev").click();
     } else if (ev.key === "s" || ev.key === "S") {
-      document.getElementById("sendBtn").click();
+      refSendBtn.current.click();
+      // document.getElementById("sendBtn").click();
     } else if (ev.key === "f" || ev.key === "F")  {
       // allows to focus on the search box
       ev.preventDefault();
@@ -339,6 +341,7 @@ const Tagger = () => {
             handleDirectUploadMerged={handleDirectUploadMerged}
             refDoneBtn={refDoneBtn}
             refMergerSelector={refMergerSelector}
+            refSendBtn={refSendBtn}
           />
         </div>
       </div>

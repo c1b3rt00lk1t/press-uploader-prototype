@@ -17,7 +17,8 @@ const TagsForm = ({
   setMerged,
   handleDirectUploadMerged,
   refDoneBtn,
-  refMergerSelector
+  refMergerSelector,
+  refSendBtn
 }) => {
   // let { zones, sectors, tags } = selectedFile;
 
@@ -96,6 +97,7 @@ const TagsForm = ({
         </button>}
         {origin === "server" && (
           <button id="sendBtn"
+          ref={refSendBtn}
             onClick={(ev) => {
               // handleTagsNext(ev);
               const newMerged = taggedFiles.map((a) => formatFileTags(a));
