@@ -33,8 +33,9 @@ const Tagger = () => {
   const refSendBtn = useRef();
   const refNextBtn = useRef();
 
-  // ref for the searchBox focus
+  // ref for the searchBox 
   const refSearchBoxInput = useRef();
+  const refSearchBoxCheckBtn = useRef();
 
   // ref for buttons in Dictionary
   const refResetBtn = useRef();
@@ -268,7 +269,7 @@ const Tagger = () => {
     } 
    } else if (ev.key === "AltGraph") {
       ev.preventDefault();
-      document.querySelector('#dictionary-search-box-check').click();
+      refSearchBoxCheckBtn.current.click();
    } else if (ev.key === "Shift") {
     refNextBtn.current.focus()
    }
@@ -333,6 +334,7 @@ const Tagger = () => {
             refResetBtn={refResetBtn}
             refPastePreviousBtn={refPastePreviousBtn}
             refPasteLastBtn={refPasteLastBtn}
+            refSearchBoxCheckBtn={refSearchBoxCheckBtn}
           />
           <TagsForm
             selectedFile={selectedFile}

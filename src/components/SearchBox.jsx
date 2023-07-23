@@ -14,6 +14,7 @@ const SearchBox = ({
   handleSelectItems,
   setLastSelectedItem,
   refSearchBoxInput,
+  refSearchBoxCheckBtn,
   dictionary,
 }) => {
   const [inputValue, setInputValue] = useState("");
@@ -186,6 +187,7 @@ const SearchBox = ({
       ></input>
       <button
         id="dictionary-search-box-check"
+        ref={refSearchBoxCheckBtn}
         onClick={checkItem}
         style={{ visibility: "hidden", position: "absolute" }}
       ></button>

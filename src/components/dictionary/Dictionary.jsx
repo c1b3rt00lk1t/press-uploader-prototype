@@ -22,6 +22,7 @@ const Dictionary = ({
   refResetBtn,
   refPastePreviousBtn,
   refPasteLastBtn,
+  refSearchBoxCheckBtn,
 }) => {
   const { dictionary } = useContext(PressUploaderContext);
 
@@ -182,6 +183,7 @@ const Dictionary = ({
         }}
         setLastSelectedItem={setLastSelectedItem}
         refSearchBoxInput={refSearchBoxInput}
+        refSearchBoxCheckBtn={refSearchBoxCheckBtn}
       />
       <div className={`dictionary-container-vertical`}>
         {embed && (
