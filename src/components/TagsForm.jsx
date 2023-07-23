@@ -55,7 +55,7 @@ const TagsForm = ({
 
         {/* <button onClick={clickLoader} id="display-loader">
           Load
-        </button> */}
+        </button>
         <input
           onChange={handleTagsLoad}
           type="file"
@@ -63,7 +63,7 @@ const TagsForm = ({
           id="loader-selector"
           name="fileLoad"
           style={{ display: "none" }}
-        />
+        /> */}
         <button onClick={clickMerger} id="display-merger">
           Merge
         </button>
