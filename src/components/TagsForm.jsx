@@ -33,39 +33,6 @@ const TagsForm = ({
 
   return (
     <div className="tagsForm">
-      {/* <div>
-        Zones:
-        <div>
-          <input
-            type="text"
-            style={{ width: "15vw" }}
-            onChange={handleZonesChange}
-            value={zones}
-          ></input>
-        </div>
-      </div>
-      <div>
-        Sectors:
-        <div>
-          <input
-            type="text"
-            style={{ width: "15vw" }}
-            onChange={handleSectorsChange}
-            value={sectors}
-          ></input>
-        </div>
-      </div>
-      <div>
-        Tags:
-        <div>
-          <input
-            type="text"
-            style={{ width: "15vw" }}
-            onChange={handleTagsChange}
-            value={tags}
-          ></input>
-        </div>
-      </div> */}
       <div className={"tagFormBtns"}>
         <button id="nextBtn" onClick={handleTagsNext}>Next</button>
         <a
