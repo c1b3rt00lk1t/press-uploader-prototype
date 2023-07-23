@@ -31,7 +31,7 @@ const TagsForm = ({
 
   const clickMerger = () => {
     // Triggers the event
-    document.getElementById("merger-selector").click();
+    refMergerSelector.current.click();
   };
 
   return (
