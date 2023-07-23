@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styles from './SearchBox.module.css'
 
 const SearchBox = ({
   handleSearchBoxFocus,
@@ -52,6 +53,13 @@ const SearchBox = ({
     setInputValue(input);
     setSearchString(input);
   }
+
+  // Calculates the relation between content and searched items
+  // 1) there is only one possible sector, tag or zone or 
+  // 2) if the input is exactly equal than a sector, tag or zone
+
+  const isTheOnlyOne = searched.length === 1 && searched[0].includes(inputValue);
+  const isSameText = searched.includes(inputValue);
 
   const handleChangeSearchBox = (ev) => {
     handleSetInputValue(ev.target.value);
@@ -119,8 +127,7 @@ const SearchBox = ({
     // The function will only check the item if:
     // 1) there is only one possible sector, tag or zone or 
     // 2) if the input is exactly equal than a sector, tag or zone
-    const isTheOnlyOne = searched.length === 1 && searched[0].includes(inputValue);
-    const isSameText = searched.includes(inputValue);
+
 
     if (!isSameText && !isTheOnlyOne) return;
 
@@ -168,7 +175,7 @@ const SearchBox = ({
   return (
     <>
       <input
-        className="dictionary-search-box"
+        className={`dictionary-search-box ${isTheOnlyOne ? styles.isTheOnlyOne : isSameText ? styles.isSameText : ''}`}
         value={inputValue}
         onChange={handleChangeSearchBox}
         onFocus={handleSearchBoxFocus}
