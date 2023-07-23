@@ -32,6 +32,9 @@ const Tagger = () => {
   const refMergerSelector = useRef();
   const refSendBtn = useRef();
 
+  //ref for the searchBox focus
+  const refSearchBoxInput = useRef();
+
   useEffect(() => {
     refFocus.current.focus();
   }, []);
@@ -258,7 +261,8 @@ const Tagger = () => {
     } else if (ev.key === "f" || ev.key === "F")  {
       // allows to focus on the search box
       ev.preventDefault();
-      document.querySelector("input").focus();
+      refSearchBoxInput.current.focus();
+      // document.querySelector("input").focus();
     } 
    } else if (ev.key === "AltGraph") {
       ev.preventDefault();
@@ -323,6 +327,7 @@ const Tagger = () => {
             handleGetPreviousTags={handleGetPreviousTags}
             handleSearchBoxFocus={handleSearchBoxFocus}
             handleSearchBoxBlur={handleSearchBoxBlur}
+            refSearchBoxInput={refSearchBoxInput}
           />
           <TagsForm
             selectedFile={selectedFile}

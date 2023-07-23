@@ -13,6 +13,7 @@ const SearchBox = ({
   setSearchString,
   handleSelectItems,
   setLastSelectedItem,
+  refSearchBoxInput,
   dictionary,
 }) => {
   const [inputValue, setInputValue] = useState("");
@@ -181,6 +182,7 @@ const SearchBox = ({
         onFocus={handleSearchBoxFocus}
         onBlur={handleSearchBoxBlur}
         placeholder="Type a zone, sector or tag..."
+        ref={refSearchBoxInput}
       ></input>
       <button
         id="dictionary-search-box-check"

@@ -18,6 +18,7 @@ const Dictionary = ({
   handleGetPreviousTags,
   handleSearchBoxFocus,
   handleSearchBoxBlur,
+  refSearchBoxInput,
 }) => {
   const { dictionary } = useContext(PressUploaderContext);
 
@@ -174,6 +175,7 @@ const Dictionary = ({
         setSearchString={setSearchString}
         handleSelectItems={{zones: handleSelectZones, sectors: handleSelectSectors, tags: handleSelectTags}}
         setLastSelectedItem={setLastSelectedItem}
+        refSearchBoxInput={refSearchBoxInput}
       />
       <div className={`dictionary-container-vertical`}>
         {embed && (
@@ -215,6 +217,7 @@ const Dictionary = ({
           unfoldedTags={unfoldedTags}
           setLastSelectedItem={setLastSelectedItem}
           embed={embed}
+          refSearchBoxInput={refSearchBoxInput}
         />
 
         {embed && (
