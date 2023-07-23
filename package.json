@@ -54,6 +54,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "cypress": "^12.17.2"
+    "cypress": "^12.17.2",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.33.0"
   }
 }
