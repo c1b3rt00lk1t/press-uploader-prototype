@@ -19,6 +19,7 @@ const Dictionary = ({
   handleSearchBoxFocus,
   handleSearchBoxBlur,
   refSearchBoxInput,
+  refResetBtn,
 }) => {
   const { dictionary } = useContext(PressUploaderContext);
 
@@ -181,6 +182,7 @@ const Dictionary = ({
         {embed && (
           <button
             id="dict-reset"
+            ref={refResetBtn}
             className="dictionary-reset"
             onClick={handleClickResetDictionary}
           >

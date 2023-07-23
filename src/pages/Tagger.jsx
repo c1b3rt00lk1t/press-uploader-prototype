@@ -32,8 +32,11 @@ const Tagger = () => {
   const refMergerSelector = useRef();
   const refSendBtn = useRef();
 
-  //ref for the searchBox focus
+  // ref for the searchBox focus
   const refSearchBoxInput = useRef();
+
+  // ref for reset button in Dictionary
+  const refResetBtn = useRef();
 
   useEffect(() => {
     refFocus.current.focus();
@@ -252,7 +255,8 @@ const Tagger = () => {
     } else if (ev.key === "l" || ev.key === "L") {
       document.getElementById("select-last").click();
     } else if (ev.key === "r" || ev.key === "R") {
-      document.getElementById("dict-reset").click();
+      refResetBtn.current.click();
+      // document.getElementById("dict-reset").click();
     } else if (ev.key === "p" || ev.key === "P") {
       document.getElementById("dict-prev").click();
     } else if (ev.key === "s" || ev.key === "S") {
@@ -328,6 +332,7 @@ const Tagger = () => {
             handleSearchBoxFocus={handleSearchBoxFocus}
             handleSearchBoxBlur={handleSearchBoxBlur}
             refSearchBoxInput={refSearchBoxInput}
+            refResetBtn={refResetBtn}
           />
           <TagsForm
             selectedFile={selectedFile}
