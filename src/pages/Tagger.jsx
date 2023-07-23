@@ -27,6 +27,9 @@ const Tagger = () => {
   // get the focus for usage of onKeyDown
   const ref = useRef(null);
 
+  // ref for doneBtn
+  const refDoneBtn = useRef();
+
   useEffect(() => {
     ref.current.focus();
   }, []);
@@ -236,7 +239,8 @@ const Tagger = () => {
     if (ev.key === "n" || ev.key === "N")  {
       handleTagsNext(ev);
     } else if (ev.key === "d" || ev.key === "D") {
-      document.getElementById("doneBtn").click();
+      refDoneBtn.current.click();
+      // document.getElementById("doneBtn").click();
     } else if (ev.key === "m" || ev.key === "M") {
       document.getElementById("merger-selector").click();
     } else if (ev.key === "l" || ev.key === "L") {
@@ -331,6 +335,7 @@ const Tagger = () => {
             setMerged={setMerged}
             session={session}
             handleDirectUploadMerged={handleDirectUploadMerged}
+            refDoneBtn={refDoneBtn}
           />
         </div>
       </div>

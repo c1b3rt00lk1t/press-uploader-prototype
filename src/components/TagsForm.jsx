@@ -16,6 +16,7 @@ const TagsForm = ({
   formatFileTags,
   setMerged,
   handleDirectUploadMerged,
+  refDoneBtn
 }) => {
   // let { zones, sectors, tags } = selectedFile;
 
@@ -76,6 +77,7 @@ const TagsForm = ({
 
         {origin === "folder" && <button
           id="doneBtn"
+          ref={refDoneBtn}
           onClick={(ev) => {
             handleTagsNext(ev);
               if (taggedFiles[0].url && taggedFiles[0].url2) {
