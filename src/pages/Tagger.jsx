@@ -250,27 +250,20 @@ const Tagger = () => {
       handleTagsNext(ev);
     } else if (ev.key === "d" || ev.key === "D") {
       refDoneBtn.current.click();
-      // document.getElementById("doneBtn").click();
     } else if (ev.key === "m" || ev.key === "M") {
       refMergerSelector.current.click();
-      // document.getElementById("merger-selector").click();
     } else if (ev.key === "l" || ev.key === "L") {
       refPasteLastBtn.current.click();
-      // document.getElementById("select-last").click();
     } else if (ev.key === "r" || ev.key === "R") {
       refResetBtn.current.click();
-      // document.getElementById("dict-reset").click();
     } else if (ev.key === "p" || ev.key === "P") {
       refPastePreviousBtn.current.click();
-      // document.getElementById("dict-prev").click();
     } else if (ev.key === "s" || ev.key === "S") {
       refSendBtn.current.click();
-      // document.getElementById("sendBtn").click();
     } else if (ev.key === "f" || ev.key === "F")  {
       // allows to focus on the search box
       ev.preventDefault();
       refSearchBoxInput.current.focus();
-      // document.querySelector("input").focus();
     } 
    } else if (ev.key === "AltGraph") {
       ev.preventDefault();
