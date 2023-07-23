@@ -16,7 +16,8 @@ const TagsForm = ({
   formatFileTags,
   setMerged,
   handleDirectUploadMerged,
-  refDoneBtn
+  refDoneBtn,
+  refMergerSelector
 }) => {
   // let { zones, sectors, tags } = selectedFile;
 
@@ -70,6 +71,7 @@ const TagsForm = ({
           onChange={handleMergeLoad}
           type="file"
           accept=".json"
+          ref={refMergerSelector}
           id="merger-selector"
           name="fileMerge"
           style={{ display: "none" }}
