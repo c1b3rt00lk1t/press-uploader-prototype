@@ -25,13 +25,13 @@ const Tagger = () => {
   } = useContext(PressUploaderContext);
 
   // get the focus for usage of onKeyDown
-  const ref = useRef(null);
+  const refFocus = useRef(null);
 
   // ref for doneBtn
   const refDoneBtn = useRef();
 
   useEffect(() => {
-    ref.current.focus();
+    refFocus.current.focus();
   }, []);
 
   // preparations
@@ -273,7 +273,7 @@ const Tagger = () => {
 
   return (
     // ref, tabIndex are necessary to make use of onKeyDown
-    <div ref={ref} tabIndex="-1" onKeyDown={handleKeyDown}>
+    <div ref={refFocus} tabIndex="-1" onKeyDown={handleKeyDown}>
       <div className="horizontal">
         <ul className="orderContentList">
           {taggedFiles.map((item) => (
