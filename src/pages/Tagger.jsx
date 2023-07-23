@@ -198,16 +198,16 @@ const Tagger = () => {
 
         if (toMerge) {
           if (toMerge.zones.length) {
-            file.zones.push(...toMerge.zones);
+            file.zones = [...new Set([...file.zones,...toMerge.zones])];
           }
           if (toMerge.sectors.length) {
-            file.sectors.push(...toMerge.sectors);
+            file.sectors = [...new Set([...file.sectors,...toMerge.sectors])];
           }
           if (toMerge.tags.length) {
-            file.tags.push(...toMerge.tags);
+            file.tags =  [...new Set([...file.tags,...toMerge.tags])];
           }
           if (toMerge.others.length) {
-            file.others.push(...toMerge.others);
+            file.others = [...new Set([...file.others,...toMerge.others])];;
           }
         }
 
