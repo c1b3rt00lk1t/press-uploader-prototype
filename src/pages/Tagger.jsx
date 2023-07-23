@@ -35,8 +35,10 @@ const Tagger = () => {
   // ref for the searchBox focus
   const refSearchBoxInput = useRef();
 
-  // ref for reset button in Dictionary
+  // ref for buttons in Dictionary
   const refResetBtn = useRef();
+  const refPastePreviousBtn = useRef();
+  const refPasteLastBtn = useRef();
 
   useEffect(() => {
     refFocus.current.focus();
@@ -253,12 +255,14 @@ const Tagger = () => {
       refMergerSelector.current.click();
       // document.getElementById("merger-selector").click();
     } else if (ev.key === "l" || ev.key === "L") {
-      document.getElementById("select-last").click();
+      refPasteLastBtn.current.click();
+      // document.getElementById("select-last").click();
     } else if (ev.key === "r" || ev.key === "R") {
       refResetBtn.current.click();
       // document.getElementById("dict-reset").click();
     } else if (ev.key === "p" || ev.key === "P") {
-      document.getElementById("dict-prev").click();
+      refPastePreviousBtn.current.click();
+      // document.getElementById("dict-prev").click();
     } else if (ev.key === "s" || ev.key === "S") {
       refSendBtn.current.click();
       // document.getElementById("sendBtn").click();
@@ -333,6 +337,8 @@ const Tagger = () => {
             handleSearchBoxBlur={handleSearchBoxBlur}
             refSearchBoxInput={refSearchBoxInput}
             refResetBtn={refResetBtn}
+            refPastePreviousBtn={refPastePreviousBtn}
+            refPasteLastBtn={refPasteLastBtn}
           />
           <TagsForm
             selectedFile={selectedFile}

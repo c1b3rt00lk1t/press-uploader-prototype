@@ -20,6 +20,8 @@ const Dictionary = ({
   handleSearchBoxBlur,
   refSearchBoxInput,
   refResetBtn,
+  refPastePreviousBtn,
+  refPasteLastBtn,
 }) => {
   const { dictionary } = useContext(PressUploaderContext);
 
@@ -158,8 +160,7 @@ const Dictionary = ({
     lastSelectedItem[0] === "zones" && handleSelectZones(lastSelectedItem);
     lastSelectedItem[0] === "sectors" && handleSelectSectors(lastSelectedItem);
     lastSelectedItem[0] === "tags" && handleSelectTags(lastSelectedItem);
- 
-  }
+  };
 
   return (
     <>
@@ -174,7 +175,11 @@ const Dictionary = ({
         setSearched={setSearched}
         searched={searched}
         setSearchString={setSearchString}
-        handleSelectItems={{zones: handleSelectZones, sectors: handleSelectSectors, tags: handleSelectTags}}
+        handleSelectItems={{
+          zones: handleSelectZones,
+          sectors: handleSelectSectors,
+          tags: handleSelectTags,
+        }}
         setLastSelectedItem={setLastSelectedItem}
         refSearchBoxInput={refSearchBoxInput}
       />
@@ -193,6 +198,7 @@ const Dictionary = ({
         {embed && (
           <button
             id="dict-prev"
+            ref={refPastePreviousBtn}
             className="dictionary-prev"
             onClick={handleClickPrevious}
           >
@@ -236,7 +242,12 @@ const Dictionary = ({
           />
         )}
         {embed && (
-          <button id="select-last" onClick={applyLastSelectedItem} style={{visibility:'hidden', position: 'absolute'}}></button>
+          <button
+            id="select-last"
+            ref={refPasteLastBtn}
+            onClick={applyLastSelectedItem}
+            style={{ visibility: "hidden", position: "absolute" }}
+          ></button>
         )}
       </div>
     </>
