@@ -222,7 +222,7 @@ const Tagger = () => {
             file.tags =  [...new Set([...file.tags,...toMerge.tags])];
           }
           if (toMerge.others.length) {
-            file.others = [...new Set([...file.others,...toMerge.others])];;
+            file.others = [...new Set([...file.others,...toMerge.others])];
           }
         }
 

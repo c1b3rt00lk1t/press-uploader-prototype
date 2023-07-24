@@ -35,10 +35,10 @@ const auth = getAuth(app);
 
 export const authenticateUser = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
+  .then(() => {
     return true;
   })
-  .catch((error) => {
+  .catch(() => {
     return false
   });
 }
@@ -46,7 +46,7 @@ export const authenticateUser = (email, password) => {
 export const signOutUser = () => {
   signOut(auth).then(() => {
     console.log("Logged out")
-  }).catch((error) => {
+  }).catch(() => {
     // An error happened.
   });
 }

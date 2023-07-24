@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useEffect } from "react";
 import { createContext, useState } from "react";
 import {
   getDataFromDBSession,
@@ -45,7 +46,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       const sessions = Object.keys(data);
       setData(data);
       setUniqueSessions(sessions);
-      !!sessions.length
+      sessions.length
         ? setServerGetSessions({
             status: true,
             msg: ["All sessions received."],
@@ -428,7 +429,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       pdfFiles.map((file) => {
         return uploadFile(file, file.webkitRelativePath);
       })
-    ).then((_) =>
+    ).then(() =>
       setUploaderUpload({ status: true, msg: ["Everything loaded."] })
     );
   };
@@ -439,7 +440,7 @@ export const PressUploaderContextProvider = ({ children }) => {
       pdfFiles.map((file) => {
         return uploadFileToBackUp(file, file.webkitRelativePath);
       })
-    ).then((_) =>
+    ).then(() =>
       setUploaderUploadToBackUp({ status: true, msg: ["Everything loaded."] })
     );
   };
@@ -460,7 +461,7 @@ export const PressUploaderContextProvider = ({ children }) => {
 
     setUrls(fileUrls);
     console.log("All urls received.");
-    !!fileUrls.length
+    fileUrls.length
       ? setUploaderGetURLs({ status: true, msg: ["All urls received."] })
       : setUploaderGetURLs({ status: false, msg: ["No urls received."] });
   };
@@ -487,7 +488,7 @@ export const PressUploaderContextProvider = ({ children }) => {
 
     setUrlsFromBackUp(fileUrls);
     console.log("All urls received from backup.");
-    !!fileUrls.length
+    fileUrls.length
       ? setUploaderGetURLsFromBackUp({
           status: true,
           msg: ["All urls received."],
@@ -525,7 +526,7 @@ export const PressUploaderContextProvider = ({ children }) => {
     }
     setMerged(mergedTmp);
 
-    !!mergedTmp.length
+    mergedTmp.length
       ? setMergerMergeCard({
           status: true,
           msg: "Tags and urls successfully merged.",

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Tree from "../Tree";
 import { ErrorBoundary } from "../ErrorBoundary";
