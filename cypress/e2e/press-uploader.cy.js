@@ -73,7 +73,7 @@ describe('Uploader :: Dictionary', () => {
     cy.contains('tags')
   })
 
-  xit('allows to navigate the dictionary with the searchbox', () => {
+  it('allows to navigate the dictionary with the searchbox', () => {
     cy.viewport(1600, 900)
     cy.visit('http://localhost:3000/')
 
@@ -203,7 +203,7 @@ describe('Uploader :: Folder', () => {
 
 describe('Uploader :: Tagger', () => { 
 
-  xit('correctly submits to a tagging process the folder "Revisión prensa 0000-00-00"', () => {
+  it('correctly submits to a tagging process the folder "Revisión prensa 0000-00-00"', () => {
     cy.viewport(1600, 900)
     cy.visit('http://localhost:3000/')
 
