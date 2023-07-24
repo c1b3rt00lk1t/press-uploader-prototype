@@ -3,14 +3,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const TagsForm = ({
-  selectedFile,
   handleTagsNext,
-  // handleZonesChange,
-  // handleSectorsChange,
-  // handleTagsChange,
-  handleTagsLoad,
   handleMergeLoad,
-  relativePath,
   session,
   taggedFiles,
   origin,
@@ -104,8 +98,7 @@ const TagsForm = ({
           <button
             id="sendBtn"
             ref={refSendBtn}
-            onClick={(ev) => {
-              // handleTagsNext(ev);
+            onClick={() => {
               const newMerged = taggedFiles.map((a) => formatFileTags(a));
               setMerged(newMerged);
               handleDirectUploadMerged(newMerged);
