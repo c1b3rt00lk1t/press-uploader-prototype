@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 // import { Document, Page } from 'react-pdf';
 import { Document, Page, pdfjs } from "react-pdf";
