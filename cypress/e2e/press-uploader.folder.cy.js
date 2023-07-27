@@ -1,3 +1,4 @@
+/** Integration tests for Folder */
 describe('Uploader :: Folder', () => { 
 
     it('does not load and fires an alert when selecting folder "Revisión prensa 9999-99-99"', () => {
