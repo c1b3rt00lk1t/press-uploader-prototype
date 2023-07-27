@@ -131,6 +131,7 @@ describe('Uploader :: Start', () => {
 
 })
 
+/** Test for Folder */
 describe('Uploader :: Folder', () => { 
 
   xit('does not load and fires an alert when selecting folder "Revisión prensa 9999-99-99"', () => {
@@ -201,6 +202,7 @@ describe('Uploader :: Folder', () => {
 
 })
 
+/** Tests for Tagger */
 describe('Uploader :: Tagger', () => { 
 
   it('correctly submits to a tagging process the folder "Revisión prensa 0000-00-00"', () => {
