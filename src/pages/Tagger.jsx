@@ -267,7 +267,7 @@ const Tagger = () => {
       ev.preventDefault();
       refSearchBoxInput.current.focus();
     } 
-   } else if (ev.key === "AltGraph") {
+   } else if (ev.key === "AltGraph" || ev.key === "Enter") {
       ev.preventDefault();
       refSearchBoxCheckBtn.current.click();
    } else if (ev.key === "Shift") {
