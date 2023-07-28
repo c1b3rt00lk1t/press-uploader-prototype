@@ -71,7 +71,15 @@ const CheckBox = ({
       )}
 
       <div
-        className={searched.includes(input) ? "dictionary-searched" : ""}
+        className={
+          checked
+            ? "dictionary-checked"
+            : searchString === input
+            ? "dictionary-searched dictionary-matches"
+            : searched.includes(input)
+            ? "dictionary-searched"
+            : "dictionary-name"
+        }
         style={{
           color: checked
             ? "blue"
