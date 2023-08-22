@@ -6,7 +6,6 @@ import TagsForm from "../components/TagsForm";
 import PreviewPdf from "../components/PreviewPdf";
 import Dictionary from "../components/dictionary/Dictionary";
 
-
 const Tagger = () => {
   const {
     origin,
@@ -15,13 +14,13 @@ const Tagger = () => {
     handleTaggedFiles,
     previous,
     setPrevious,
-    selectedTagger, 
+    selectedTagger,
     setSelectedTagger,
     relativePath,
     session,
     setMerged,
     handlePreviousAfterLoad,
-    handleDirectUploadMerged
+    handleDirectUploadMerged,
   } = useContext(PressUploaderContext);
 
   // get the focus for usage of onKeyDown
@@ -33,7 +32,7 @@ const Tagger = () => {
   const refSendBtn = useRef();
   const refNextBtn = useRef();
 
-  // ref for the searchBox 
+  // ref for the searchBox
   const refSearchBoxInput = useRef();
   const refSearchBoxCheckBtn = useRef();
 
@@ -61,7 +60,7 @@ const Tagger = () => {
   const handleSelectItem = (ev) => {
     setSelected(+ev.target.dataset.order);
     // used to keep a global reference to the selected file in the tagger so that it does not return to the first one every time the tagger is exited
-    setSelectedTagger(+ev.target.dataset.order)
+    setSelectedTagger(+ev.target.dataset.order);
   };
 
   /* Logic for the Tag Form */
@@ -168,11 +167,15 @@ const Tagger = () => {
     if (selected < maxOrder) {
       const index = orderArray[orderArray.indexOf(selected) + 1];
       setSelected(index);
-      setSelectedTagger(index)
+      setSelectedTagger(index);
     } else if (selected >= maxOrder) {
       setSelected(minOrder);
       setSelectedTagger(minOrder);
     }
+
+    const selectedContentItem = document.querySelector(".selectedContentItem");
+
+    selectedContentItem.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const handleTagsLoad = async (ev) => {
@@ -213,16 +216,16 @@ const Tagger = () => {
 
         if (toMerge) {
           if (toMerge.zones.length) {
-            file.zones = [...new Set([...file.zones,...toMerge.zones])];
+            file.zones = [...new Set([...file.zones, ...toMerge.zones])];
           }
           if (toMerge.sectors.length) {
-            file.sectors = [...new Set([...file.sectors,...toMerge.sectors])];
+            file.sectors = [...new Set([...file.sectors, ...toMerge.sectors])];
           }
           if (toMerge.tags.length) {
-            file.tags =  [...new Set([...file.tags,...toMerge.tags])];
+            file.tags = [...new Set([...file.tags, ...toMerge.tags])];
           }
           if (toMerge.others.length) {
-            file.others = [...new Set([...file.others,...toMerge.others])];
+            file.others = [...new Set([...file.others, ...toMerge.others])];
           }
         }
 
@@ -246,34 +249,33 @@ const Tagger = () => {
   const handleSearchBoxBlur = () => setSearchBoxFocus(false);
 
   const handleKeyDown = (ev) => {
-   // enables only the keyboard shortcuts if the focus is not in the search box component
-   if( !searchBoxfocus ) {
-    if (ev.key === "n" || ev.key === "N")  {
-      handleTagsNext(ev);
-    } else if (ev.key === "d" || ev.key === "D") {
-      refDoneBtn.current.click();
-    } else if (ev.key === "m" || ev.key === "M") {
-      refMergerSelector.current.click();
-    } else if (ev.key === "l" || ev.key === "L") {
-      refPasteLastBtn.current.click();
-    } else if (ev.key === "r" || ev.key === "R") {
-      refResetBtn.current.click();
-    } else if (ev.key === "p" || ev.key === "P") {
-      refPastePreviousBtn.current.click();
-    } else if (ev.key === "s" || ev.key === "S") {
-      refSendBtn.current.click();
-    } else if (ev.key === "f" || ev.key === "F")  {
-      // allows to focus on the search box
-      ev.preventDefault();
-      refSearchBoxInput.current.focus();
-    } 
-   } else if (ev.key === "AltGraph" || ev.key === "Enter") {
+    // enables only the keyboard shortcuts if the focus is not in the search box component
+    if (!searchBoxfocus) {
+      if (ev.key === "n" || ev.key === "N") {
+        handleTagsNext(ev);
+      } else if (ev.key === "d" || ev.key === "D") {
+        refDoneBtn.current.click();
+      } else if (ev.key === "m" || ev.key === "M") {
+        refMergerSelector.current.click();
+      } else if (ev.key === "l" || ev.key === "L") {
+        refPasteLastBtn.current.click();
+      } else if (ev.key === "r" || ev.key === "R") {
+        refResetBtn.current.click();
+      } else if (ev.key === "p" || ev.key === "P") {
+        refPastePreviousBtn.current.click();
+      } else if (ev.key === "s" || ev.key === "S") {
+        refSendBtn.current.click();
+      } else if (ev.key === "f" || ev.key === "F") {
+        // allows to focus on the search box
+        ev.preventDefault();
+        refSearchBoxInput.current.focus();
+      }
+    } else if (ev.key === "AltGraph" || ev.key === "Enter") {
       ev.preventDefault();
       refSearchBoxCheckBtn.current.click();
-   } else if (ev.key === "Shift") {
-    refNextBtn.current.focus()
-   }
-
+    } else if (ev.key === "Shift") {
+      refNextBtn.current.focus();
+    }
   };
 
   const selectedFile = taggedFiles.filter((item) => item.order === selected)[0];
