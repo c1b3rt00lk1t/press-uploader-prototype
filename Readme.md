@@ -2,7 +2,7 @@
 <img src="https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/uploader.png?raw=true" width="20%" height="20%" >
 </p>
 
-# Document Tag Manager & Uploader
+# Document Tag Manager
 
 ### Basic description
 
@@ -58,6 +58,7 @@ The app allows a given set of pdfs in a group of folders to be managed in the fo
 - Upload the files in a primary and a secondary storage
 - Checkout the session so that it can be accessed and downloaded
 - Two flows available: from Folder to Server or form Server to Server
+- The result of these operations can be accessed using the <a href="https://github.com/c1b3rt00lk1t/press-reader-prototype" target="_blank">Press Reader App</a>.
 
 <br/><br/>
 <br/><br/>
