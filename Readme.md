@@ -14,4 +14,4 @@ A working version of the app can be found <a href="https://press-uploader-demo.w
 - To run the app in local: <code>$ npm run start</code>
 - To run the e2e cypress tests in local: <code>$ npm run cypress:open</code>
 
-![alt text](https://github.com/c1b3rt00lkit/press-uploader-prototype/blob/demo/images/cloc stats.png?raw=true)
+![alt text](https://github.com/c1b3rt00lkit/press-uploader-prototype/blob/demo/images/cloc_stats.png?raw=true)
