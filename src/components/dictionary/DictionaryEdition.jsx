@@ -34,7 +34,7 @@ const DictionaryEdition = ({ selected, pathOfSelected }) => {
           className="dictionary-edit-input"
         />
       </div>
-      <div className="dictionary-edit-row">
+      <div className="dictionary-edit-row" style={{ display: "none" }}>
         <AiOutlineDelete onClick={() => {}} className="dictionary-edit-icons" />
         <input
           type="text"
