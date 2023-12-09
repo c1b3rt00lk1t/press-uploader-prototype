@@ -4,6 +4,11 @@
 
 # Document Tag Manager & Uploader
 
+### Basic description
+
+PWA · JAVASCRIPT · REACT · FIREBASE · CYPRESS  
+Backend PWA to classify pdf documents with tags and upload them in order to be accessed form across an organization.
+
 ### Available demo online
 
 A working version of the desktop app can be found <a href="https://press-uploader-demo.web.app/" target="_blank">here</a>.
@@ -17,11 +22,9 @@ A working version of the desktop app can be found <a href="https://press-uploade
 
 ![cloc stats](https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/cloc_stats.png?raw=true)
 
-### Description
+### Functional description
 
-PWA · JAVASCRIPT · REACT · FIREBASE · CYPRESS  
-Backend PWA to classify pdf documents with tags and upload them in order to be accessed form across an organization.  
-It allows a given set of pdfs in a group of folders to be managed in the following ways:
+The app allows a given set of pdfs in a group of folders to be managed in the following ways:
 
 - Order the files with drag and drop in order to ensure that they are displayed in a specific sequence
 - Check that the files order and the files in the folders match
