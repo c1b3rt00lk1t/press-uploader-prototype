@@ -22,6 +22,22 @@ A working version of the desktop app can be found <a href="https://press-uploade
 
 ![cloc stats](https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/cloc_stats.png?raw=true)
 
+### Technical description
+
+The app leverages on the following technical pilars:
+
+- The app is written in <code>Javascript</code> and <code>JSX</code> using the <code>React</code> library, initially bootstraped with create-react-app.
+- The state is managed combining <code>useState</code> with <code>createContext()</code> provided with a functional component that takes <code>children</code> as props and returns the <code>context.Provider</code>.
+- The resulting context is consumed via <code>useContext</code>.
+- Side effects are handled with <code>useEffect</code>.
+- <code>useRef</code> is used to target specific DOM elements across renderings.
+- Firebase is used for Hosting, Database and Storage.
+- The app programatically reads and writes in the Database and the Storage bucket.
+- Cors is handled with a specific file <code>cors.json</code> and <code>gsutil</code> configuration.
+- The app handles two simultaneous Firebase instances as the Reader needs a primary and a secondary source.
+- Currying is used to build specialized functions.
+- Pagination is achieved using <code>react-router-dom</code>.
+
 ### Functional description
 
 The app allows a given set of pdfs in a group of folders to be managed in the following ways:
@@ -36,4 +52,6 @@ The app allows a given set of pdfs in a group of folders to be managed in the fo
 - Checkout the session so that it can be accessed and downloaded
 - Two flows available: from Folder to Server or form Server to Server
 
+<br/><br/>
+<br/><br/>
 ![app flow](https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/uploader_flow.gif?raw=true)
