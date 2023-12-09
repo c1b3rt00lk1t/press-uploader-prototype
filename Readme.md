@@ -22,7 +22,7 @@ A working version of the desktop app can be found <a href="https://press-uploade
 
 ![cloc stats](https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/cloc_stats.png?raw=true)
 
-### Technical description
+### Key technical features
 
 The app leverages on the following technical pilars:
 
@@ -35,8 +35,15 @@ The app leverages on the following technical pilars:
 - The app programatically reads and writes in the Database and the Storage bucket.
 - Cors is handled with a specific file <code>cors.json</code> and <code>gsutil</code> configuration.
 - The app handles two simultaneous Firebase instances as the Reader needs a primary and a secondary source.
-- Currying is used to build specialized functions.
+- Advanced ES6+ features such as <code>async/await</code> and <code>destructuring</code> are applied in the app as well as functional techniques like <code>map</code>, <code>filter</code> and <code>reduce</code> to handle arrays or <code>currying</code> to build specialized functions.
 - Pagination is achieved using <code>react-router-dom</code>.
+- End-to-end testing is implemented with <code>Cypress</code>.
+
+<br/><br/>
+<br/><br/>
+![app state flow](https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/workflows.gif?raw=true)
+<br/><br/>
+<br/><br/>
 
 ### Functional description
 
@@ -54,4 +61,4 @@ The app allows a given set of pdfs in a group of folders to be managed in the fo
 
 <br/><br/>
 <br/><br/>
-![app flow](https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/uploader_flow.gif?raw=true)
+![app functional flow](https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/uploader_flow.gif?raw=true)
