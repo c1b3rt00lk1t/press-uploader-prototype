@@ -37,6 +37,7 @@ The app leverages on the following technical pilars:
 - The app handles two simultaneous Firebase instances as the Reader needs a primary and a secondary source.
 - Advanced ES6+ features such as <code>async/await</code> and <code>destructuring</code> are applied in the app as well as functional techniques like <code>map</code>, <code>filter</code> and <code>reduce</code> to handle arrays or <code>currying</code> to build specialized functions.
 - Pagination is achieved using <code>react-router-dom</code>.
+- The pdfs are rendered as images using the <code>react-pdf</code> library.
 - End-to-end testing is implemented with <code>Cypress</code>.
 
 <br/><br/>
