@@ -33,10 +33,10 @@ const NavBar = () => {
       <Link disabled={enableTagger} to="/tagger">
         Tagger
       </Link>
-      <Link disabled={!authenticated && enableUploader} to="/uploader">
+      <Link disabled={!authenticated || enableUploader} to="/uploader">
         Uploader
       </Link>
-      <Link disabled={!authenticated && enableMerger} to="/merger">
+      <Link disabled={!authenticated || enableMerger} to="/merger">
         Merger
       </Link>
       <Link disabled={!authenticated} to="/checkout">
