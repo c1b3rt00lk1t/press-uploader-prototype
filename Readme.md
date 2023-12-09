@@ -35,3 +35,5 @@ The app allows a given set of pdfs in a group of folders to be managed in the fo
 - Upload the files in a primary and a secondary storage
 - Checkout the session so that it can be accessed and downloaded
 - Two flows available: from Folder to Server or form Server to Server
+
+![app flow](https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/uploader_flow.gif?raw=true)
