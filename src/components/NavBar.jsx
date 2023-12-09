@@ -4,19 +4,26 @@ import PressUploaderContext from "../contexts/PressUploaderContext";
 
 const NavBar = () => {
   const {
-    authenticated,readyToTagger, basicSelectorChecks, readyToOrder, origin
+    authenticated,
+    readyToTagger,
+    basicSelectorChecks,
+    readyToOrder,
+    origin,
   } = useContext(PressUploaderContext);
   const enableOrder = !readyToOrder;
   const enableTagger = !readyToTagger;
   const enableUploader = !basicSelectorChecks;
-  // const enableMerger = enableTagger && enableUploader;
-  const enableMerger = false;
+  const enableMerger = !readyToTagger;
 
   return (
     <div className="navbar">
       <Link to="/start">Start</Link>
-      <Link disabled={!authenticated || origin !== "server"} to="/server">Server</Link>
-      <Link disabled={origin !== "folder"} to="/selector">Folder</Link>
+      <Link disabled={!authenticated || origin !== "server"} to="/server">
+        Server
+      </Link>
+      <Link disabled={origin !== "folder"} to="/selector">
+        Folder
+      </Link>
       <Link disabled={enableOrder} to="/order">
         Order
       </Link>
@@ -38,9 +45,7 @@ const NavBar = () => {
       <Link disabled={true} to="/">
         Settings
       </Link>
-      <Link to="/">
-        Log in
-      </Link>
+      <Link to="/">Log in</Link>
     </div>
   );
 };
