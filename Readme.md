@@ -29,7 +29,7 @@ The app allows a given set of pdfs in a group of folders to be managed in the fo
 - Order the files with drag and drop in order to ensure that they are displayed in a specific sequence
 - Check that the files order and the files in the folders match
 - Check the size and rare characters of the files
-- Tag the pdf files with a set of tags from a Ditionary including zones, sectors and general themes
+- Tag the pdf files with a set of tags from a Dictionary including zones, sectors and general themes
 - Create new tags in the Dictionary tree
 - Easily copy or propagate a set of tags or the last tag through the pdfs
 - Upload the files in a primary and a secondary storage
