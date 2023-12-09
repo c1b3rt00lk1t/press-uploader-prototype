@@ -1,4 +1,4 @@
-<img src="https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/uploader.png?raw=true" width=25% height=25%>
+<img src="https://github.com/c1b3rt00lk1t/press-uploader-prototype/blob/demo/images/uploader.png?raw=true" width="20%" height="20%" align="center">
 
 ## Document Tag Manager & Uploader
 
