@@ -11,5 +11,5 @@ A working version of the app can be found <a href="https://press-uploader-demo.w
 
 ### Basic usage
 
-- To run the app in local: <code>$ npm run dev</code>
+- To run the app in local: <code>$ npm run start</code>
 - To run the e2e cypress tests in local: <code>$ npm run cypress:open</code>
