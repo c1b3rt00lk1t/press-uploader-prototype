@@ -24,7 +24,7 @@ A working version of the desktop app can be found <a href="https://press-uploade
 
 ### Key technical features
 
-The app leverages on the following technical pilars:
+The app leverages on the following technical pillars:
 
 - The app is written in <code>Javascript</code> and <code>JSX</code> using the <code>React</code> library, initially bootstraped with create-react-app.
 - The state is managed combining <code>useState</code> with <code>createContext()</code> provided with a functional component that takes <code>children</code> as props and returns the <code>context.Provider</code>.
